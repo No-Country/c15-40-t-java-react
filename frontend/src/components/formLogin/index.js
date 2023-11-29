@@ -7,10 +7,8 @@ export const Index = () => {
     const handleFormSubmit = (e) => {
         e.preventDefault()
 
-        if(user.length === '' || password.length === ''){
-            alert('Por favor ingrese un usuario y contraseña.');
-        }else{
-            return
+        if(user === '' || password === ''){
+            window.alert('Por favor ingrese un usuario y contraseña.');
         }
 
         console.log('Usuario:', user);

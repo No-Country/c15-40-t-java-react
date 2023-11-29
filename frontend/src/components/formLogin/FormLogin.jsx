@@ -4,30 +4,27 @@ import { Index } from '.';
 
 
 const FormLogin = () => {
-    const {handleFormSubmit, user, password, setPassword, setUser} = Index()
-
+  const {handleFormSubmit, user, password, setPassword, setUser} = Index()
 
   return (
         <form onSubmit={handleFormSubmit} className='max-w-md mx-auto my-20 border rounded-md p-2'>
         <div className='mb-6 p-2'>
             <Input
             key='usuario'
-            type="usuario"
-            label="Usuaio"
+            type="text"
+            label="Usuario"
             labelPlacement='Usuario'
             placeholder="Nombre de Usuario"
-            value={user}
             onchange={(e) => setUser(e.target.value)}
             />
         </div>
-        <div className='mb-6 p-2 '>
+        <div className='mb-6 p-2'>
             <Input
             key='contraseña'
             type="password"
             label="Contraseña"
             labelPlacement='Contraseña'
             placeholder="Ingrese Contraseña"
-            value={password}
             onchange={(e) => setPassword(e.target.value)}
             />
         </div>
