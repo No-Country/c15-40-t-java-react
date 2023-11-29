@@ -1,6 +1,4 @@
-'use client';
-
-import React, { useState } from 'react';
+import React from 'react';
 
 import {
   Button,
@@ -21,14 +19,12 @@ import { usePathname } from 'next/navigation';
 import { Index } from '.';
 
 export default function Header () {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const { NavbarLinks } = Index();
+  const { NavbarLinks, isMenuOpen, setIsMenuOpen } = Index();
 
   const pathname = usePathname();
 
   return (
-    <Navbar classNames={{ base: 'p-4 bg-transparent', wrapper: 'bg-white rounded-xl shadow-xl shadow-purple-500/25', menu: 'pt-10 backdrop-blur-none bg-white' }} onMenuOpenChange={setIsMenuOpen}>
+    <Navbar classNames={{ base: 'p-4 bg-transparent', wrapper: 'bg-white rounded-xl shadow-xl shadow-purple-500/25', menu: 'pt-10 backdrop-blur-none bg-white', toggleIcon: 'text-orange-500' }} onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}

@@ -1,9 +1,11 @@
 import './globals.css';
 
 import Providers from '@/Providers';
+
 import { Header } from '@/components/Header';
 
 import { K2D } from 'next/font/google';
+
 const K2DFont = K2D({
   subsets: ['latin-ext'],
   display: 'swap',
@@ -26,7 +28,7 @@ export default function RootLayout ({ children }) {
       }>
         <Providers>
           <Header />
-          <main className='min-h-[calc(100dvh_-_96px)] p-4 max-w-5xl mx-auto'>
+          <main className='min-h-[calc(100dvh_-_96px)] p-4 mx-auto'>
             {children}
           </main>
         </Providers>

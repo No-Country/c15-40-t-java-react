@@ -12,5 +12,15 @@ module.exports = {
   theme: {
     extend: {}
   },
-  plugins: [nextui()]
+  plugins: [nextui({
+    themes: {
+      light: {
+        colors: {
+          primary: '#a855f7', // purple-500 en tailwind
+          secondary: '#d946ef', // fuchsia-500 en tailwind
+          warning: '#f97316' // orange-500 en tailwind
+        }
+      }
+    }
+  })]
 };
