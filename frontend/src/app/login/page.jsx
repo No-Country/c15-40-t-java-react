@@ -1,3 +1,4 @@
+'use client';
 import FormLogin from '@/components/formLogin/formLogin';
 import React from 'react'
 
