@@ -4,6 +4,7 @@ import com.NoCountry.educ.ar.entity.User;
 import com.NoCountry.educ.ar.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,10 +38,21 @@ public class UserController {
         }
 
         if (user == null) {
-            response.put("mensaje", "El ID del usuario: ".concat(id.toString().concat("no existe en la base de datos")));
+            response.put("mensaje", "El ID del usuario: ".concat(id.toString().concat(" no existe en la base de datos")));
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<User>(user, HttpStatus.OK);
+    }
+
+    @PostMapping("/user")
+    public ResponseEntity<User> createUser(@RequestBody User userRequest) {
+        User newUser = null;
+        try {
+            newUser = userService.saveUser(userRequest);
+        } catch(DataIntegrityViolationException e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<User>(newUser, HttpStatus.CREATED);
     }
     
 }

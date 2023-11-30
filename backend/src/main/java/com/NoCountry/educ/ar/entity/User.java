@@ -44,4 +44,18 @@ public class User {
     private String userOccupation;
 
     private boolean alta;
+
+    public User(String institutionName, String address, String city, String phone, String email, String password,
+            String cue, String image, String nameOfUser, String userOccupation) {
+        this.institutionName = institutionName;
+        this.address = address;
+        this.city = city;
+        this.phone = phone;
+        this.email = email;
+        this.password = password;
+        this.cue = cue;
+        this.image = image;
+        this.nameOfUser = nameOfUser;
+        this.userOccupation = userOccupation;
+    }
 }
