@@ -28,7 +28,7 @@ export default function Header () {
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-          className="lg:hidden"
+          className="md:hidden"
         />
         <NavbarBrand>
           <Link href="/">
@@ -36,7 +36,7 @@ export default function Header () {
           </Link>
         </NavbarBrand>
       </NavbarContent>
-      <NavbarContent className="hidden lg:flex gap-4" justify="center">
+      <NavbarContent className="hidden md:flex gap-4" justify="center">
         {NavbarLinks.map((link) => {
           const { name, path } = link;
 
@@ -49,10 +49,10 @@ export default function Header () {
           );
         })}
       </NavbarContent>
-      <NavbarContent justify="end">
+      <NavbarContent justify="end" className='hidden md:flex'>
         <NavbarItem>
-          <Button disableRipple as={Link} href="/iniciar-sesion" color='warning' variant='ghost'>
-            Iniciar sesión
+          <Button className='hover:!text-white' disableRipple as={Link} href="/iniciar-sesion" color='warning' variant='ghost'>
+            Eres un colegio ?
           </Button>
         </NavbarItem>
       </NavbarContent>
@@ -68,6 +68,11 @@ export default function Header () {
             </NavbarMenuItem>
           );
         })}
+        <NavbarMenuItem className='mt-10 self-center'>
+          <Button className='hover:!text-white' disableRipple as={Link} href="/iniciar-sesion" color='warning' variant='ghost'>
+            Eres un colegio ?
+          </Button>
+        </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>
   );
