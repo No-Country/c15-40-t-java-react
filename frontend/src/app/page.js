@@ -23,9 +23,9 @@ export default function Home () {
         </header>
         <div
           style={{ clipPath: 'polygon(0 0, 100% 0, 100% 80%, 15% 100%, 0 100%)' }}
-          className='rounded-3xl w-3/4 max-w-md overflow-hidden rotate-[12deg] lg:w-1/2 aspect-square'>
+          className='rounded-3xl w-3/4 max-w-md overflow-hidden rotate-[13deg] lg:w-1/2 aspect-square'>
           <Image radius='none'
-            classNames={{ wrapper: '-rotate-[12deg] overflow-visible scale-125', img: 'scale-125 top-5' }} src="/children.webp" />
+            classNames={{ wrapper: '-rotate-[13deg] overflow-visible scale-125', img: 'scale-125 top-5' }} src="/children.webp" />
         </div>
       </div>
     </section>
