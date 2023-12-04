@@ -10,11 +10,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of="id")
-@Document(value = "pre_inscripcion")
+@Document(value = "users")
 public class User  {
 
     @Id
     private String id;
+    private String pre_inscription_id;
     private String email;
     private String password;
     private String image;
