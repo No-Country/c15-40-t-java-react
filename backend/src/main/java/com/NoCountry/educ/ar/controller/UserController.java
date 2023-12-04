@@ -54,7 +54,7 @@ public class UserController {
             response.put("mensaje", "El ID del usuario: ".concat(id.toString().concat(" no existe en la base de datos")));
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<User>(user, HttpStatus.OK);
+        return new ResponseEntity<>(new UserResponseDTO(user), HttpStatus.OK);
     }
 
     @PostMapping("/register-user")
