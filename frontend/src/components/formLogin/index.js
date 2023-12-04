@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 
 export const Index = () => {
     const [user, setUser] = useState('')
@@ -8,7 +9,10 @@ export const Index = () => {
         e.preventDefault()
 
         if(user === '' || password === ''){
-            window.alert('Por favor ingrese un usuario y contraseña.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Ingrese usuario y contraseña',
+            });
         }
 
         console.log('Usuario:', user);
@@ -17,3 +21,4 @@ export const Index = () => {
 
     return {handleFormSubmit, user, setUser, password, setPassword}
 }
+
