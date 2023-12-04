@@ -7,9 +7,7 @@ const RegistrarColegio = () => {
   const [address, setAddress] = React.useState('');
 
   return (
-
     <>
-
       <form className='w-4/5 flex flex-col justify-around mx-auto bg-white rounded-3xl p-4 shadow-xl'>
 
         <h1 className='text-start font-bold mb-4 text-2xl'>Pre-Registro de Colegio</h1>
@@ -128,7 +126,6 @@ const RegistrarColegio = () => {
 
       </form>
     </>
-
   );
 };
 
