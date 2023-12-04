@@ -1,24 +1,27 @@
 package com.NoCountry.educ.ar.controller;
 
+import com.NoCountry.educ.ar.dto.UserRequestDTO;
+import com.NoCountry.educ.ar.dto.UserResponseDTO;
 import com.NoCountry.educ.ar.entity.User;
-import com.NoCountry.educ.ar.exception.ErrorDto;
+
 import com.NoCountry.educ.ar.service.UserService;
 
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
+
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/users")
@@ -26,6 +29,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private MessageSource messageSource;
 
     @GetMapping()
     public ResponseEntity<List<User>> getAll() {
@@ -52,35 +58,22 @@ public class UserController {
     }
 
     @PostMapping("/register-user")
-    public ResponseEntity<User> createUser(@RequestBody @Valid User userRequest) {
-        User newUser = null;
-        try {
-            newUser = userService.saveUser(userRequest);
-            return new ResponseEntity<User>(newUser, HttpStatus.CREATED);
-        } catch(Exception e) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+    public ResponseEntity<?> createUser(@RequestBody @Valid UserRequestDTO userRequest, BindingResult bindingResult, Locale locale) {
+        if (bindingResult.hasErrors()) {
+            String errorMessage = bindingResult.getFieldErrors().stream()
+                    .map(error -> {
+                        String messageCode = "error.validation." + error.getCode();
+                        return messageSource.getMessage(messageCode, new Object[]{error.getField(), error.getRejectedValue()}, locale);
+                    })
+                    .collect(Collectors.joining(", "));
+            return ResponseEntity.badRequest().body(errorMessage);
         }
+
+        User newUser = new User(userRequest);
+        userService.saveUser(newUser);
+        UserResponseDTO userResponseDTO = new UserResponseDTO(newUser);
+        return new ResponseEntity<>(userResponseDTO, HttpStatus.CREATED);
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public List<ErrorDto> handleValidationExceptions(MethodArgumentNotValidException ex){
-        return ex.getBindingResult()
-                .getAllErrors()
-                .stream()
-                .map(UserController::getErrorDto)
-                .toList();
-    }
 
-    private static ErrorDto getErrorDto(ObjectError error) {
-        String field = error instanceof FieldError fieldError ? fieldError.getField() : null;
-        String rejectedValue = error instanceof FieldError fieldError ? String.valueOf(fieldError.getRejectedValue()) : null;
-
-        return new ErrorDto(
-                error.getObjectName(),
-                field,
-                rejectedValue,
-                error.getDefaultMessage());
-    }
-    
 }
