@@ -115,13 +115,13 @@ const RegistrarColegio = () => {
       
     </div>
 
-    <label className='mb-2' for="file">Foto DNI</label>
+    <label className='mb-2' htmlFor="file">Foto DNI</label>
     
     
     <div className="w-[calc(50%-0.25rem)] flex gap-2 mb-4">
 
         
-        <input type="file" id='file' name='file' class="block w-full text-sm text-slate-500
+      <input type="file" id='file' name='file' className="block w-full text-sm text-slate-500
       file:mr-4 file:py-2 file:px-4
       file:rounded-full file:border-0
       file:text-sm file:font-semibold
