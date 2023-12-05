@@ -1,24 +1,12 @@
 {
-  "extends": [
-    "standard",
-    "plugin:react/recommended",
-    "eslint:recommended"
-  ],
-  "plugins": [
-    "react"
-  ],
+  "extends": ["standard", "plugin:react/recommended", "eslint:recommended"],
+  "plugins": ["react"],
   "rules": {
     "camelcase": "off",
-    "indent": [
-      "error",
-      2
-    ],
+    "indent": ["error", 4],
     "no-unused-vars": "error",
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
-    "semi": [
-      "error",
-      "always"
-    ]
+    "semi": ["error", "always"]
   }
 }
