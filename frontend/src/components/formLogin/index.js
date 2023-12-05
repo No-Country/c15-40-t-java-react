@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Swal from 'sweetalert2';
 
 export const Index = () => {
     const [user, setUser] = useState('')
@@ -8,17 +7,16 @@ export const Index = () => {
     const handleFormSubmit = (e) => {
         e.preventDefault()
 
-        if(user === '' || password === ''){
-            Swal.fire({
-                icon: 'error',
-                title: 'Ingrese usuario y contraseña',
-            });
+        const formData = new FormData(e.target)
+        const userData = {
+            user: formData.get('user'),
+            password: formData.get('password')
         }
 
-        console.log('Usuario:', user);
-        console.log('Contraseña:', password);
+        console.log(userData)
     }
 
+    
     return {handleFormSubmit, user, setUser, password, setPassword}
 }
 

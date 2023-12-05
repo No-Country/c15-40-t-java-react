@@ -4,10 +4,12 @@
     "plugin:react/recommended",
     "eslint:recommended"
   ],
-  "plugins": [
-    "react"
-  ],
-  "rules": {
+  
+    "plugins": ["prettier"],
+
+    "rules": { 
+      "prettier/prettier": "error",
+
     "camelcase": "off",
     "indent": [
       "error",
