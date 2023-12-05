@@ -10,8 +10,7 @@ export const Index = () => {
   const NavbarLinks = [
     { name: 'Preguntas Frecuentes', path: '/preguntas-frecuentes' },
     { name: 'Buscador', path: '/buscador' },
-    { name: 'Comparar Colegios', path: '/comparar-colegios' },
-    { name: 'Registrar Colegio', path: '/registrar-colegio' }
+    { name: 'Comparar Colegios', path: '/comparar-colegios' }
   ];
 
   return { NavbarLinks, isMenuOpen, setIsMenuOpen };
