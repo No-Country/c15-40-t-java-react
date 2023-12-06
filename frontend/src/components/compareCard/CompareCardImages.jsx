@@ -1,10 +1,10 @@
 import React from "react";
 import { Image } from "@nextui-org/react";
 
-function CompareCard({ colegio }) {
+function CompareCardImages({ colegio }) {
   return (
     <div className="flex flex-col gap-5">
-      <h1 className="text-lg font-semibold">{colegio}</h1>
+      <h1 className="text-lg font-semibold">{colegio.institutionName}</h1>
       <Image
         width={400}
         alt="NextUI hero Image"
@@ -14,4 +14,4 @@ function CompareCard({ colegio }) {
   );
 }
 
-export default CompareCard;
+export default CompareCardImages;

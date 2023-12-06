@@ -1,4 +1,3 @@
-import React from "react";
 export const colegios = [
   {
     label: "Colegio1",
@@ -19,5 +18,88 @@ export const colegios = [
     label: "Colegio4",
     value: "Colegio4",
     description: "Colegio4 es el mejor",
+  },
+];
+
+export const colegioDetail = [
+  {
+    _id: 1,
+    pre_inscription_id: 1, // Referencia al documento en Pre_Inscription
+    gestion: "public",
+    institutionName: "Lopa Colegio",
+    address: "Lopa Lopa",
+    city: "Montevideo",
+    phones: [],
+    cue: "cue",
+    web: "google.com.ar",
+    educationLevels: [
+      {
+        name: "kindergarten",
+        fee: { min: 20000, max: 25000 },
+        inscriptionDate: "30/05/1989",
+        shifts: [
+          { name: "turno mañana", schedule: { from: 8, to: 12 } },
+          { name: "turno tarde", schedule: { from: 13, to: 17 } },
+        ],
+      },
+      {
+        name: "highschool",
+        fee: { min: 30000, max: 45000 },
+        inscriptionDate: "30/05/1989",
+        shifts: [
+          { name: "turno mañana", schedule: { from: 8, to: 12 } },
+          { name: "turno tarde", schedule: { from: 13, to: 17 } },
+        ],
+        orientations: ["Economics", "Arts", "Chemistry"],
+      },
+    ],
+    talleres: ["Voley", "Ajedrez"],
+    bilingual: false,
+    comedor: false,
+    religion: ["Catolico", "Judio"],
+    uniforme: false,
+    genere: "Género",
+    condicionesEdilicias: "Condiciones Edilicias",
+    calefaccion: false,
+  },
+  {
+    _id: 2,
+    pre_inscription_id: 2, // Referencia al documento en Pre_Inscription
+    web: "google.com.ar",
+    gestion: "public",
+    institutionName: "Ilis",
+    address: "Ilis Ilis 55",
+    city: "Montevideo",
+    phones: [],
+    cue: "cue",
+    educationLevels: [
+      {
+        name: "kindergarten",
+        fee: { min: 20000, max: 25000 },
+        inscriptionDate: "15/06/1955",
+        shifts: [
+          { name: "turno mañana", schedule: { from: 8, to: 12 } },
+          { name: "turno tarde", schedule: { from: 13, to: 17 } },
+        ],
+      },
+      {
+        name: "highschool",
+        fee: { min: 30000, max: 45000 },
+        inscriptionDate: "30/05/1989",
+        shifts: [
+          { name: "turno mañana", schedule: { from: 8, to: 12 } },
+          { name: "turno tarde", schedule: { from: 13, to: 17 } },
+        ],
+        orientations: ["Economics", "Arts", "Chemistry"],
+      },
+    ],
+    talleres: ["Voley", "Ajedrez"],
+    bilingual: true,
+    comedor: true,
+    religion: ["Catolico", "Judio"],
+    uniforme: true,
+    genere: "Género",
+    condicionesEdilicias: "Condiciones Edilicias",
+    calefaccion: true,
   },
 ];
