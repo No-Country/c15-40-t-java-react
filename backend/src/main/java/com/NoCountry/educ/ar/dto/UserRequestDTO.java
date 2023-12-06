@@ -7,12 +7,12 @@ import jakarta.validation.constraints.Size;
 import org.springframework.data.mongodb.core.index.Indexed;
 
 public record UserRequestDTO(
-        @NotBlank @Email
-        @Indexed(name = "pre_inscripcion_email_index_unique", unique = true) String email,
-        @NotBlank String password,
-                   String image,
-        @NotBlank String username,
-        @NotBlank String userOccupation,
+    @NotBlank @Email
+    @Indexed(name = "pre_inscripcion_email_index_unique", unique = true) String email,
+    @NotBlank String password,
+    @NotBlank String image,
+    @NotBlank String username,
+    @NotBlank String userOccupation,
         Role role
 ) {
 }

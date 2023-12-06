@@ -31,12 +31,12 @@ public class AuthenticationService  implements UserDetailsService {
     public AuthenticationResponse login(AuthenticationRequest authRequest) {
 
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                authRequest.getUsername(), authRequest.getPassword()
+                authRequest.email(), authRequest.password()
         );
 
         authenticationManager.authenticate(authToken);
 
-        User user = userRepository.findByUsername(authRequest.getUsername()).get();
+        User user = userRepository.findByEmail(authRequest.email()).get();
 
         String jwt = jwtService.generateToken(user, generateExtraClaims(user));
 
@@ -46,7 +46,7 @@ public class AuthenticationService  implements UserDetailsService {
     private Map<String, Object> generateExtraClaims(User user) {
 
         Map<String, Object> extraClaims = new HashMap<>();
-        extraClaims.put("name", user.getUsername());
+        extraClaims.put("name", user.getEmail());
         extraClaims.put("role", user.getRole().name());
         extraClaims.put("permissions", user.getAuthorities());
 
@@ -54,9 +54,9 @@ public class AuthenticationService  implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> userOptional = userRepository.findByUsername(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<User> userOptional = userRepository.findByEmail(email);
 
-        return userOptional.orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + username));
+        return userOptional.orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + email));
     }
 }

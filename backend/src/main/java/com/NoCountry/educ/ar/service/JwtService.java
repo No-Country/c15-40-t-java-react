@@ -38,7 +38,7 @@ public class JwtService {
                 .compact();
     }
 
-    public String extractUsername(String jwt) {
+    public String extractEmail(String jwt) {
         return extractAllClaims(jwt).getSubject();
     }
 

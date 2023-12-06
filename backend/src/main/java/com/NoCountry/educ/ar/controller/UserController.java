@@ -43,7 +43,7 @@ public class UserController {
         return new ResponseEntity<>(usernames, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('SAVE_ONE_INSTITUTION')")
+
     @GetMapping("/list")
     public ResponseEntity<List<User>> getAll() {
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
