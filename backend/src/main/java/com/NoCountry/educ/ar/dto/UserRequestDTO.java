@@ -8,9 +8,12 @@ import org.springframework.data.mongodb.core.index.Indexed;
 public record UserRequestDTO(
         @NotBlank @Email
         @Indexed(name = "pre_inscripcion_email_index_unique", unique = true) String email,
-        @NotBlank @Size(min = 5, max = 20) String password,
-        @NotBlank String image,
-        @NotBlank String nameOfUser,
-        @NotBlank String userOccupation
+        @NotBlank @Size(min = 5, max = 20) String password
 ) {
+        public UserRequestDTO(FormRequestDTO formRequest) {
+                this(
+                        formRequest.email(),
+                        formRequest.password()
+                );
+        }  
 }
