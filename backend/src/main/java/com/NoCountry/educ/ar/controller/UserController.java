@@ -3,7 +3,7 @@ package com.NoCountry.educ.ar.controller;
 import com.NoCountry.educ.ar.dto.UserRequestDTO;
 import com.NoCountry.educ.ar.dto.UserResponseDTO;
 import com.NoCountry.educ.ar.entity.User;
-
+import org.springframework.security.access.prepost.PreAuthorize;
 import com.NoCountry.educ.ar.service.UserService;
 
 import jakarta.validation.Valid;
@@ -33,7 +33,18 @@ public class UserController {
     @Autowired
     private MessageSource messageSource;
 
-    @GetMapping()
+    @PreAuthorize("hasAuthority('READ_ALL_INSTITUTIONS')")
+    @GetMapping("/usernames")
+    public ResponseEntity<List<String>> getAllUsernames() {
+        List<User> users = userService.findAll();
+        List<String> usernames = users.stream()
+                .map(User::getUsername)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(usernames, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/list")
     public ResponseEntity<List<User>> getAll() {
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
