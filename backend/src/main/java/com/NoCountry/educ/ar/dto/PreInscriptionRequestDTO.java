@@ -7,5 +7,13 @@ public record PreInscriptionRequestDTO(
     String[] phones, 
     String cue
 ) {
-    
+    public PreInscriptionRequestDTO(FormRequestDTO formRequest) {
+        this(
+            formRequest.institutionName(),
+            formRequest.address(),
+            formRequest.city(),
+            formRequest.phones(),
+            formRequest.cue()
+        );
+    }
 }
