@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.NoCountry.educ.ar.dto.FormRequestDTO;
 import com.NoCountry.educ.ar.dto.FormResponseDTO;
 import com.NoCountry.educ.ar.dto.PreInscriptionRequestDTO;
-import com.NoCountry.educ.ar.dto.UserRequestDTO;
+import com.NoCountry.educ.ar.dto.UserOfFormRequest;
 import com.NoCountry.educ.ar.entity.PreInscription;
 import com.NoCountry.educ.ar.entity.User;
 import com.NoCountry.educ.ar.service.PreInscriptionImplements;
@@ -36,7 +36,7 @@ public class FormController {
         PreInscriptionRequestDTO preInscriptionRequestDTO = new PreInscriptionRequestDTO(formRequest);
         PreInscription newPreInscription = preInscriptionService.createPreInscription(preInscriptionRequestDTO);
         
-        UserRequestDTO userRequestDTO = new UserRequestDTO(formRequest);
+        UserOfFormRequest userRequestDTO = new UserOfFormRequest(formRequest);
         User newUser = userService.createUser(userRequestDTO, newPreInscription);
         
         FormResponseDTO formResponse = new FormResponseDTO(newPreInscription, newUser);
@@ -49,7 +49,7 @@ public class FormController {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<FormResponseDTO>> getForms() {
-        return new ResponseEntity<>(userService.getUsersWithPreInscriptions(), HttpStatus.OK);
+    public ResponseEntity<List<User>> getForms() {
+        return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
 }

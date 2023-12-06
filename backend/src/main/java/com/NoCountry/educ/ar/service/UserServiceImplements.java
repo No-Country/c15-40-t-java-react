@@ -1,7 +1,7 @@
 package com.NoCountry.educ.ar.service;
 
 import com.NoCountry.educ.ar.dto.FormResponseDTO;
-import com.NoCountry.educ.ar.dto.UserRequestDTO;
+import com.NoCountry.educ.ar.dto.UserOfFormRequest;
 import com.NoCountry.educ.ar.entity.PreInscription;
 import com.NoCountry.educ.ar.entity.User;
 import com.NoCountry.educ.ar.repository.UserRepository;
@@ -38,7 +38,7 @@ public class UserServiceImplements implements UserService{
 
     @Override
     @Transactional
-    public User createUser(UserRequestDTO userRequestDTO, PreInscription preInscription) {
+    public User createUser(UserOfFormRequest userRequestDTO, PreInscription preInscription) {
         User newUser = new User(userRequestDTO);
         newUser.setPreInscriptionId(preInscription);
         return userRepository.save(newUser);
