@@ -15,20 +15,28 @@ export const useFormLogin = async () => {
             password: formData.post('password')
         }
 
-        const response = await fetch('https://educ-ar-lgxy.onrender.com/auth/authenticate', {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(userData)
-        })
-
-        if(response.status == 200){
-            navigate('/')
+        try {
+            const response = await fetch('https://educ-ar-lgxy.onrender.com/auth/authenticate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            });
+    
+            if (response.status === 200) {
+                const data = await response.json();
+                console.log(data);
+            } else {
+                console.error('Error en la solicitud al backend');
+            }
+        } catch (error) {
+            console.error('Error de red:', error);
         }
 
-        e.target.reset();
+
         console.log(userData)
+        e.target.reset();
     }
 
     const handleUserChange = (e) => {
