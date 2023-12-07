@@ -1,16 +1,22 @@
 import React from "react";
 import { Input } from "@nextui-org/react";
 import Link from "next/link";
-import { Index } from ".";
+import { useFormLogin } from ".";
+
 
 const FormLogin = () => {
+
   const {
     handleFormSubmit,
     user,
-    setUser,
+    handleUserChange,
     password,
-    setPassword
-  } = Index();
+    handlePasswordChange,
+    onBlurInputPassword,
+    onBlurInputEmail,
+    errorMessageEmail,
+    errorMessagePassword
+  } = useFormLogin();
 
   return (
     <form
@@ -19,19 +25,19 @@ const FormLogin = () => {
     >
       <div className="mb-6 p-2">
         <Input
-          key="Usuario"
-          type="text"
-          label="Usuario"
-          name="user"
+          key="email"
+          type="email"
+          label="Email"
+          name="email"
           labelPlacement="inside"
-          placeholder="Nombre de Usuario"
-          onChange={(e) => {
-            setUser(e.target.value)
-          }}
+          placeholder="Email"
+          value={user}
+          onBlur={onBlurInputEmail}
+          onChange={handleUserChange}
           classNames={{
             label: "font-semibold",
           }}
-          errorMessage={"ingrese usuario"}
+          errorMessage={errorMessageEmail}
         />
       </div>
       <div className="mb-6 p-2">
@@ -42,13 +48,13 @@ const FormLogin = () => {
           name="password"
           labelPlacement="inside"
           placeholder="Ingrese Contraseña"
-          onChange={(e) => {
-            setPassword(e.target.value)
-          }}
+          value={password}
+          onBlur={onBlurInputPassword}
+          onChange={handlePasswordChange}
           classNames={{
             label: "font-semibold",
           }}
-          errorMessage={"ingrese contraseña"}
+          errorMessage={errorMessagePassword}
         />
       </div>
       <div className="m-auto flex justify-center">
