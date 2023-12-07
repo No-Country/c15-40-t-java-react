@@ -1,137 +1,284 @@
 'use client'
-import React from 'react';
-import {Input} from "@nextui-org/react";
+import React, {useRef} from 'react';
+import Link from 'next/link';
+import { Input, Button } from "@nextui-org/react";
+import { useForm } from "react-hook-form";
+import emailjs from '@emailjs/browser';
+import {sendAllData} from './service'
+import { useRouter } from "next/navigation";
+import { shootAlertError, shootAlertOK } from '@/components/Alerts/Alerts';
+
 
 const RegistrarColegio = () => {
 
-    const [schoolName, setSchoolName] = React.useState("");
-    const [address, setAddress]= React.useState("");
+
+  const router = useRouter();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    mode: "onBlur",
+    defaultValues: {
+      email: "",
+
+    },
+  });
+
+  const customInputStyle = {
+    label: "font-semibold",
+    base: 'group grid col-span-2 md:col-span-1',
+    errorMessage: 'text-red-500'
+  }
+  
+
+  const onSubmit = async (data) => {
+
+    const dataBack= {
+      institutionName:data.institutionName,
+      address: data.address,
+      city:data.city,
+      phones: [data.phone],
+      cue:data.cue,
+      email:data.email,
+      password:data.password,
+    }
+
+    const response= await sendAllData(dataBack);
+
+    if(response.status !== 201){
+
+      shootAlertError("Ups, problemas en el servidor!", "Intenta de nuevo en unos minutos" )
+
+      } else{
+
+        shootAlertOK("Registro exitoso!","Gracias por elegirnos")
+
+        sendEmail();
+
+        setTimeout(() => {
+          
+          router.push("/");
+        }, 3000);
+
+        console.log(response.status)
+      }
     
+  }
+
+  const EmailJSform = useRef();
+
+  const sendEmail = () => {
+    
+
+    emailjs.sendForm('service_uzlwg6h', 'template_9fb25kg', EmailJSform.current, '4yGsYAx7t2YvKyg5k')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+  };
+
+
 
   return (
 
     <>
-    
-    <form className='w-4/5 flex flex-col justify-around mx-auto bg-white rounded-3xl p-4 shadow-xl'>
 
-    <h1 className='text-start font-bold mb-4 text-2xl'>Pre-Registro de Colegio</h1>
-        <p className='mb-3 text-orange-500'>Datos Institución</p>
+      <form ref={EmailJSform} onSubmit={handleSubmit(onSubmit)} className='w-4/5 grid grid-cols-2 flex gap-x-2 gap-y-4 mb-4 justify-around mx-auto bg-white rounded-3xl p-4 shadow-xl'>
 
-    <div className="w-full flex gap-2 mb-4">
-      <Input
-        label="Nombre Colegio"
-        placeholder="Colegio Santo Tomás"
-        value={schoolName}
-        onValueChange={setSchoolName}
-        classNames={{
-            label: "font-semibold",
-        }}
-      />
-      <Input
-        label="Dirección"
-        placeholder="San Martin 556"
-        value={address}
-        onValueChange={setAddress}
-        classNames={{
-            label: "font-semibold",
-        }}
-      />
-      
-    </div>
-    <div className="w-full flex gap-2 mb-4">
-      <Input
-        label="Ciudad"
-        placeholder="Córdoba"
-        /* value={}
-        onValueChange={} */
-        classNames={{
-            label: "font-semibold",
-        }}
-      />
-      <Input
-        label="Teléfono de la institución"
-        placeholder="0351 48121400"
-        /* value={}
-        onValueChange={} */
-        classNames={{
-            label: "font-semibold",
-        }}
-      />
-      
-    </div>
-    <div className="w-full flex gap-2 mb-4">
-      <Input
-        label="Email de la institución"
-        placeholder="santotomas@edu.ar"
-        /* value={}
-        onValueChange={} */
-        classNames={{
-            label: "font-semibold",
-        }}
-      />
-       <Input
-      label="Contraseña"
-      placeholder="Ingresa tu contraseña"
-      type="password"
-      classNames={{
-        label: "font-semibold",
-    }}
-    />
-      
-    </div>
-    <div className="w-[calc(50%-0.25rem)] flex gap-2 mb-5">
-      <Input
-        label="Código único de establecimiento (CUE)"
-        placeholder="140522200"
-        /* value={}
-        onValueChange={} */
-        classNames={{
-            label: "font-semibold",
-        }}
-      />     
-    </div>
+        <h1 className='text-start font-bold mb-4 text-2xl col-span-2'>Pre-Registro de Colegio</h1>
+        <p className='mb-3 text-orange-500 col-span-2'>Datos de la Institución</p>
 
-    <p className='mb-3 text-orange-500'>Datos Persona que realiza Registro</p>
 
-    <div className="w-full flex gap-2 mb-4">
-      <Input
-        label="Nombre y Apellido"
-        placeholder="Sofía González"
-       /*  value={}
-        onValueChange={} */
-        classNames={{
-            label: "font-semibold",
-        }}
-      />
-      <Input
-        label="Cargo que ocupa en el colegio"
-        placeholder="Directora nivel secundario"
-        /* value={}
-        onValueChange={} */
-        classNames={{
-            label: "font-semibold",
-        }}
-      />
-      
-    </div>
+        <Input
+          isRequired
+          label="Nombre Colegio"
+          classNames={customInputStyle}
+          errorMessage={errors.institutionName && errors.institutionName.message}
+          {...register("institutionName", {
+            required: "Este campo es obligatorio",
+            minLength: {
+              value: 3,
+              message: "Debe tener al menos 3 caracteres",
+            }
+          })}
+        />
 
-    <label className='mb-2' htmlFor="file">Foto DNI</label>
-    
-    
-    <div className="w-[calc(50%-0.25rem)] flex gap-2 mb-4">
+        <Input
+          isRequired
+          label="Dirección"
+          classNames={customInputStyle}
+          errorMessage={errors.address && errors.address.message}
+          {...register("address", {
+            required: "Este campo es obligatorio",
+            minLength: {
+              value: 5,
+              message: "Debe tener al menos 5 caracteres",
+            }
+          })}
+        />
 
-        
-      <input type="file" id='file' name='file' className="block w-full text-sm text-slate-500
-      file:mr-4 file:py-2 file:px-4
-      file:rounded-full file:border-0
-      file:text-sm file:font-semibold
-      file:bg-violet-50 file:text-violet-700
-      hover:file:bg-violet-100"/>
-  
-      
-    </div>
-    
-    </form>
+        <Input
+          isRequired
+          label="Ciudad"
+          classNames={customInputStyle}
+          errorMessage={errors.city && errors.city.message}
+          {...register("city", {
+            required: "Este campo es obligatorio",
+            minLength: {
+              value: 3,
+              message: "Debe tener al menos 3 caracteres",
+            }
+          })}
+        />
+
+        <Input
+          isRequired
+          label="Teléfono de la institución"
+          classNames={customInputStyle}
+          errorMessage={errors.phone && errors.phone.message}
+          {...register("phone", {
+            required: "Este campo es obligatorio",
+            minLength: {
+              value: 7,
+              message: "Debe tener al menos 7 números",
+            },
+            pattern: {
+              value: /^[0-9\s]+$/i,
+              message: "Escriba solo números"
+            }
+          })}
+        />
+
+        <Input
+          isRequired
+          label="Email de la institución"
+          classNames={customInputStyle}
+          errorMessage={errors.email && errors.email.message}
+          {...register("email", {
+            required: "Este campo es obligatorio",
+            minLength: {
+              value: 5,
+              message: "Debe tener al menos 5 caracteres",
+            },
+            pattern: {
+              value: /^[a-zA-Z0-9.!#$%&*+/=?^_`{|}~-]+@[a-zA-Z]+(\.[a-zA-Z]+)+$/,
+              message: "El formato del correo debe ser Ejemplo@mail.com"
+            }
+          })}
+        />
+
+        <Input
+          isRequired
+          label="Contraseña"
+          type="password"
+          classNames={customInputStyle}
+          errorMessage={errors.password && errors.password.message}
+          {...register("password", {
+            required: "Este campo es obligatorio",
+            pattern: {
+              value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+              message: "Minimo 8 caracteres, al menos 1 mayúscula, 1 minúscula y 1 número"
+            }
+          })}
+        />
+
+        <div className=" grid col-span-2  gap-2 mb-4 md:col-span-1">
+          <Input
+            isRequired
+            label="Código único de establecimiento (CUE)"
+            classNames={{
+              label: "font-semibold truncate",
+              errorMessage: 'text-red-500'
+            }}
+            errorMessage={errors.cue && errors.cue.message}
+            {...register("cue", {
+              required: "Este campo es obligatorio",
+              minLength: {
+                value: 9,
+                message: "Debe tener mín 9 números",
+              },
+              maxLength: {
+                value: 9,
+                message: "Debe tener máx 9 números",
+              },
+              pattern: {
+                value: /^[0-9]+$/i,
+                message: "Escriba solo números"
+              }
+
+            })}
+
+          />
+        </div>
+
+        <p className='mb-3 text-orange-500 col-span-2'>Datos de la Persona que realiza el Registro</p>
+
+        <Input
+          isRequired
+          label="Nombre y Apellido"
+          classNames={customInputStyle}
+          errorMessage={errors.nameOfUser && errors.nameOfUser.message}
+          {...register("nameOfUser", {
+            required: "Este campo es obligatorio",
+            minLength: {
+              value: 5,
+              message: "Debe tener al menos 5 caracteres",
+            }
+          })}
+        />
+
+        <Input
+          isRequired
+          label="Cargo que ocupa en el colegio"
+          classNames={customInputStyle}
+          errorMessage={errors.userOccupation && errors.userOccupation.message}
+          {...register("userOccupation", {
+            required: "Este campo es obligatorio",
+            minLength: {
+              value: 5,
+              message: "Debe tener al menos 5 caracteres",
+            }
+          })}
+        />
+
+<Input
+            isRequired
+            label="Código único de identificación laboral (CUIL)"
+            classNames={{
+              label: "font-semibold truncate",
+              errorMessage: 'text-red-500',
+              base: 'group grid col-span-2 md:col-span-1'
+            }}
+            errorMessage={errors.cuil && errors.cuil.message}
+            {...register("cuil", {
+              required: "Este campo es obligatorio",
+              minLength: {
+                value: 11,
+                message: "Debe tener mín 11 números",
+              },
+              maxLength: {
+                value: 11,
+                message: "Debe tener máx 11 números",
+              },
+              pattern: {
+                value: /^[0-9]+$/i,
+                message: "Escriba solo números sin guiones"
+              }
+
+            })}
+
+          />
+
+        <Button type='submit' className='bg-orange-500 text-white col-span-2 w-1/3 justify-self-center font-semibold mb-2 md:w-1/4' radius="md">
+          Enviar
+        </Button>
+
+      </form>
+
+      <p className='text-center mx-auto w-3/4'>Si ya te registraste y recibiste un mail confirmando la validación de datos, entonces solo debes <Link href="/iniciar-sesion" className='text-violet-500 font-semibold'>Loguearte aquí</Link> </p>
     </>
 
   )
