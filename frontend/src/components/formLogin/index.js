@@ -65,5 +65,3 @@ export const useFormLogin = async () => {
     
     return {handleFormSubmit, user, handleUserChange, password, handlePasswordChange, onBlurInputPassword, onBlurInputEmail, errorMessageEmail, errorMessagePassword}
 }
-
-
