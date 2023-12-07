@@ -13,9 +13,22 @@ import {
   TableRow,
   TableCell,
 } from "@nextui-org/react";
-import { colegios, colegioDetail } from "./data";
+import { colegios } from "./data";
+import { useState } from "react";
 
 export default function page() {
+  const [selectColegio1, setSelectColegio1] = useState("Colegio1");
+  const [selectColegio2, setSelectColegio2] = useState("Colegio2");
+
+  const handleSelection1Change = (id) => {
+    console.log("cambie", id);
+    setSelectColegio1(id);
+  };
+
+  const handleSelection2Change = (id) => {
+    setSelectColegio2(id);
+  };
+
   return (
     <div className="flex flex-col items-center justify-center ">
       <h1 className="text-xl font-bold">Comparador de colegios</h1>
@@ -75,7 +88,7 @@ export default function page() {
             <TableRow key={"row-L-9"}>
               <TableCell className="flex justify-center ">Uniforme</TableCell>
             </TableRow>
-            <TableRow key={"row-L-9"}>
+            <TableRow key={"row-L-10"}>
               <TableCell className="flex justify-center ">
                 Tiene calefacción
               </TableCell>
@@ -90,6 +103,7 @@ export default function page() {
             placeholder="Elegí un colegio"
             className="w-full col-start-2"
             size="lg"
+            onSelectionChange={handleSelection1Change}
           >
             {(colegio) => (
               <AutocompleteItem key={colegio.value}>
@@ -97,9 +111,9 @@ export default function page() {
               </AutocompleteItem>
             )}
           </Autocomplete>
-          <CompareCardImages colegio={colegioDetail[1]} />
+          <CompareCardImages colegioId={selectColegio1} />
         </div>
-        <CompareCardDetails colegio={colegioDetail[1]} />
+        <CompareCardDetails colegioId={selectColegio1} position={"left"} />
         <div className="col-start-3 row-start-1">
           <Autocomplete
             defaultItems={colegios}
@@ -107,6 +121,7 @@ export default function page() {
             placeholder="Elegí un colegio"
             className="w-full col-start-3 row-start-1"
             size="lg"
+            onSelectionChange={handleSelection2Change}
           >
             {(colegio) => (
               <AutocompleteItem key={colegio.value}>
@@ -114,9 +129,9 @@ export default function page() {
               </AutocompleteItem>
             )}
           </Autocomplete>
-          <CompareCardImages colegio={colegioDetail[0]} />
+          <CompareCardImages colegioId={selectColegio2} />
         </div>
-        <CompareCardDetails colegio={colegioDetail[0]} />
+        <CompareCardDetails colegioId={selectColegio2} position={"right"} />
       </div>
     </div>
   );

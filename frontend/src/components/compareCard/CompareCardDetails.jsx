@@ -7,8 +7,21 @@ import {
   TableRow,
   TableCell,
 } from "@nextui-org/react";
+import { index } from ".";
 
-function CompareCardDetails({ colegio }) {
+function CompareCardDetails({ colegioId, position }) {
+  const {
+    institutionName,
+    address,
+    city,
+    educationLevelsString,
+    talleresString,
+    bilingual,
+    comedor,
+    religionesString,
+    uniforme,
+    calefaccion,
+  } = index(colegioId);
   return (
     <div className="flex flex-col gap-5">
       <Table
@@ -23,68 +36,56 @@ function CompareCardDetails({ colegio }) {
         </TableHeader>
         <TableBody>
           {/* Nombre */}
-          <TableRow key={"row-L-1"}>
+          <TableRow key={`row-${position}-1`}>
             <TableCell className="flex justify-center ">
-              {colegio.institutionName}
+              {institutionName}
             </TableCell>
           </TableRow>
           {/* Address */}
-          <TableRow key={"row-L-2"}>
-            <TableCell className="flex justify-center ">
-              {colegio.address}
-            </TableCell>
+          <TableRow key={`row-${position}-2`}>
+            <TableCell className="flex justify-center ">{address}</TableCell>
           </TableRow>
           {/* Ciudad */}
-          <TableRow key={"row-L-3"}>
-            <TableCell className="flex justify-center ">
-              {colegio.city}
-            </TableCell>
+          <TableRow key={`row-${position}-3`}>
+            <TableCell className="flex justify-center ">{city}</TableCell>
           </TableRow>
           {/* Education Levels */}
-          <TableRow key={"row-L-4"}>
+          <TableRow key={`row-${position}-4`}>
             <TableCell className="flex justify-center ">
-              {colegio.educationLevels.map((level) => (
-                {level.name}
-              ))}
+              {educationLevelsString.length > 0
+                ? educationLevelsString
+                : "No hay datos"}
             </TableCell>
           </TableRow>
           {/* Talleres */}
-          <TableRow key={"row-L-5"}>
+          <TableRow key={`row-${position}-5`}>
             <TableCell className="flex justify-center ">
-              {colegio.talleres.map((level, index) => {
-                let todos = "";
-                todos += (index > 0 ? " - " : "") + level;
-                return todos;
-              })}
+              {talleresString.length > 0 ? talleresString : "No tiene talleres"}
             </TableCell>
           </TableRow>
-          <TableRow key={"row-L-6"}>
+          <TableRow key={`row-${position}-6`}>
             <TableCell className="flex justify-center ">
-              <p>{colegio.bilingual ? "Si" : "No"}</p>
+              <p>{bilingual}</p>
             </TableCell>
           </TableRow>
-          <TableRow key={"row-L-7"}>
+          <TableRow key={`row-${position}-7`}>
             <TableCell className="flex justify-center ">
-              <p>{colegio.comedor ? "Si" : "No"}</p>
+              <p>{comedor}</p>
             </TableCell>
           </TableRow>
-          <TableRow key={"row-L-8"}>
+          <TableRow key={`row-${position}-8`}>
             <TableCell className="flex justify-center flex-col items-center">
-              {colegio.religion.map((level, index) => {
-                let todos = "";
-                todos += (index > 0 ? " - " : "") + level;
-                return todos;
-              })}
+              {religionesString.length > 0 ? religionesString : "Laico"}
             </TableCell>
           </TableRow>
-          <TableRow key={"row-L-9"}>
+          <TableRow key={`row-${position}-9`}>
             <TableCell className="flex justify-center ">
-              <p>{colegio.uniforme ? "Si" : "No"}</p>
+              <p>{uniforme}</p>
             </TableCell>
           </TableRow>
-          <TableRow key={"row-L-9"}>
+          <TableRow key={`row-${position}-10`}>
             <TableCell className="flex justify-center ">
-              <p>{colegio.calefaccion ? "Si" : "No"}</p>
+              <p>{calefaccion}</p>
             </TableCell>
           </TableRow>
         </TableBody>

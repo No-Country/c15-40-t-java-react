@@ -23,7 +23,7 @@ export const colegios = [
 
 export const colegioDetail = [
   {
-    _id: 1,
+    id: "Colegio1",
     pre_inscription_id: 1, // Referencia al documento en Pre_Inscription
     gestion: "public",
     institutionName: "Lopa Colegio",
@@ -63,7 +63,7 @@ export const colegioDetail = [
     calefaccion: false,
   },
   {
-    _id: 2,
+    id: "Colegio2",
     pre_inscription_id: 2, // Referencia al documento en Pre_Inscription
     web: "google.com.ar",
     gestion: "public",
@@ -94,6 +94,67 @@ export const colegioDetail = [
       },
     ],
     talleres: ["Voley", "Ajedrez"],
+    bilingual: true,
+    comedor: true,
+    religion: ["Catolico", "Judio"],
+    uniforme: true,
+    genere: "Género",
+    condicionesEdilicias: "Condiciones Edilicias",
+    calefaccion: true,
+  },
+  {
+    id: "Colegio3",
+    pre_inscription_id: 2, // Referencia al documento en Pre_Inscription
+    web: "google.com.ar",
+    gestion: "public",
+    institutionName: "Colegio Ingles",
+    address: "Ilis Ilis 55",
+    city: "Buenos Aires",
+    phones: [],
+    cue: "cue",
+    educationLevels: [
+      {
+        name: "kindergarten",
+        fee: { min: 20000, max: 25000 },
+        inscriptionDate: "15/06/1955",
+        shifts: [
+          { name: "turno mañana", schedule: { from: 8, to: 12 } },
+          { name: "turno tarde", schedule: { from: 13, to: 17 } },
+        ],
+      },
+    ],
+    talleres: ["Voley", "Ajedrez", "Fútbol", "Atletismo"],
+    bilingual: true,
+    comedor: true,
+    religion: ["Catolico", "Judio"],
+    uniforme: true,
+    genere: "Género",
+    condicionesEdilicias: "Condiciones Edilicias",
+    calefaccion: true,
+  },
+  {
+    id: "Colegio4",
+    pre_inscription_id: 2, // Referencia al documento en Pre_Inscription
+    web: "google.com.ar",
+    gestion: "public",
+    institutionName: "Colegio Frances",
+    address: "Maria Mieres 2565",
+    city: "Cordoba",
+    phones: [],
+    cue: "cue",
+    educationLevels: [
+      {
+        name: "highschool",
+        fee: { min: 30000, max: 45000 },
+        inscriptionDate: "30/05/1989",
+        shifts: [
+          { name: "turno mañana", schedule: { from: 8, to: 12 } },
+          { name: "turno tarde", schedule: { from: 13, to: 17 } },
+        ],
+        orientations: ["Economics", "Arts", "Chemistry"],
+      },
+    ],
+    talleres: [],
     bilingual: true,
     comedor: true,
     religion: ["Catolico", "Judio"],
