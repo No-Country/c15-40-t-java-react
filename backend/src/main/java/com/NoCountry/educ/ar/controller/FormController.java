@@ -19,8 +19,8 @@ import com.NoCountry.educ.ar.dto.PreInscriptionRequestDTO;
 import com.NoCountry.educ.ar.dto.UserOfFormRequest;
 import com.NoCountry.educ.ar.entity.PreInscription;
 import com.NoCountry.educ.ar.entity.User;
-import com.NoCountry.educ.ar.service.PreInscriptionImplements;
-import com.NoCountry.educ.ar.service.UserServiceImplements;
+import com.NoCountry.educ.ar.service.PreInscriptionService;
+import com.NoCountry.educ.ar.service.UserService;
 
 @CrossOrigin
 @RestController
@@ -28,10 +28,10 @@ import com.NoCountry.educ.ar.service.UserServiceImplements;
 public class FormController {
     
     @Autowired
-    private PreInscriptionImplements preInscriptionService;
+    private PreInscriptionService preInscriptionService;
 
     @Autowired
-    private UserServiceImplements userService;
+    private UserService userService;
 
     @PostMapping("")
     public ResponseEntity<FormResponseDTO> createForm(@RequestBody FormRequestDTO formRequest) {
@@ -40,18 +40,23 @@ public class FormController {
         
         UserOfFormRequest userRequestDTO = new UserOfFormRequest(formRequest);
         User newUser = userService.createUser(userRequestDTO, newPreInscription);
-        
+       
         FormResponseDTO formResponse = new FormResponseDTO(newPreInscription, newUser);
         return new ResponseEntity<>(formResponse, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<List<User>> getFormByUserId(@PathVariable String userId) {
-        return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
+    @GetMapping("/pre-inscription/{preInscriptionId}")
+    public ResponseEntity<FormResponseDTO> getFormByPreInscriptionId(@PathVariable String preInscriptionId) {
+        return new ResponseEntity<>(userService.getFormByPreInscriptionId(preInscriptionId), HttpStatus.OK);
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<FormResponseDTO> getFormByUserId(@PathVariable String userId) {
+        return new ResponseEntity<>(userService.getFormByUserId(userId), HttpStatus.OK);
     }
 
     @GetMapping("")
-    public ResponseEntity<List<User>> getForms() {
-        return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<FormResponseDTO>> getForms() {
+        return new ResponseEntity<>(userService.getUsersWithPreInscriptions(), HttpStatus.OK);
     }
 }

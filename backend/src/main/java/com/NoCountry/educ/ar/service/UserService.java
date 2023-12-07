@@ -17,5 +17,9 @@ public interface UserService {
 
     public User createUser(UserOfFormRequest userRequestDTO, PreInscription preInscription);
 
+    public FormResponseDTO getFormByPreInscriptionId(String preInscriptionId);
+
+    public FormResponseDTO getFormByUserId(String userId);
+
     public List<FormResponseDTO> getUsersWithPreInscriptions();
 }
