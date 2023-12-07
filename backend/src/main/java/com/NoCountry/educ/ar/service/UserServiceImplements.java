@@ -45,6 +45,20 @@ public class UserServiceImplements implements UserService{
     }
 
     @Override
+    public FormResponseDTO getFormByPreInscriptionId(String preInscriptionId) {
+        User user = userRepository.findByPreInscriptionId(preInscriptionId);
+        FormResponseDTO formSetup = new FormResponseDTO(user);
+        return formSetup;
+    }
+
+    @Override
+    public FormResponseDTO getFormByUserId(String userId) {
+        User user = userRepository.findById(userId).get();
+        FormResponseDTO formSetup = new FormResponseDTO(user);
+        return formSetup;
+    }
+
+    @Override
     @Transactional
     public List<FormResponseDTO> getUsersWithPreInscriptions() {
         return userRepository.findAll()
