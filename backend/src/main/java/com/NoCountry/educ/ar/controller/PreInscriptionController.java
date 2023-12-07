@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import com.NoCountry.educ.ar.dto.PreInscriptionResponseDTO;
 import com.NoCountry.educ.ar.entity.PreInscription;
 import com.NoCountry.educ.ar.service.PreInscriptionImplements;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/pre-inscriptions")
 public class PreInscriptionController {
