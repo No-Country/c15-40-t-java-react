@@ -1,12 +1,12 @@
 'use client';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Link from 'next/link';
 import { Input, Button } from '@nextui-org/react';
 import { useForm } from 'react-hook-form';
 import emailjs from '@emailjs/browser';
 import { sendAllData } from './service';
 import { useRouter } from 'next/navigation';
-import { shootAlertError, shootAlertOK } from '@/components/Alerts/Alerts';
+import { EyeIcon, EyeSlashIcon } from '@/components/Icons';
 
 const RegistrarColegio = () => {
   const router = useRouter();
@@ -42,12 +42,9 @@ const RegistrarColegio = () => {
     const response = await sendAllData(dataBack);
 
     if (response.status !== 201) {
-      shootAlertError(
-        'Ups, problemas en el servidor!',
-        'Intenta de nuevo en unos minutos'
-      );
+      console.log('Ups, problemas en el servidor!');
     } else {
-      shootAlertOK('Registro exitoso!', 'Gracias por elegirnos');
+      console.log('Registro exitoso!', 'Gracias por elegirnos');
 
       sendEmail();
 
@@ -79,12 +76,16 @@ const RegistrarColegio = () => {
       );
   };
 
+  const [isVisible, setIsVisible] = useState(false);
+
+  const toggleVisibility = () => setIsVisible(!isVisible);
+
   return (
     <>
       <form
         ref={EmailJSform}
         onSubmit={handleSubmit(onSubmit)}
-        className="w-4/5 grid grid-cols-2 flex gap-x-2 gap-y-4 mb-4 justify-around mx-auto bg-white rounded-3xl p-4 shadow-xl">
+        className="w-4/5 grid grid-cols-2 gap-x-2 gap-y-4 mb-4 justify-around mx-auto bg-white rounded-3xl p-4 shadow-xl">
         <h1 className="text-start font-bold mb-4 text-2xl col-span-2">
           Pre-Registro de Colegio
         </h1>
@@ -176,7 +177,21 @@ const RegistrarColegio = () => {
         <Input
           isRequired
           label="Contraseña"
-          type="password"
+          endContent={
+            <button
+              className="focus:outline-none"
+              type="button"
+              onClick={toggleVisibility}>
+              {isVisible
+                ? (
+                  <EyeSlashIcon className="text-2xl text-default-400 pointer-events-none" />
+                )
+                : (
+                  <EyeIcon className="text-2xl text-default-400 pointer-events-none" />
+                )}
+            </button>
+          }
+          type={isVisible ? 'text' : 'password'}
           classNames={customInputStyle}
           errorMessage={errors.password && errors.password.message}
           {...register('password', {
