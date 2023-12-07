@@ -5,7 +5,7 @@ import { index } from ".";
 function CompareCardImages({ colegioId }) {
   const { institutionName } = index(colegioId);
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 items-center p-5">
       <h1 className="text-lg font-semibold">{institutionName}</h1>
       <Image
         width={400}
