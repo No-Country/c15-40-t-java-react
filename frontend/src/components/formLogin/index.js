@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const useFormLogin = async () => {
+export const useFormLogin = () => {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessageEmail, setErrorMessageEmail] = useState('');
@@ -9,38 +9,59 @@ export const useFormLogin = async () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData(e.target);
-    const userData = {
-      email: formData.post('email'),
-      password: formData.post('password')
-    };
+    if (user !== '' && password !== '') {
+      const formData = new FormData(e.target);
+      const userData = {
+        email: formData.get('email'),
+        password: formData.get('password')
+      };
 
-    const response = await fetch('https://educ-ar-lgxy.onrender.com/auth/authenticate', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify(userData)
-    });
+      try {
+        const response = await fetch(
+          'https://educ-ar-lgxy.onrender.com/auth/authenticate',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+          }
+        );
 
-    if (response.status === 200) {
-      console.log('Login exitoso');
+        if (response.ok) {
+          const data = await response.json();
+          document.cookie = `jwt=${data.token}; expires${new Date(
+            Date.now() + 1 * 24 * 60 * 1000
+          ).toUTCString()};path=/`;
+        }
+      } catch (error) {
+        console.error('Error de red:', error);
+      }
+
+      e.target.reset();
+    } else if (user === '' && password === '') {
+      setErrorMessageEmail('Ingrese email');
+      setErrorMessagePassword('Ingrese contraseña');
+    } else if (user === '') {
+      setErrorMessageEmail('Ingrese email');
+    } else if (password === '') {
+      setErrorMessagePassword('Ingrese contraseña');
     }
-
-    e.target.reset();
-    console.log(userData);
   };
 
   const handleUserChange = (e) => {
-    setUser(e.target.value);
+    const email = e.target.value;
+    setUser(email);
   };
 
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+    const password = e.target.value;
+    setPassword(password);
   };
 
   const onBlurInputEmail = (e) => {
-    if (user === '') {
+    const email = e.target.value;
+    if (email === '') {
       setErrorMessageEmail('Ingrese email');
     } else {
       setErrorMessageEmail('');
@@ -57,5 +78,15 @@ export const useFormLogin = async () => {
     }
   };
 
-  return { handleFormSubmit, user, handleUserChange, password, handlePasswordChange, onBlurInputPassword, onBlurInputEmail, errorMessageEmail, errorMessagePassword };
+  return {
+    handleFormSubmit,
+    user,
+    handleUserChange,
+    password,
+    handlePasswordChange,
+    onBlurInputPassword,
+    onBlurInputEmail,
+    errorMessageEmail,
+    errorMessagePassword
+  };
 };
