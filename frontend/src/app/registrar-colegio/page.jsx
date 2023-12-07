@@ -1,3 +1,4 @@
+
 'use client'
 import React, {useRef} from 'react';
 import Link from 'next/link';
@@ -72,6 +73,7 @@ const RegistrarColegio = () => {
   const sendEmail = () => {
     
 
+
     emailjs.sendForm('service_uzlwg6h', 'template_9fb25kg', EmailJSform.current, '4yGsYAx7t2YvKyg5k')
       .then((result) => {
           console.log(result.text);
@@ -83,8 +85,8 @@ const RegistrarColegio = () => {
 
 
   return (
-
     <>
+
 
       <form ref={EmailJSform} onSubmit={handleSubmit(onSubmit)} className='w-4/5 grid grid-cols-2 flex gap-x-2 gap-y-4 mb-4 justify-around mx-auto bg-white rounded-3xl p-4 shadow-xl'>
 
@@ -281,7 +283,12 @@ const RegistrarColegio = () => {
       <p className='text-center mx-auto w-3/4'>Si ya te registraste y recibiste un mail confirmando la validación de datos, entonces solo debes <Link href="/iniciar-sesion" className='text-violet-500 font-semibold'>Loguearte aquí</Link> </p>
     </>
 
-  )
-}
 
-export default RegistrarColegio
+        </div>
+
+      </form>
+    </>
+  );
+};
+
+export default RegistrarColegio;
