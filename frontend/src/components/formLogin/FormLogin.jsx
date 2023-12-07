@@ -1,11 +1,9 @@
-import React from "react";
-import { Input } from "@nextui-org/react";
-import Link from "next/link";
-import { useFormLogin } from ".";
-
+import React from 'react';
+import { Input } from '@nextui-org/react';
+import Link from 'next/link';
+import { useFormLogin } from '.';
 
 const FormLogin = () => {
-
   const {
     handleFormSubmit,
     user,
@@ -35,7 +33,7 @@ const FormLogin = () => {
           onBlur={onBlurInputEmail}
           onChange={handleUserChange}
           classNames={{
-            label: "font-semibold",
+            label: 'font-semibold'
           }}
           errorMessage={errorMessageEmail}
         />
@@ -52,7 +50,7 @@ const FormLogin = () => {
           onBlur={onBlurInputPassword}
           onChange={handlePasswordChange}
           classNames={{
-            label: "font-semibold",
+            label: 'font-semibold'
           }}
           errorMessage={errorMessagePassword}
         />
@@ -67,7 +65,7 @@ const FormLogin = () => {
       </div>
       <div className="text-center mt-4 p-2">
         <Link
-          href={"/registrar-colegio"}
+          href={'/registrar-colegio'}
           className="text-blue-500 hover:underline"
         >
           ¿Todavía no estas registrado? Crea tu cuenta aqui
