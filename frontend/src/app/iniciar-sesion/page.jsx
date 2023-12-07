@@ -1,5 +1,5 @@
 'use client';
-import FormLogin from '@/components/formLogin/formLogin';
+import FormLogin from '@/components/formLogin/FormLogin';
 import React from 'react'
 
 
