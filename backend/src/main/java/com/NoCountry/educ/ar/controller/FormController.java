@@ -15,52 +15,33 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.NoCountry.educ.ar.dto.FormRequestDTO;
 import com.NoCountry.educ.ar.dto.FormResponseDTO;
-import com.NoCountry.educ.ar.dto.PreInscriptionRequestDTO;
-import com.NoCountry.educ.ar.dto.UserOfFormRequest;
-import com.NoCountry.educ.ar.entity.PreInscription;
-import com.NoCountry.educ.ar.entity.User;
-import com.NoCountry.educ.ar.service.PreInscriptionService;
-import com.NoCountry.educ.ar.service.UserService;
+import com.NoCountry.educ.ar.service.FormService;
 
 @CrossOrigin
 @RestController
 @RequestMapping("/api/forms")
 public class FormController {
-    
-    @Autowired
-    private PreInscriptionService preInscriptionService;
 
     @Autowired
-    private UserService userService;
+    private FormService formService;
 
     @PostMapping("")
-    public ResponseEntity<?> createForm(@RequestBody FormRequestDTO formRequest) {
-        PreInscriptionRequestDTO preInscriptionRequestDTO = new PreInscriptionRequestDTO(formRequest);
-        PreInscription newPreInscription = preInscriptionService.createPreInscription(preInscriptionRequestDTO);
-    
-        if (newPreInscription != null) {
-            UserOfFormRequest userRequestDTO = new UserOfFormRequest(formRequest);
-            User newUser = userService.createUser(userRequestDTO, newPreInscription);
-            if (newUser != null) {
-                FormResponseDTO formResponse = new FormResponseDTO(newPreInscription, newUser);
-                return new ResponseEntity<>(formResponse, HttpStatus.CREATED);
-            }
-        }
-        return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);    
+    public ResponseEntity<FormResponseDTO> createForm(@RequestBody FormRequestDTO formRequest) {
+        return new ResponseEntity<>(formService.createForm(formRequest), HttpStatus.CREATED);
     }
 
     @GetMapping("/pre-inscription/{preInscriptionId}")
     public ResponseEntity<FormResponseDTO> getFormByPreInscriptionId(@PathVariable String preInscriptionId) {
-        return new ResponseEntity<>(userService.getFormByPreInscriptionId(preInscriptionId), HttpStatus.OK);
+        return new ResponseEntity<>(formService.getFormByPreInscriptionId(preInscriptionId), HttpStatus.OK);
     }
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<FormResponseDTO> getFormByUserId(@PathVariable String userId) {
-        return new ResponseEntity<>(userService.getFormByUserId(userId), HttpStatus.OK);
+        return new ResponseEntity<>(formService.getFormByUserId(userId), HttpStatus.OK);
     }
 
     @GetMapping("")
     public ResponseEntity<List<FormResponseDTO>> getForms() {
-        return new ResponseEntity<>(userService.getUsersWithPreInscriptions(), HttpStatus.OK);
+        return new ResponseEntity<>(formService.getForms(), HttpStatus.OK);
     }
 }
