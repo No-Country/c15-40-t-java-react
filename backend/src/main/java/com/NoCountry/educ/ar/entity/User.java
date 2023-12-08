@@ -33,7 +33,7 @@ public class User implements UserDetails {
     @DBRef
     private PreInscription preInscriptionId;
 
-    @Indexed(unique = true)
+    @Indexed(name = "email_index", unique = true)
     private String email;
 
     private String password;

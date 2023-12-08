@@ -9,20 +9,22 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.NoCountry.educ.ar.dto.PreInscriptionRequestDTO;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 //import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 //@EqualsAndHashCode(of = "id")
 @Document(value = "pre_inscriptions")
 public class PreInscription {
+
     @Id
     private String id;
     
-    @Indexed(name = "institution_name_index", unique = true)
     private String institutionName;
 
     private String address;
