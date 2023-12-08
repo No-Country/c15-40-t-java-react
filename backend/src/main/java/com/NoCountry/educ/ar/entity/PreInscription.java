@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@EqualsAndHashCode(of = "id")
+//@EqualsAndHashCode(of = "id")
 @Document(value = "pre_inscriptions")
 public class PreInscription {
     @Id
