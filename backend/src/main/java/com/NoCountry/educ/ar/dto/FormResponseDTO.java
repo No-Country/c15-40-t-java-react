@@ -1,5 +1,7 @@
 package com.NoCountry.educ.ar.dto;
 
+import java.util.List;
+
 import com.NoCountry.educ.ar.entity.PreInscription;
 import com.NoCountry.educ.ar.entity.User;
 
@@ -8,7 +10,7 @@ public record FormResponseDTO (
     String institutionName, 
     String address,
     String city,
-    String[] phones,
+    List<String> phones,
     String cue,
     String user_id,
     String email,

@@ -1,5 +1,7 @@
 package com.NoCountry.educ.ar.dto;
 
+import java.util.List;
+
 import com.NoCountry.educ.ar.entity.PreInscription;
 
 public record PreInscriptionResponseDTO(
@@ -7,7 +9,7 @@ public record PreInscriptionResponseDTO(
     String instutitionName,
     String address,
     String city,
-    String[] phones,
+    List<String> phones,
     String cue
 ) {
 
