@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.NoCountry.educ.ar.dto.PreInscriptionRequestDTO;
 import com.NoCountry.educ.ar.entity.PreInscription;
 import com.NoCountry.educ.ar.repository.PreInscriptionRepository;
+import com.NoCountry.educ.ar.validator.ObjectsValidator;
 
 @Service
 public class PreInscriptionImplements implements PreInscriptionService {
@@ -15,8 +16,12 @@ public class PreInscriptionImplements implements PreInscriptionService {
     @Autowired
     private PreInscriptionRepository preInscriptionRepository;
 
+    @Autowired
+    private ObjectsValidator<PreInscriptionRequestDTO> preInscriptionValidator;
+
     @Override
     public PreInscription createPreInscription(PreInscriptionRequestDTO preInscriptionDTO) {
+        preInscriptionValidator.validate(preInscriptionDTO);
         PreInscription newPreInscription = new PreInscription(preInscriptionDTO);
         return preInscriptionRepository.save(newPreInscription);
     }

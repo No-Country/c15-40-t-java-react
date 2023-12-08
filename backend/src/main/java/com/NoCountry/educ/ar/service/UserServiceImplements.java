@@ -5,6 +5,7 @@ import com.NoCountry.educ.ar.dto.UserOfFormRequest;
 import com.NoCountry.educ.ar.entity.PreInscription;
 import com.NoCountry.educ.ar.entity.User;
 import com.NoCountry.educ.ar.repository.UserRepository;
+import com.NoCountry.educ.ar.validator.ObjectsValidator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ public class UserServiceImplements implements UserService{
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ObjectsValidator<UserOfFormRequest> userValidator;
 
     @Override
     @Transactional
@@ -39,6 +43,7 @@ public class UserServiceImplements implements UserService{
     @Override
     @Transactional
     public User createUser(UserOfFormRequest userRequestDTO, PreInscription preInscription) {
+        userValidator.validate(userRequestDTO);
         User newUser = new User(userRequestDTO);
         newUser.setPreInscriptionId(preInscription);
         return userRepository.save(newUser);
