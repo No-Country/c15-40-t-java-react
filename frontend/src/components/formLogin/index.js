@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const useFormLogin = async () => {
+export const useFormLogin = () => {
     const [user, setUser] = useState('')
     const [password, setPassword] = useState('')
     const [errorMessageEmail, setErrorMessageEmail] = useState('')
@@ -9,12 +9,13 @@ export const useFormLogin = async () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault()
 
-        const formData = new FormData(e.target)
-        const userData = {
-            email: formData.post('email'),
-            password: formData.post('password')
-        }
 
+        if( user != '' && password != ''){
+            const formData = new FormData(e.target)
+        const userData = {
+            email: formData.get('email'),
+            password: formData.get('password')
+        }
         try {
             const response = await fetch('https://educ-ar-lgxy.onrender.com/auth/authenticate', {
                 method: 'POST',
@@ -38,7 +39,7 @@ export const useFormLogin = async () => {
         console.log(userData)
         e.target.reset();
     }
-
+    }   
     const handleUserChange = (e) => {
         setUser(e.target.value);
     };
