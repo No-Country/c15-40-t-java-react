@@ -11,10 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.NoCountry.educ.ar.exception.DuplicateFieldException;
 import com.NoCountry.educ.ar.exception.IdNotFoundException;
 import com.NoCountry.educ.ar.exception.ObjectNotValidException;
 import com.mongodb.DuplicateKeyException;
-
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -32,9 +32,10 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(getErrorsMap(errors), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(DuplicateKeyException.class)
-    public ResponseEntity<Map<String, List<String>>> handleIndexedException(DuplicateKeyException exception) {
-        return new ResponseEntity<>(getErrorsMap(List.of(exception.getMessage())), HttpStatus.BAD_REQUEST);
+    @ExceptionHandler(DuplicateFieldException.class)
+    public ResponseEntity<Map<String, List<String>>> handleIndexedException(DuplicateFieldException exception) {
+        List<String> errors = Collections.singletonList(exception.getMessage());
+        return new ResponseEntity<>(getErrorsMap(errors), HttpStatus.BAD_REQUEST);
     }
 
     private Map<String, List<String>> getErrorsMap(List<String> errors) {

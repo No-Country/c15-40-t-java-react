@@ -11,5 +11,7 @@ public interface PreInscriptionService {
 
     public PreInscription getPreInscriptionById(String id);
 
+    public PreInscription getPreInscriptionByCUE(String cue);
+
     public List<PreInscription> getPreInscriptions();
 }

@@ -12,7 +12,7 @@ import com.NoCountry.educ.ar.repository.PreInscriptionRepository;
 import com.NoCountry.educ.ar.validator.ObjectsValidator;
 
 @Service
-public class PreInscriptionImplements implements PreInscriptionService {
+public class PreInscriptionServiceImplements implements PreInscriptionService {
 
     @Autowired
     private PreInscriptionRepository preInscriptionRepository;
@@ -36,5 +36,9 @@ public class PreInscriptionImplements implements PreInscriptionService {
     public List<PreInscription> getPreInscriptions() {
         return preInscriptionRepository.findAll();
     }
-    
+
+    @Override
+    public PreInscription getPreInscriptionByCUE(String cue) {
+        return preInscriptionRepository.getPreInscriptionByCue(cue).orElse(null);
+    }   
 }

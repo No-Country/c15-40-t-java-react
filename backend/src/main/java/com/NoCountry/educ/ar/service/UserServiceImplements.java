@@ -4,6 +4,7 @@ import com.NoCountry.educ.ar.dto.FormResponseDTO;
 import com.NoCountry.educ.ar.dto.UserOfFormRequest;
 import com.NoCountry.educ.ar.entity.PreInscription;
 import com.NoCountry.educ.ar.entity.User;
+import com.NoCountry.educ.ar.exception.DuplicateFieldException;
 import com.NoCountry.educ.ar.exception.IdNotFoundException;
 import com.NoCountry.educ.ar.repository.UserRepository;
 import com.NoCountry.educ.ar.validator.ObjectsValidator;
@@ -32,8 +33,12 @@ public class UserServiceImplements implements UserService{
     @Override
     @Transactional
     public User findById(String id) {
-        return userRepository.findById(id)
-            .orElseThrow(() -> new IdNotFoundException("Usuario con id = " + id + " no encontrado"));
+        return userRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public User findUserByEmail(String email) {
+        return userRepository.findByEmail(email).orElse(null);
     }
 
     @Override

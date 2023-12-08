@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.NoCountry.educ.ar.dto.PreInscriptionRequestDTO;
 import com.NoCountry.educ.ar.dto.PreInscriptionResponseDTO;
 import com.NoCountry.educ.ar.entity.PreInscription;
-import com.NoCountry.educ.ar.service.PreInscriptionImplements;
+import com.NoCountry.educ.ar.service.PreInscriptionService;
 
 @CrossOrigin
 @RestController
@@ -24,7 +24,7 @@ import com.NoCountry.educ.ar.service.PreInscriptionImplements;
 public class PreInscriptionController {
     
     @Autowired
-    private PreInscriptionImplements preInscriptionService;
+    private PreInscriptionService preInscriptionService;
 
     @PostMapping()
     public ResponseEntity<PreInscriptionResponseDTO> createPreInscription(@RequestBody PreInscriptionRequestDTO preInscriptionRequest) {
