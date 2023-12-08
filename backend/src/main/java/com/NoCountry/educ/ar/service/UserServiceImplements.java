@@ -4,6 +4,7 @@ import com.NoCountry.educ.ar.dto.FormResponseDTO;
 import com.NoCountry.educ.ar.dto.UserOfFormRequest;
 import com.NoCountry.educ.ar.entity.PreInscription;
 import com.NoCountry.educ.ar.entity.User;
+import com.NoCountry.educ.ar.exception.IdNotFoundException;
 import com.NoCountry.educ.ar.repository.UserRepository;
 import com.NoCountry.educ.ar.validator.ObjectsValidator;
 
@@ -31,7 +32,8 @@ public class UserServiceImplements implements UserService{
     @Override
     @Transactional
     public User findById(String id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id)
+            .orElseThrow(() -> new IdNotFoundException("Usuario con id = " + id + " no encontrado"));
     }
 
     @Override
@@ -43,7 +45,6 @@ public class UserServiceImplements implements UserService{
     @Override
     @Transactional
     public User createUser(UserOfFormRequest userRequestDTO, PreInscription preInscription) {
-        userValidator.validate(userRequestDTO);
         User newUser = new User(userRequestDTO);
         newUser.setPreInscriptionId(preInscription);
         return userRepository.save(newUser);
@@ -51,14 +52,16 @@ public class UserServiceImplements implements UserService{
 
     @Override
     public FormResponseDTO getFormByPreInscriptionId(String preInscriptionId) {
-        User user = userRepository.findByPreInscriptionId(preInscriptionId);
+        User user = userRepository.findByPreInscriptionId(preInscriptionId)
+            .orElseThrow(() -> new IdNotFoundException("Formulario con id de pre inscripcion = " + preInscriptionId + " no encontrado"));
         FormResponseDTO formSetup = new FormResponseDTO(user);
         return formSetup;
     }
 
     @Override
     public FormResponseDTO getFormByUserId(String userId) {
-        User user = userRepository.findById(userId).get();
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> new IdNotFoundException("Formulario con id de usuario = " + userId + " no encontrado"));
         FormResponseDTO formSetup = new FormResponseDTO(user);
         return formSetup;
     }

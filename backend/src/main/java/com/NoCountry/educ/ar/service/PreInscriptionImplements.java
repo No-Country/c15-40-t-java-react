@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.NoCountry.educ.ar.dto.PreInscriptionRequestDTO;
 import com.NoCountry.educ.ar.entity.PreInscription;
+import com.NoCountry.educ.ar.exception.IdNotFoundException;
 import com.NoCountry.educ.ar.repository.PreInscriptionRepository;
 import com.NoCountry.educ.ar.validator.ObjectsValidator;
 
@@ -21,14 +22,14 @@ public class PreInscriptionImplements implements PreInscriptionService {
 
     @Override
     public PreInscription createPreInscription(PreInscriptionRequestDTO preInscriptionDTO) {
-        preInscriptionValidator.validate(preInscriptionDTO);
         PreInscription newPreInscription = new PreInscription(preInscriptionDTO);
         return preInscriptionRepository.save(newPreInscription);
     }
 
     @Override
     public PreInscription getPreInscriptionById(String id) {
-        return preInscriptionRepository.findById(id).orElse(null);
+        return preInscriptionRepository.findById(id)
+            .orElseThrow(() -> new IdNotFoundException("Pre inscripcion con id = " + id + " no encontrada"));
     }
 
     @Override
