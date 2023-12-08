@@ -10,7 +10,7 @@ import com.NoCountry.educ.ar.dto.PreInscriptionRequestDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+//import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor

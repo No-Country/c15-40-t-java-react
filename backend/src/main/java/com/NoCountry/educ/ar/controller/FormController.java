@@ -26,8 +26,13 @@ public class FormController {
     private FormService formService;
 
     @PostMapping("")
-    public ResponseEntity<FormResponseDTO> createForm(@RequestBody FormRequestDTO formRequest) {
-        return new ResponseEntity<>(formService.createForm(formRequest), HttpStatus.CREATED);
+    public ResponseEntity<?> createForm(@RequestBody FormRequestDTO formRequest) {
+        FormResponseDTO formResponse = formService.createForm(formRequest);
+        
+        if (formResponse != null)
+            return new ResponseEntity<>(formResponse, HttpStatus.CREATED);
+        
+        return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR); 
     }
 
     @GetMapping("/pre-inscription/{preInscriptionId}")
