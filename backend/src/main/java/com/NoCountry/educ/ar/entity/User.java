@@ -7,6 +7,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,24 +23,27 @@ import java.util.stream.Collectors;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(of="id")
+//@EqualsAndHashCode(of="id")
 @Document(value = "users")
 public class User implements UserDetails {
 
     @Id
     private String id;
+
     @DBRef
     private PreInscription preInscriptionId;
+
+    @Indexed(unique = true)
     private String email;
-    private String username;
+
     private String password;
+    
     @Enumerated(EnumType.STRING)
     private Role role;
 
     public User(UserRequestDTO userRequestDTO) {
         this.email = userRequestDTO.email();
         this.password = userRequestDTO.password();
-        this.username = userRequestDTO.username();
         this.role = userRequestDTO.role();
     }
 
@@ -84,5 +88,10 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
     }
 }

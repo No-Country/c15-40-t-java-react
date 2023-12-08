@@ -1,6 +1,9 @@
 package com.NoCountry.educ.ar.entity;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.NoCountry.educ.ar.dto.PreInscriptionRequestDTO;
@@ -13,15 +16,22 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@EqualsAndHashCode(of = "id")
+//@EqualsAndHashCode(of = "id")
 @Document(value = "pre_inscriptions")
 public class PreInscription {
     @Id
     private String id;
+    
+    @Indexed(name = "institution_name_index", unique = true)
     private String institutionName;
+
     private String address;
+
     private String city;
-    private String[] phones;
+    
+    private List<String> phones;
+
+    @Indexed(name = "institution_cue_index", unique = true)
     private String cue;
 
     public PreInscription(PreInscriptionRequestDTO preInscriptionRequest) {

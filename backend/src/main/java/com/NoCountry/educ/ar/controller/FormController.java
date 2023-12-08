@@ -34,15 +34,19 @@ public class FormController {
     private UserService userService;
 
     @PostMapping("")
-    public ResponseEntity<FormResponseDTO> createForm(@RequestBody FormRequestDTO formRequest) {
+    public ResponseEntity<?> createForm(@RequestBody FormRequestDTO formRequest) {
         PreInscriptionRequestDTO preInscriptionRequestDTO = new PreInscriptionRequestDTO(formRequest);
         PreInscription newPreInscription = preInscriptionService.createPreInscription(preInscriptionRequestDTO);
-        
-        UserOfFormRequest userRequestDTO = new UserOfFormRequest(formRequest);
-        User newUser = userService.createUser(userRequestDTO, newPreInscription);
-       
-        FormResponseDTO formResponse = new FormResponseDTO(newPreInscription, newUser);
-        return new ResponseEntity<>(formResponse, HttpStatus.CREATED);
+    
+        if (newPreInscription != null) {
+            UserOfFormRequest userRequestDTO = new UserOfFormRequest(formRequest);
+            User newUser = userService.createUser(userRequestDTO, newPreInscription);
+            if (newUser != null) {
+                FormResponseDTO formResponse = new FormResponseDTO(newPreInscription, newUser);
+                return new ResponseEntity<>(formResponse, HttpStatus.CREATED);
+            }
+        }
+        return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);    
     }
 
     @GetMapping("/pre-inscription/{preInscriptionId}")
