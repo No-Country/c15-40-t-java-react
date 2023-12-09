@@ -24,6 +24,8 @@ export const colegios = [
 export const colegioDetail = [
   {
     id: "Colegio1",
+    logo:"https://png.pngtree.com/png-clipart/20220928/original/pngtree-nutrition-school-health-coaches-logo-png-image_8639850.png",
+    thumbnail: "https://images.pexels.com/photos/207692/pexels-photo-207692.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     pre_inscription_id: 1, // Referencia al documento en Pre_Inscription
     gestion: "public",
     institutionName: "Lopa Colegio",
@@ -64,6 +66,8 @@ export const colegioDetail = [
   },
   {
     id: "Colegio2",
+    logo:"https://png.pngtree.com/png-clipart/20220928/original/pngtree-nutrition-school-health-coaches-logo-png-image_8639850.png",
+    thumbnail: "https://images.pexels.com/photos/207684/pexels-photo-207684.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     pre_inscription_id: 2, // Referencia al documento en Pre_Inscription
     web: "google.com.ar",
     gestion: "public",
@@ -104,6 +108,8 @@ export const colegioDetail = [
   },
   {
     id: "Colegio3",
+    logo:"https://png.pngtree.com/png-clipart/20220928/original/pngtree-nutrition-school-health-coaches-logo-png-image_8639850.png",
+    thumbnail:"https://images.pexels.com/photos/2305098/pexels-photo-2305098.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     pre_inscription_id: 2, // Referencia al documento en Pre_Inscription
     web: "google.com.ar",
     gestion: "public",
@@ -134,6 +140,8 @@ export const colegioDetail = [
   },
   {
     id: "Colegio4",
+    logo:"https://png.pngtree.com/png-clipart/20220928/original/pngtree-nutrition-school-health-coaches-logo-png-image_8639850.png",
+    thumbnail:"https://images.pexels.com/photos/989932/pexels-photo-989932.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     pre_inscription_id: 2, // Referencia al documento en Pre_Inscription
     web: "google.com.ar",
     gestion: "public",
