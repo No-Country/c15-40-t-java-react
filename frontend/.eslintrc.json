@@ -3,7 +3,7 @@
   "plugins": ["react"],
   "rules": {
     "camelcase": "off",
-    "indent": ["error", 4],
+    "indent": ["error", 2],
     "no-unused-vars": "error",
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
