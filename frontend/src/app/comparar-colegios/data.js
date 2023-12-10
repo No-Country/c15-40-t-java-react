@@ -172,3 +172,17 @@ export const colegioDetail = [
     calefaccion: true,
   },
 ];
+
+////////////////////////////////
+const ciudadesNoRepeat = [...new Set(colegioDetail.map((colegio) => {
+  return colegio.city;
+} ))];
+
+export const ciudades = ciudadesNoRepeat.map((ciudad) => {
+  return {
+    label: ciudad,
+    value: ciudad,
+    description: ciudad,
+  };
+} );
+///////////////////////////////

@@ -2,14 +2,17 @@
 
 import React from 'react';
 import {Card, CardHeader, CardBody, CardFooter, Image} from '@nextui-org/react';
+import { useRouter } from 'next/navigation';
 
 function ColegioCard({colegio}) {
 
+  const router = useRouter();
   const hanldePress = (e) => {
-    console.log(e);
+    console.log(e.target.key);
+    router.push(`/buscador/${colegio.id}`);
   };
   return (
-    <Card className="w-[300px]" isPressable onPress={hanldePress}
+    <Card className="w-[300px]" isPressable onPress={hanldePress} 
     >
       <CardHeader>
         <Image
