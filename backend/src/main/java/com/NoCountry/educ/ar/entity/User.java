@@ -49,6 +49,7 @@ public class User implements UserDetails {
     public User(UserOfFormRequest userOfFormRequest) {
         this.email = userOfFormRequest.email();
         this.password = userOfFormRequest.password();
+        this.role = userOfFormRequest.role();
     }
 
     @Override
