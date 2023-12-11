@@ -3,6 +3,8 @@ package com.NoCountry.educ.ar.dto;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.mongodb.core.index.Indexed;
 
+import com.NoCountry.educ.ar.util.Role;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
@@ -14,12 +16,15 @@ public record UserOfFormRequest(
 
     @NotBlank(message = "Es necesario una contraseña")
     @Length(min = 5, max = 20, message = "La password debe contener de 5 a 20 caracteres") 
-    String password
+    String password,
+
+    Role role
 ) {
     public UserOfFormRequest(FormRequestDTO formRequestDTO) {
         this(
             formRequestDTO.email(),
-            formRequestDTO.password()
+            formRequestDTO.password(),
+            Role.ADMINISTRATOR
         );
     }
 

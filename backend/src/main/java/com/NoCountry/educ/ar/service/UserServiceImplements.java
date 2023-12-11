@@ -9,6 +9,7 @@ import com.NoCountry.educ.ar.repository.UserRepository;
 import com.NoCountry.educ.ar.validator.ObjectsValidator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,9 @@ public class UserServiceImplements implements UserService{
 
     @Autowired
     private ObjectsValidator<UserOfFormRequest> userValidator;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     @Transactional
@@ -50,6 +54,7 @@ public class UserServiceImplements implements UserService{
     @Transactional
     public User createUser(UserOfFormRequest userRequestDTO, PreInscription preInscription) {
         User newUser = new User(userRequestDTO);
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword())); 
         newUser.setPreInscriptionId(preInscription);
         return userRepository.save(newUser);
     }
