@@ -13,6 +13,8 @@ public interface UserService {
 
     public User findById(String id);
 
+    public User findUserByEmail(String email);
+
     public User saveUser(User user);
 
     public User createUser(UserOfFormRequest userRequestDTO, PreInscription preInscription);
