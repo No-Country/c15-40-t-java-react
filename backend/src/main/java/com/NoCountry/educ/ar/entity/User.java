@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-//@EqualsAndHashCode(of="id")
 @Document(value = "users")
 public class User implements UserDetails {
 

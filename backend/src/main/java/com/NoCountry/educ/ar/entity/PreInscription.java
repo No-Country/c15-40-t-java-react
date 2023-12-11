@@ -10,7 +10,6 @@ import com.NoCountry.educ.ar.dto.PreInscriptionRequestDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-//import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -18,7 +17,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-//@EqualsAndHashCode(of = "id")
 @Document(value = "pre_inscriptions")
 public class PreInscription {
 

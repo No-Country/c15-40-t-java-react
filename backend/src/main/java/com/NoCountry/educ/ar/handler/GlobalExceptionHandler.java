@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.NoCountry.educ.ar.exception.DuplicateFieldException;
 import com.NoCountry.educ.ar.exception.IdNotFoundException;
 import com.NoCountry.educ.ar.exception.ObjectNotValidException;
-import com.mongodb.DuplicateKeyException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {

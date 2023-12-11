@@ -4,7 +4,6 @@ import com.NoCountry.educ.ar.dto.FormResponseDTO;
 import com.NoCountry.educ.ar.dto.UserOfFormRequest;
 import com.NoCountry.educ.ar.entity.PreInscription;
 import com.NoCountry.educ.ar.entity.User;
-import com.NoCountry.educ.ar.exception.DuplicateFieldException;
 import com.NoCountry.educ.ar.exception.IdNotFoundException;
 import com.NoCountry.educ.ar.repository.UserRepository;
 import com.NoCountry.educ.ar.validator.ObjectsValidator;
