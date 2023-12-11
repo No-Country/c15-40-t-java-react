@@ -1,4 +1,9 @@
 export { default as DeleteIcon } from './DeleteIcon';
 export { default as EditIcon } from './EditIcon';
+export { default as EmailIcon } from './EmailIcon';
 export { default as EyeIcon } from './EyeIcon';
+export { default as EyeSlashIcon } from './EyeSlashIcon';
+export { default as LocationIcon } from './LocationIcon';
+export { default as PhoneIcon } from './PhoneIcon';
 export { default as SearchIcon } from './SearchIcon';
+export { default as WebIcon } from './WebIcon';
