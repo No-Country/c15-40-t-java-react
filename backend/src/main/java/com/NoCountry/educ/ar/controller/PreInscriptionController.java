@@ -22,7 +22,7 @@ import com.NoCountry.educ.ar.service.PreInscriptionService;
 @RestController
 @RequestMapping("/api/pre-inscriptions")
 public class PreInscriptionController {
-    
+
     @Autowired
     private PreInscriptionService preInscriptionService;
 
@@ -31,7 +31,7 @@ public class PreInscriptionController {
         PreInscription newPreInscription = preInscriptionService.createPreInscription(preInscriptionRequest);
         PreInscriptionResponseDTO preInscriptionResponseDTO = new PreInscriptionResponseDTO(newPreInscription);
         return new ResponseEntity<>(preInscriptionResponseDTO, HttpStatus.CREATED);
-    } 
+    }
 
     @GetMapping("/{preInscriptionId}")
     public ResponseEntity<PreInscriptionResponseDTO> getPreInscriptionById(@PathVariable String preInscriptionId) {
@@ -43,10 +43,10 @@ public class PreInscriptionController {
     @GetMapping()
     public ResponseEntity<List<PreInscriptionResponseDTO>> getPreInscriptions() {
         List<PreInscriptionResponseDTO> preInscriptions = preInscriptionService
-            .getPreInscriptions()
-            .stream()
-            .map(preInscription -> new PreInscriptionResponseDTO(preInscription))
-            .toList();
+                .getPreInscriptions()
+                .stream()
+                .map(preInscription -> new PreInscriptionResponseDTO(preInscription))
+                .toList();
         return new ResponseEntity<>(preInscriptions, HttpStatus.OK);
     }
 

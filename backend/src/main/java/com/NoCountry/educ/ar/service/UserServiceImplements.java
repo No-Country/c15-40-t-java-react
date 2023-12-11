@@ -6,13 +6,12 @@ import com.NoCountry.educ.ar.entity.PreInscription;
 import com.NoCountry.educ.ar.entity.User;
 import com.NoCountry.educ.ar.exception.IdNotFoundException;
 import com.NoCountry.educ.ar.repository.UserRepository;
-import com.NoCountry.educ.ar.validator.ObjectsValidator;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImplements implements UserService{
@@ -20,8 +19,13 @@ public class UserServiceImplements implements UserService{
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private ObjectsValidator<UserOfFormRequest> userValidator;
+    @Override
+    @Transactional
+    public User createUser(UserOfFormRequest userRequestDTO, PreInscription preInscription) {
+        User newUser = new User(userRequestDTO);
+        newUser.setPreInscriptionId(preInscription);
+        return userRepository.save(newUser);
+    }
 
     @Override
     @Transactional
@@ -31,27 +35,23 @@ public class UserServiceImplements implements UserService{
 
     @Override
     @Transactional
+    public List<String> findByEmails(){
+        List<User> users = findAll();
+        List<String> usernames = users.stream()
+                .map(User::getUsername)
+                .collect(Collectors.toList());
+        return usernames;
+    }
+
+    @Override
+    @Transactional
     public User findById(String id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id).orElseThrow(()-> new IdNotFoundException("Usario con" + id + "no encontrado"));
     }
 
     @Override
     public User findUserByEmail(String email) {
-        return userRepository.findByEmail(email).orElse(null);
-    }
-
-    @Override
-    @Transactional
-    public User saveUser(User user) {
-        return userRepository.save(user);
-    }
-
-    @Override
-    @Transactional
-    public User createUser(UserOfFormRequest userRequestDTO, PreInscription preInscription) {
-        User newUser = new User(userRequestDTO);
-        newUser.setPreInscriptionId(preInscription);
-        return userRepository.save(newUser);
+        return userRepository.findByEmail(email).orElseThrow(()-> new IdNotFoundException("Usario con" + email + "no encontrado"));
     }
 
     @Override

@@ -15,7 +15,7 @@ public interface UserService {
 
     public User findUserByEmail(String email);
 
-    public User saveUser(User user);
+    public List<String> findByEmails();
 
     public User createUser(UserOfFormRequest userRequestDTO, PreInscription preInscription);
 
