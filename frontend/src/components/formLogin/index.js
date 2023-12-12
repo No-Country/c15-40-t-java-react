@@ -15,7 +15,6 @@ export const useFormLogin = () => {
         email: formData.get('email'),
         password: formData.get('password')
       };
-
       try {
         const response = await fetch(
           'https://educ-ar-lgxy.onrender.com/auth/authenticate',
@@ -28,30 +27,22 @@ export const useFormLogin = () => {
           }
         );
 
-        if (response.ok) {
+        if (response.status === 200) {
           const data = await response.json();
-          document.cookie = `jwt=${data.token}; expires${new Date(
-            Date.now() + 1 * 24 * 60 * 1000
-          ).toUTCString()};path=/`;
+          console.log(data);
+        } else {
+          console.error('Error en la solicitud al backend');
         }
       } catch (error) {
         console.error('Error de red:', error);
       }
 
+      console.log(userData);
       e.target.reset();
-    } else if (user === '' && password === '') {
-      setErrorMessageEmail('Ingrese email');
-      setErrorMessagePassword('Ingrese contraseña');
-    } else if (user === '') {
-      setErrorMessageEmail('Ingrese email');
-    } else if (password === '') {
-      setErrorMessagePassword('Ingrese contraseña');
     }
   };
-
   const handleUserChange = (e) => {
-    const email = e.target.value;
-    setUser(email);
+    setUser(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
