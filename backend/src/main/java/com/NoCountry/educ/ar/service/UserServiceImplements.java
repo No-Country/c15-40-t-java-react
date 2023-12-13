@@ -1,8 +1,8 @@
 package com.NoCountry.educ.ar.service;
 
 import com.NoCountry.educ.ar.dto.FormResponseDTO;
-import com.NoCountry.educ.ar.dto.UserOfFormRequest;
-import com.NoCountry.educ.ar.entity.PreInscription;
+import com.NoCountry.educ.ar.dto.UserRequestDTO;
+import com.NoCountry.educ.ar.entity.Institution;
 import com.NoCountry.educ.ar.entity.User;
 import com.NoCountry.educ.ar.exception.IdNotFoundException;
 import com.NoCountry.educ.ar.repository.UserRepository;
@@ -31,7 +31,7 @@ public class UserServiceImplements implements UserService{
 
     @Override
     @Transactional
-    public List<String> findByEmails(){
+    public List<String> getUsersEmails(){
         List<User> users = findAll();
         List<String> usernames = users.stream()
                 .map(User::getUsername)
@@ -41,30 +41,22 @@ public class UserServiceImplements implements UserService{
 
     @Override
     @Transactional
-    public User findById(String id) {
+    public User findUserById(String id) {
         return userRepository.findById(id).orElseThrow(()-> new IdNotFoundException("Usario con" + id + "no encontrado"));
     }
 
     @Override
     public User findUserByEmail(String email) {
-        return userRepository.findByEmail(email).orElseThrow(()-> new IdNotFoundException("Usario con" + email + "no encontrado"));
+        return userRepository.findByEmail(email).orElse(null);
     }
 
     @Override
     @Transactional
-    public User createUser(UserOfFormRequest userRequestDTO, PreInscription preInscription) {
+    public User createUser(UserRequestDTO userRequestDTO, Institution institution) {
         User newUser = new User(userRequestDTO);
         newUser.setPassword(passwordEncoder.encode(newUser.getPassword())); 
-        newUser.setPreInscriptionId(preInscription);
+        newUser.setInstitutionId(institution);
         return userRepository.save(newUser);
-    }
-
-    @Override
-    public FormResponseDTO getFormByPreInscriptionId(String preInscriptionId) {
-        User user = userRepository.findByPreInscriptionId(preInscriptionId)
-            .orElseThrow(() -> new IdNotFoundException("Formulario con id de pre inscripcion = " + preInscriptionId + " no encontrado"));
-        FormResponseDTO formSetup = new FormResponseDTO(user);
-        return formSetup;
     }
 
     @Override
@@ -83,4 +75,15 @@ public class UserServiceImplements implements UserService{
             .map(user -> new FormResponseDTO(user))
             .toList();
     }
+
+	@Override
+	public Institution getInstitutionByEmail(String email) {
+		User user = findUserByEmail(email);
+
+        if (user == null) {
+            throw new IdNotFoundException("Usuario con email: " + email + " no encontrado.");
+        }
+        
+        return  user.getInstitutionId();
+	}
 }

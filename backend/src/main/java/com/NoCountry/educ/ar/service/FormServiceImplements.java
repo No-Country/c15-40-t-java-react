@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import com.NoCountry.educ.ar.dto.FormRequestDTO;
 import com.NoCountry.educ.ar.dto.FormResponseDTO;
 import com.NoCountry.educ.ar.dto.PreInscriptionRequestDTO;
-import com.NoCountry.educ.ar.dto.UserOfFormRequest;
-import com.NoCountry.educ.ar.entity.PreInscription;
+import com.NoCountry.educ.ar.dto.UserRequestDTO;
+import com.NoCountry.educ.ar.entity.Institution;
 import com.NoCountry.educ.ar.entity.User;
 import com.NoCountry.educ.ar.exception.DuplicateFieldException;
 import com.NoCountry.educ.ar.validator.ObjectsValidator;
@@ -17,7 +17,7 @@ import com.NoCountry.educ.ar.validator.ObjectsValidator;
 @Service
 public class FormServiceImplements implements FormService {
 
-    private PreInscriptionService preInscriptionService;
+    private InstitutionService institutionService;
 
     private UserService userService;
 
@@ -25,8 +25,8 @@ public class FormServiceImplements implements FormService {
     private ObjectsValidator<FormRequestDTO> formValidator;
 
     @Autowired
-    public void setPreInscriptionService(PreInscriptionService preInscriptionService) {
-        this.preInscriptionService = preInscriptionService;
+    public void setInstitutionService(InstitutionService institutionService) {
+        this.institutionService = institutionService;
     }
 
     @Autowired
@@ -38,29 +38,24 @@ public class FormServiceImplements implements FormService {
     public FormResponseDTO createForm(FormRequestDTO formRequest) {
         formValidator.validate(formRequest);
 
-        if (preInscriptionService.getPreInscriptionByCUE(formRequest.cue())  != null) 
+        if (institutionService.getInstitutionByCUE(formRequest.cue())  != null) 
             throw new DuplicateFieldException("CUE: " + formRequest.cue() + " ya se encuentra cargado");
 
         if (userService.findUserByEmail(formRequest.email()) != null)
             throw new DuplicateFieldException("Email: " + formRequest.email() + " ya se encuentra cargado");
 
         PreInscriptionRequestDTO preInscriptionRequestDTO = new PreInscriptionRequestDTO(formRequest);
-        PreInscription newPreInscription = preInscriptionService.createPreInscription(preInscriptionRequestDTO);
+        Institution newInstitution = institutionService.createInstitution(preInscriptionRequestDTO);
         
-        if (newPreInscription != null) {
-            UserOfFormRequest userRequestDTO = new UserOfFormRequest(formRequest);
-            User newUser = userService.createUser(userRequestDTO, newPreInscription);
+        if (newInstitution != null) {
+            UserRequestDTO userRequestDTO = new UserRequestDTO(formRequest);
+            User newUser = userService.createUser(userRequestDTO, newInstitution);
             if (newUser != null) {
-                FormResponseDTO formResponse = new FormResponseDTO(newPreInscription, newUser);
+                FormResponseDTO formResponse = new FormResponseDTO(newInstitution, newUser);
                 return formResponse;
             }
         }
         return null;
-    }
-
-    @Override
-    public FormResponseDTO getFormByPreInscriptionId(String preInscriptionId) {
-        return userService.getFormByPreInscriptionId(preInscriptionId);
     }
 
     @Override

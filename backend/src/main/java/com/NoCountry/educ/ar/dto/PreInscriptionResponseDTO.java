@@ -2,7 +2,7 @@ package com.NoCountry.educ.ar.dto;
 
 import java.util.List;
 
-import com.NoCountry.educ.ar.entity.PreInscription;
+import com.NoCountry.educ.ar.entity.Institution;
 
 public record PreInscriptionResponseDTO(
     String id,
@@ -13,14 +13,14 @@ public record PreInscriptionResponseDTO(
     String cue
 ) {
 
-    public PreInscriptionResponseDTO(PreInscription preInscription) {
+    public PreInscriptionResponseDTO(Institution institution) {
         this(
-            preInscription.getId(),
-            preInscription.getInstitutionName(),
-            preInscription.getAddress(),
-            preInscription.getCity(),
-            preInscription.getPhones(),
-            preInscription.getCue()
+            institution.getId(),
+            institution.getInstitutionName(),
+            institution.getAddress(),
+            institution.getCity(),
+            institution.getPhones(),
+            institution.getCue()
         );
     }
 }

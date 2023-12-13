@@ -1,6 +1,5 @@
 package com.NoCountry.educ.ar.entity;
 
-import com.NoCountry.educ.ar.dto.UserOfFormRequest;
 import com.NoCountry.educ.ar.dto.UserRequestDTO;
 import com.NoCountry.educ.ar.util.Role;
 import jakarta.persistence.EnumType;
@@ -30,7 +29,7 @@ public class User implements UserDetails {
     private String id;
 
     @DBRef
-    private PreInscription preInscriptionId;
+    private Institution institutionId;
 
     @Indexed(name = "email_index", unique = true)
     private String email;
@@ -44,12 +43,6 @@ public class User implements UserDetails {
         this.email = userRequestDTO.email();
         this.password = userRequestDTO.password();
         this.role = userRequestDTO.role();
-    }
-
-    public User(UserOfFormRequest userOfFormRequest) {
-        this.email = userOfFormRequest.email();
-        this.password = userOfFormRequest.password();
-        this.role = userOfFormRequest.role();
     }
 
     @Override

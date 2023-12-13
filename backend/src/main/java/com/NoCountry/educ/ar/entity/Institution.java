@@ -17,8 +17,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(value = "pre_inscriptions")
-public class PreInscription {
+@Document(value = "institutions")
+public class Institution {
 
     @Id
     private String id;
@@ -34,11 +34,39 @@ public class PreInscription {
     @Indexed(name = "institution_cue_index", unique = true)
     private String cue;
 
-    public PreInscription(PreInscriptionRequestDTO preInscriptionRequest) {
+    private String web;
+
+    private List<String> administration;
+
+    private List<EducationLevel> educationLevels;
+
+    private List<String> educationalWorkshops;
+
+    private boolean bilingual;
+
+    private boolean canteen;
+
+    private List<Religion> religion;
+
+    private boolean schoolUniform;
+
+    private Genere genere;
+    
+    private List<String> images;
+
+    public Institution(PreInscriptionRequestDTO preInscriptionRequest) {
         this.institutionName = preInscriptionRequest.institutionName();
         this.address = preInscriptionRequest.address();
         this.city =  preInscriptionRequest.city();
         this.phones = preInscriptionRequest.phones();
         this.cue = preInscriptionRequest.cue();
+    }
+
+    public enum Religion {
+        CATOLICO, JUDIO, EVANGELISTA, LAICO
+    }
+
+    public enum Genere {
+        MASCULINO, FEMENINO, MIXTO
     }
 }

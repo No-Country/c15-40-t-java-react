@@ -35,11 +35,6 @@ public class FormController {
         return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR); 
     }
 
-    @GetMapping("/pre-inscription/{preInscriptionId}")
-    public ResponseEntity<FormResponseDTO> getFormByPreInscriptionId(@PathVariable String preInscriptionId) {
-        return new ResponseEntity<>(formService.getFormByPreInscriptionId(preInscriptionId), HttpStatus.OK);
-    }
-
     @GetMapping("/user/{userId}")
     public ResponseEntity<FormResponseDTO> getFormByUserId(@PathVariable String userId) {
         return new ResponseEntity<>(formService.getFormByUserId(userId), HttpStatus.OK);
