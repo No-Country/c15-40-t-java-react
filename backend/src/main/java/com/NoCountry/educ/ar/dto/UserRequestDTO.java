@@ -1,20 +1,31 @@
 package com.NoCountry.educ.ar.dto;
 
-import com.NoCountry.educ.ar.util.Role;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.mongodb.core.index.Indexed;
 
-public record UserRequestDTO(
-        @NotBlank(message = "El nombre  de la institutción es necesario")
-        @Email(regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$",
-                message = "El formato del email no es válido")
-        String email,
-        @NotBlank(message = "El nombre  de la institutción es necesario")
-        String password,
-        @NotBlank(message = "El nombre  de la institutción es necesario")
-        String username,
+import com.NoCountry.educ.ar.util.Role;
 
-        Role role
-) { 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
+public record UserRequestDTO(    
+    @NotBlank(message = "El email de la institución es obligatorio")
+    @Email(regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", message = "El formato del email no es válido")
+    @Indexed(name = "pre_inscripcion_email_index_unique", unique = true)
+    String email,
+
+    @NotBlank(message = "Es necesario una contraseña")
+    @Length(min = 5, max = 20, message = "La password debe contener de 5 a 20 caracteres") 
+    String password,
+
+    Role role
+) {
+    public UserRequestDTO(FormRequestDTO formRequestDTO) {
+        this(
+            formRequestDTO.email(),
+            formRequestDTO.password(),
+            Role.ADMINISTRATOR
+        );
+    }
+
 }

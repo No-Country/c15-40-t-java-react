@@ -1,18 +1,18 @@
 package com.NoCountry.educ.ar.dto;
 
-import com.NoCountry.educ.ar.entity.PreInscription;
+import com.NoCountry.educ.ar.entity.Institution;
 import com.NoCountry.educ.ar.entity.User;
 import com.NoCountry.educ.ar.util.Role;
 
 public record UserResponseDTO(
         String id,
-        PreInscription pre_inscription_id,
+        Institution pre_inscription_id,
         String email,
         String password,
         String username,
         Role role
 ) {
         public UserResponseDTO(User user){
-                this(user.getId(), user.getPreInscriptionId(), user.getEmail(), user.getPassword(), user.getUsername(), user.getRole());
+                this(user.getId(), user.getInstitutionId(), user.getEmail(), user.getPassword(), user.getUsername(), user.getRole());
         }
 }

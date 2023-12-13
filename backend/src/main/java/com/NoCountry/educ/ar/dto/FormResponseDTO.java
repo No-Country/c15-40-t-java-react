@@ -2,7 +2,7 @@ package com.NoCountry.educ.ar.dto;
 
 import java.util.List;
 
-import com.NoCountry.educ.ar.entity.PreInscription;
+import com.NoCountry.educ.ar.entity.Institution;
 import com.NoCountry.educ.ar.entity.User;
 
 public record FormResponseDTO (
@@ -13,34 +13,31 @@ public record FormResponseDTO (
     List<String> phones,
     String cue,
     String user_id,
-    String email,
-    String password
+    String email
 ) {
-    public FormResponseDTO(PreInscription preInscription, User user) {
+    public FormResponseDTO(Institution institution, User user) {
         this(
-            preInscription.getId(),
-            preInscription.getInstitutionName(),
-            preInscription.getAddress(),
-            preInscription.getCity(),
-            preInscription.getPhones(),
-            preInscription.getCue(),
+            institution.getId(),
+            institution.getInstitutionName(),
+            institution.getAddress(),
+            institution.getCity(),
+            institution.getPhones(),
+            institution.getCue(),
             user.getId(),
-            user.getEmail(),
-            user.getPassword()
+            user.getEmail()
         );
     }
 
     public FormResponseDTO(User user) {
         this(
-            user.getPreInscriptionId().getId(),
-            user.getPreInscriptionId().getInstitutionName(),
-            user.getPreInscriptionId().getAddress(),
-            user.getPreInscriptionId().getCity(),
-            user.getPreInscriptionId().getPhones(),
-            user.getPreInscriptionId().getCue(),
+            user.getInstitutionId().getId(),
+            user.getInstitutionId().getInstitutionName(),
+            user.getInstitutionId().getAddress(),
+            user.getInstitutionId().getCity(),
+            user.getInstitutionId().getPhones(),
+            user.getInstitutionId().getCue(),
             user.getId(),
-            user.getEmail(),
-            user.getPassword()
+            user.getEmail()
         );
     }
 }
