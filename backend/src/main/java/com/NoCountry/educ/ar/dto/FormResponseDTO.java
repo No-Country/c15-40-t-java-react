@@ -6,7 +6,7 @@ import com.NoCountry.educ.ar.entity.Institution;
 import com.NoCountry.educ.ar.entity.User;
 
 public record FormResponseDTO (
-    String pre_inscription_id,
+    String institution_id,
     String institutionName, 
     String address,
     String city,

@@ -54,8 +54,6 @@ public class Institution {
     
     private List<String> images;
 
-    private boolean isLoad;
-
     public Institution(PreInscriptionRequestDTO preInscriptionRequest) {
         this.institutionName = preInscriptionRequest.institutionName();
         this.address = preInscriptionRequest.address();
