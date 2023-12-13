@@ -51,8 +51,13 @@ public class Institution {
     private boolean schoolUniform;
 
     private Genere genere;
-    
+
+    private Approach educationalApproach;
+
     private List<String> images;
+
+    private String logo;
+
 
     public Institution(PreInscriptionRequestDTO preInscriptionRequest) {
         this.institutionName = preInscriptionRequest.institutionName();
@@ -63,10 +68,14 @@ public class Institution {
     }
 
     public enum Religion {
-        CATOLICO, JUDIO, EVANGELISTA, LAICO
+        CATOLICO, JUDIO, EVANGELISTA, LAICO, OTRO
     }
 
     public enum Genere {
         MASCULINO, FEMENINO, MIXTO
+    }
+
+    public enum Approach {
+        TRADICIONAL, MONTESORI, ESPECIAL 
     }
 }
