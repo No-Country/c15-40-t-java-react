@@ -1,6 +1,7 @@
 package com.NoCountry.educ.ar.controller;
 
 import com.NoCountry.educ.ar.dto.UserResponseDTO;
+import com.NoCountry.educ.ar.entity.Institution;
 import com.NoCountry.educ.ar.entity.User;
 import com.NoCountry.educ.ar.service.UserService;
 
@@ -32,7 +33,11 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> show(@PathVariable String id) {
-
         return new ResponseEntity<>(new UserResponseDTO(userService.findUserById(id)), HttpStatus.OK);
+    }
+
+    @GetMapping("/institution/{userEmail}")
+    public ResponseEntity<Institution> getInstitutionByUserEmail(@PathVariable String userEmail) {
+        return new ResponseEntity<>(userService.getInstitutionByEmail(userEmail), HttpStatus.OK);
     }
 }

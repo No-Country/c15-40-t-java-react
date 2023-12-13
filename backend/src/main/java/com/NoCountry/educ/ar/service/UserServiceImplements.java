@@ -75,4 +75,15 @@ public class UserServiceImplements implements UserService{
             .map(user -> new FormResponseDTO(user))
             .toList();
     }
+
+	@Override
+	public Institution getInstitutionByEmail(String email) {
+		User user = findUserByEmail(email);
+
+        if (user == null) {
+            throw new IdNotFoundException("Usuario con email: " + email + " no encontrado.");
+        }
+        
+        return  user.getInstitutionId();
+	}
 }

@@ -1,7 +1,6 @@
 package com.NoCountry.educ.ar.entity;
 
 import com.NoCountry.educ.ar.dto.UserRequestDTO;
-import com.NoCountry.educ.ar.dto.UserRequestDTO;
 import com.NoCountry.educ.ar.util.Role;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

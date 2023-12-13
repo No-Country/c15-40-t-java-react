@@ -21,4 +21,6 @@ public interface UserService {
     public FormResponseDTO getFormByUserId(String userId);
 
     public List<FormResponseDTO> getUsersWithPreInscriptions();
+
+    public Institution getInstitutionByEmail(String email);
 }
