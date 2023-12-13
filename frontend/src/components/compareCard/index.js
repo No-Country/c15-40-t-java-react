@@ -17,8 +17,6 @@ export function index (colegioId) {
   const uniforme = colegio.uniforme ? 'Si' : 'No';
   const calefaccion = colegio.calefaccion ? 'Si' : 'No';
 
-  console.log(colegio);
-
   colegio.educationLevels.forEach((level, index) => {
     educationLevelsString += (index > 0 ? ' - ' : '') + level.name;
   });

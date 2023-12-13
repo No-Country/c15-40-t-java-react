@@ -7,8 +7,7 @@ import { useRouter } from 'next/navigation';
 function ColegioCard ({ colegio }) {
   const router = useRouter();
   const hanldePress = (e) => {
-    console.log(e.target.key);
-    router.push(`/buscador/${colegio.id}`);
+    router.push(`/escuelas/${colegio.id}`);
   };
   return (
     <Card className="w-[300px]" isPressable onPress={hanldePress}
