@@ -24,7 +24,7 @@ export default function Header () {
   const pathname = usePathname();
 
   return (
-    <Navbar classNames={{ base: 'p-4 bg-transparent', wrapper: 'bg-white rounded-xl shadow-xl shadow-purple-500/25', menu: 'pt-10 backdrop-blur-none bg-white', toggleIcon: 'text-orange-500' }} onMenuOpenChange={setIsMenuOpen}>
+    <Navbar isMenuOpen={isMenuOpen} classNames={{ base: 'p-4 bg-transparent', wrapper: 'bg-white rounded-xl shadow-xl shadow-purple-500/25', menu: 'pt-10 backdrop-blur-none bg-white', toggleIcon: 'text-orange-500' }} onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
@@ -42,7 +42,7 @@ export default function Header () {
 
           return (
             <NavbarItem key={path}>
-              <LinkUI className={`${pathname === path ? 'font-bold text-fuchsia-500 underline' : 'text-purple-500'}`} color='primary' as={Link} href={path} underline='hover'>
+              <LinkUI onClick={() => setIsMenuOpen(false)} className={`${pathname === path ? 'font-bold text-fuchsia-500 underline' : 'text-purple-500'}`} color='primary' as={Link} href={path} underline='hover'>
                 {name}
               </LinkUI>
             </NavbarItem>
@@ -62,14 +62,14 @@ export default function Header () {
 
           return (
             <NavbarMenuItem key={path}>
-              <LinkUI className={`${pathname === path ? 'font-bold text-fuchsia-500 underline' : 'text-purple-500'}`} color='primary' as={Link} href={path} underline='hover'>
+              <LinkUI onClick={() => setIsMenuOpen(false)} className={`${pathname === path ? 'font-bold text-fuchsia-500 underline' : 'text-purple-500'}`} color='primary' as={Link} href={path} underline='hover'>
                 {name}
               </LinkUI>
             </NavbarMenuItem>
           );
         })}
         <NavbarMenuItem className='mt-10 self-center'>
-          <Button className='hover:!text-white' disableRipple as={Link} href="/iniciar-sesion" color='warning' variant='ghost'>
+          <Button onClick={() => setIsMenuOpen(false)} className='hover:!text-white' disableRipple as={Link} href="/iniciar-sesion" color='warning' variant='ghost'>
             Eres un colegio ?
           </Button>
         </NavbarMenuItem>
