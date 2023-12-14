@@ -51,8 +51,6 @@ const RegistrarColegio = () => {
       setTimeout(() => {
         router.push('/');
       }, 3000);
-
-      console.log(response.status);
     }
   };
 
@@ -61,10 +59,10 @@ const RegistrarColegio = () => {
   const sendEmail = () => {
     emailjs
       .sendForm(
-        'service_uzlwg6h',
-        'template_9fb25kg',
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
         EmailJSform.current,
-        '4yGsYAx7t2YvKyg5k'
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
       )
       .then(
         (result) => {
