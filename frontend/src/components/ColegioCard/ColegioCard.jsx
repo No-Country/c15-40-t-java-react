@@ -5,31 +5,33 @@ import { Card, CardHeader, CardBody, CardFooter, Image } from '@nextui-org/react
 import { useRouter } from 'next/navigation';
 
 function ColegioCard ({ colegio }) {
+  const dummyImage = 'https://dummyimage.com/vga';
+  const dummyLogo = 'https://static.vecteezy.com/system/resources/previews/023/654/784/non_2x/golden-logo-template-free-png.png';
   const router = useRouter();
   const hanldePress = (e) => {
-    console.log(e.target.key);
-    router.push(`/buscador/${colegio.id}`);
+    router.push(`/escuelas/${colegio.id}`);
   };
+
+  console.log(colegio);
   return (
     <Card className="w-[300px]" isPressable onPress={hanldePress}
     >
-      <CardHeader>
+      <CardHeader className='flex gap-3'>
         <Image
           alt="nextui logo"
           height={40}
           radius="sm"
-          src={colegio.logo}
+          src={colegio.logo === null || colegio.logo.length === 0 ? dummyLogo : colegio.logo}
           width={40}
         />
-        {colegio.institutionName}
+        <p className=' font-bold text-xl '>{colegio.institutionName}</p>
       </CardHeader>
       <CardBody >
         <div className='w-full h-[200px] overflow-hidden'>
           <Image
             alt="Card background"
             className="object-cover"
-            src={colegio.thumbnail}
-
+            src={colegio.images === null ? dummyImage : colegio.images[0]}
           />
         </div>
       </CardBody>

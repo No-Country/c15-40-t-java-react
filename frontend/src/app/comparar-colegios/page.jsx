@@ -27,7 +27,6 @@ export default function page () {
     id === null ? setSelectColegio2('Colegio2') : setSelectColegio2(id);
   };
 
-  console.log('hola');
   return (
     <div className="flex flex-col items-center justify-center ">
       <h1 className="text-xl font-bold">Comparador de colegios</h1>

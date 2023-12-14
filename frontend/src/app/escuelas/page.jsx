@@ -1,11 +1,16 @@
 'use client';
+
 import React from 'react';
 import { Input, RadioGroup, Radio, Divider, Slider, Select, SelectItem } from '@nextui-org/react';
 import { SearchIcon } from '@/components/Icons';
 import ColegioCard from '@/components/ColegioCard/ColegioCard';
-import { colegioDetail, ciudades } from '../comparar-colegios/data';
+import { ciudades } from '../comparar-colegios/data';
+import useFetchData from './useFetchData';
 
 function page () {
+  const { data, isLoading } = useFetchData('https://educ-ar-lgxy.onrender.com/api/institutions');
+
+  console.log(data);
   return (
     <div className="flex">
       <div className="h-screen p-5  w-[15%] flex flex-col gap-1">
@@ -53,21 +58,27 @@ function page () {
         </Select>
 
       </div>
+
       <div className=" w-full">
         <div className="text-black p-5">
           <Input
-            type="email"
+            type="text"
             variant={'bordered'}
             label="Buscar"
             startContent={<SearchIcon />}
           />
         </div>
-        <div className='flex gap-2'>
-          {colegioDetail.map((item) => (
-            <ColegioCard key={item.id} colegio={item}/>
-          ))}
+        <div className='flex gap-3 flex-wrap'>
+
+          { !isLoading
+            ? data?.map((colegio) => (
+              <ColegioCard key={colegio.id} colegio={colegio}/>))
+            : 'Cargando...'
+          }
+
         </div>
       </div>
+
     </div>
   );
 }
