@@ -17,7 +17,7 @@ public class EducationLevel {
 
     private Level level;
     private Range fee; 
-    private LocalDate inscriptionDate;
+    private String inscriptionMonth;
     private Shift[] shifts = new Shift[2];
     private List<String> orientations = new ArrayList<>(); 
     
@@ -35,8 +35,9 @@ public class EducationLevel {
     @Getter
     @Setter
     public static class Range {
-        private int min;
-        private int max;
+        //Controlar que llegue un int
+        private String min;
+        private String max;
     }
 
     public enum Level {
