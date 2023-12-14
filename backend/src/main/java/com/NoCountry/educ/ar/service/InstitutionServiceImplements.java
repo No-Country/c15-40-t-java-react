@@ -19,6 +19,9 @@ public class InstitutionServiceImplements implements InstitutionService {
     private InstitutionRepository institutionRepository;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private ObjectsValidator<PreInscriptionRequestDTO> preInscriptionValidator;
 
     @Override
@@ -50,8 +53,8 @@ public class InstitutionServiceImplements implements InstitutionService {
     }
 
     @Override
-    public Institution updateInstitution(String institutionId, InstitutionRequestDTO institution) {
-        Institution institutionToUpdate = getInstitutionById(institutionId);
+    public Institution updateInstitution(String institutionEmail, InstitutionRequestDTO institution) {
+        Institution institutionToUpdate = userService.getInstitutionByEmail(institutionEmail);
         
         institutionToUpdate.setInstitutionName(institution.institutionName());
         institutionToUpdate.setAddress(institution.address());
@@ -66,7 +69,9 @@ public class InstitutionServiceImplements implements InstitutionService {
         institutionToUpdate.setReligion(institution.religion());
         institutionToUpdate.setSchoolUniform(institution.schoolUniform());
         institutionToUpdate.setGenere(institution.genere());
+        institutionToUpdate.setEducationalApproach(institution.educationalApproach());
         institutionToUpdate.setImages(institution.images());
+        institutionToUpdate.setLogo(institution.logo());
         return createInstitutionWithAllFields(institutionToUpdate);
     }
 }

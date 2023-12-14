@@ -36,7 +36,7 @@ public class Institution {
 
     private String web;
 
-    private List<String> administration;
+    private String administration;
 
     private List<EducationLevel> educationLevels;
 
@@ -57,7 +57,6 @@ public class Institution {
     private List<String> images;
 
     private String logo;
-
 
     public Institution(PreInscriptionRequestDTO preInscriptionRequest) {
         this.institutionName = preInscriptionRequest.institutionName();

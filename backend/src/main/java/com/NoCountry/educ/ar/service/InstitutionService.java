@@ -18,5 +18,5 @@ public interface InstitutionService {
 
     public List<Institution> getInstitutions();
 
-    public Institution updateInstitution(String institutionId, InstitutionRequestDTO institution);
+    public Institution updateInstitution(String institutionEmail, InstitutionRequestDTO institution);
 }
