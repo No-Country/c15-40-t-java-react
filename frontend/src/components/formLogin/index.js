@@ -1,10 +1,15 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Context } from '@/app/ContextProvider';
 
 export const useFormLogin = () => {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessageEmail, setErrorMessageEmail] = useState('');
   const [errorMessagePassword, setErrorMessagePassword] = useState('');
+  const router = useRouter();
+  const { jwt, setJwt } = useContext(Context);
+  console.log(jwt);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +34,9 @@ export const useFormLogin = () => {
 
         if (response.status === 200) {
           const data = await response.json();
-          console.log(data);
+          setJwt(data.jwt);
+
+          router.push('/panel-colegio');
         } else {
           console.error('Error en la solicitud al backend');
         }
