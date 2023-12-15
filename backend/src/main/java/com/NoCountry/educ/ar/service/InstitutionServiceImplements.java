@@ -49,7 +49,8 @@ public class InstitutionServiceImplements implements InstitutionService {
 
     @Override
     public Institution getInstitutionByCUE(String cue) {
-        return institutionRepository.getPreInscriptionByCue(cue).orElse(null);
+        return institutionRepository.getPreInscriptionByCue(cue)
+            .orElseThrow(() -> new IdNotFoundException("Institucion con CUE = " + cue + " no encontrada"));
     }
 
     @Override

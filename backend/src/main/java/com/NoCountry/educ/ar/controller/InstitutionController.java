@@ -37,6 +37,11 @@ public class InstitutionController {
         return new ResponseEntity<>(institutionService.getInstitutionById(institutionId), HttpStatus.OK);
     }
 
+    @GetMapping("cue/{institutionCue}")
+    public ResponseEntity<Institution> getInstitutionByCue(@PathVariable String institutionCue) {
+        return new ResponseEntity<>(institutionService.getInstitutionByCUE(institutionCue), HttpStatus.OK);
+    }
+
     @GetMapping("/pre-inscription/{institutionId}")
     public ResponseEntity<PreInscriptionResponseDTO> getPreInscriptionByInsitutionId(@PathVariable String institutionId) {
         Institution preInscription = institutionService.getInstitutionById(institutionId);
