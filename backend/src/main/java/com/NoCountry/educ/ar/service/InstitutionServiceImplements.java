@@ -75,4 +75,9 @@ public class InstitutionServiceImplements implements InstitutionService {
         institutionToUpdate.setLogo(institution.logo());
         return createInstitutionWithAllFields(institutionToUpdate);
     }
+
+    @Override
+    public List<Institution> findByinstitutionName(String institutionName) {
+        return institutionRepository.findByinstitutionName(institutionName);
+    }
 }

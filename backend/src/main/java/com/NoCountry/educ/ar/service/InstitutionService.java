@@ -19,4 +19,6 @@ public interface InstitutionService {
     public List<Institution> getInstitutions();
 
     public Institution updateInstitution(String institutionEmail, InstitutionRequestDTO institution);
+
+    public List<Institution> findByinstitutionName(String institutionName);
 }
