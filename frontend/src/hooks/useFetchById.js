@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import useColegioInfo from '@/hooks/useColegioInfo';
 
-export function index (colegioId) {
+export function useFetchById (colegioId) {
   const [colegio, setColegio] = useState(null);
   const [colegioInfo, setColegioInfo] = useState(null);
   const [error, setError] = useState(null);
@@ -27,7 +27,7 @@ export function index (colegioId) {
       }
     };
     fetchData();
-  }, [colegioId]);
+  }, []);
 
   return {
     colegio, error, isLoading, colegioInfo

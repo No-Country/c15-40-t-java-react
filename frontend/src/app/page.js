@@ -17,6 +17,7 @@ export default function Home () {
           <h2 className={`${Londrina_SolidFontBlack.className} text-3xl md:text-4xl lg:text-7xl font-black text-orange-500`}>Nosotros te ayudamos!</h2>
           <p className='mt-4 text-balance'>Busca el colegio que mejor se <strong className='text-purple-500'>adapte</strong> a tus necesidades.</p>
           <p className='text-balance'>Aquí encontrarás toda la información que necesitas para <span className='font-bold text-orange-500'>tomar tu decisión.!</span></p>
+
           <Button className='mt-4 text-white' color='warning' variant='shadow'>
             Inicia tu búsqueda
           </Button>

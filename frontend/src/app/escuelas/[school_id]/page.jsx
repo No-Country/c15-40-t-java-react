@@ -21,7 +21,7 @@ import {
 
 import { Londrina_Solid } from 'next/font/google';
 
-import useFetchData from '../useFetchData';
+import useFetchData from '@/hooks/useFetchData';
 
 import { useRouter } from 'next/navigation';
 

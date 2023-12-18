@@ -13,18 +13,23 @@ import {
   TableRow,
   TableCell
 } from '@nextui-org/react';
-import { colegios } from './data';
+
+import useFetchData from '@/hooks/useFetchData';
 
 export default function page () {
-  const [selectColegio1, setSelectColegio1] = useState('Colegio1');
-  const [selectColegio2, setSelectColegio2] = useState('Colegio2');
+  const [selectColegio1, setSelectColegio1] = useState('657b5c17a3896c532e843b9d');
+  const [selectColegio2, setSelectColegio2] = useState('657b5a5fa3896c532e843b9c');
+  const { institutionNames } = useFetchData('https://educ-ar-lgxy.onrender.com/api/institutions');
+
+  console.log(institutionNames);
 
   const handleSelection1Change = (id) => {
-    id === null ? setSelectColegio1('Colegio1') : setSelectColegio1(id);
+    id === null ? setSelectColegio1('657b5c17a3896c532e843b9d') : setSelectColegio1((prev) => id);
+    console.log(selectColegio1);
   };
 
   const handleSelection2Change = (id) => {
-    id === null ? setSelectColegio2('Colegio2') : setSelectColegio2(id);
+    id === null ? setSelectColegio2('657b5a5fa3896c532e843b9c') : setSelectColegio2((prev) => id);
   };
 
   return (
@@ -88,7 +93,7 @@ export default function page () {
             </TableRow>
             <TableRow key={'row-Head-10'}>
               <TableCell className="flex justify-center ">
-                Tiene calefacción
+                Administración
               </TableCell>
             </TableRow>
           </TableBody>
@@ -96,7 +101,7 @@ export default function page () {
 
         <div className="col-start-2">
           <Autocomplete
-            defaultItems={colegios}
+            defaultItems={institutionNames}
             label=""
             placeholder="Elegí un colegio"
             className="w-full col-start-2"
@@ -114,7 +119,7 @@ export default function page () {
         <CompareCardDetails colegioId={selectColegio1} position={'left'} />
         <div className="col-start-3 row-start-1">
           <Autocomplete
-            defaultItems={colegios}
+            defaultItems={institutionNames}
             label=""
             placeholder="Elegí un colegio"
             className="w-full col-start-3 row-start-1"
