@@ -10,15 +10,19 @@ import {
 } from '@nextui-org/react';
 // import { index } from '.';
 import useColegioInfo from '@/hooks/useColegioInfo';
-import useFetchData from '@/hooks/useFetchData';
+// import useFetchData from '@/hooks/useFetchData';
 
 function CompareCardDetails ({ colegioId, position }) {
   const bool = false;
 
   const [colegio, setColegio] = useState(null);
+  console.log(colegio);
   const [colegioInfo, setColegioInfo] = useState(null);
+  console.log(colegioInfo);
   const [error, setError] = useState(null);
+  console.log(error);
   const [isLoading, setIsLoading] = useState(false);
+  console.log(isLoading);
 
   useEffect(() => {
     const fetchData = async () => {
