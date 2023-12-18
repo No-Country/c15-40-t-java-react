@@ -8,6 +8,8 @@ import {
   WebIcon
 } from '@/components/Icons';
 
+import useFetchData from '@/hooks/useFetchData';
+
 import {
   Avatar,
   Card,
@@ -20,8 +22,6 @@ import {
 } from '@nextui-org/react';
 
 import { Londrina_Solid } from 'next/font/google';
-
-import useFetchData from '@/hooks/useFetchData';
 
 import { useRouter } from 'next/navigation';
 
@@ -38,7 +38,7 @@ export default function Page (props) {
 
   const { data, error } = useFetchData(urlGetSchools);
 
-  if (error) {
+  if (error === 'No se encontraron datos') {
     router.push('/404');
   }
 
