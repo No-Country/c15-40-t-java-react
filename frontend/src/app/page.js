@@ -10,7 +10,7 @@ const Londrina_SolidFontBlack = Londrina_Solid({
 
 export default function Home () {
   return (
-    <section className='grid place-items-center mx-auto min-h-[calc(100dvh_-_128px)] max-w-7xl'>
+    <section className='grid place-items-center mx-auto min-h-[calc(100dvh_-_128px)] max-w-8xl'>
       <div className='flex justify-center items-center gap-20 flex-wrap'>
         <header>
           <h1 className={`${Londrina_SolidFontBlack.className} text-3xl md:text-4xl lg:text-7xl font-black text-purple-500`}>Eligiendo colegio??...</h1>

@@ -10,7 +10,6 @@ import useFetchData from './useFetchData';
 function page () {
   const { data, isLoading } = useFetchData('https://educ-ar-lgxy.onrender.com/api/institutions');
 
-  console.log(data);
   return (
     <div className="flex">
       <div className="h-screen p-5  w-[15%] flex flex-col gap-1">
