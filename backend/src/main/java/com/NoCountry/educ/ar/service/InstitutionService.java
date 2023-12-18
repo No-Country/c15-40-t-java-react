@@ -1,6 +1,7 @@
 package com.NoCountry.educ.ar.service;
 
 import java.util.List;
+import java.util.Set;
 
 import com.NoCountry.educ.ar.dto.InstitutionRequestDTO;
 import com.NoCountry.educ.ar.dto.PreInscriptionRequestDTO;
@@ -24,5 +25,5 @@ public interface InstitutionService {
 
     public List<Institution> findInstitutionsByFields(List<String> city, String range, String[] religion);
 
-    public List<String> getAllInstitutionCities();
+    public Set<String> getAllInstitutionCities();
 }

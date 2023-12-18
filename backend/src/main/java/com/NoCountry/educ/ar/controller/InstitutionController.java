@@ -1,6 +1,7 @@
 package com.NoCountry.educ.ar.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -62,7 +63,7 @@ public class InstitutionController {
     }
 
     @GetMapping("/citiesNames")
-    public ResponseEntity<List<String>> getNamesOfTheCitiesOfTheInstitutions() {
+    public ResponseEntity<Set<String>> getNamesOfTheCitiesOfTheInstitutions() {
         return new ResponseEntity<>(institutionService.getAllInstitutionCities(), HttpStatus.OK);
     }
 

@@ -1,6 +1,7 @@
 package com.NoCountry.educ.ar.service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,10 +94,10 @@ public class InstitutionServiceImplements implements InstitutionService {
     }
 
     @Override
-    public List<String> getAllInstitutionCities() {
+    public Set<String> getAllInstitutionCities() {
         return getInstitutions()
             .stream()
             .map(Institution::getCity)
-            .collect(Collectors.toList());
+            .collect(Collectors.toSet());
     }
 }

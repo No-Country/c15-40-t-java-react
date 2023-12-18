@@ -13,4 +13,7 @@ public interface InstitutionRepository extends MongoRepository<Institution, Stri
 
     @Query("{'institutionName': {$regex : ?0, $options: 'i'}}")
     List<Institution> findByinstitutionName(String institutionName);
+
+    @Query(value = "{}", fields = "{'_id': 0, 'city': 1}")
+    List<String> findAllInstitutionsNames();
 }
