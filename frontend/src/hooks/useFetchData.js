@@ -41,11 +41,12 @@ const useFetchData = (url) => {
       // Procesamiento de los datos y actualización del estado
       setInstitutionNames((prevData) => {
         // Concatenar los nuevos datos al estado existente
-        const name = Object.keys(data).map((item) => {
-          // Ejemplo de procesamiento, puedes ajustarlo según tus necesidades
-          return { label: item.institutionName, value: item.id, description: 'descripcion si la hay' };
-        });
-        return [...prevData, ...name];
+        const names = Object.keys(data).map((key) => ({
+          label: data[key].institutionName,
+          value: data[key].id,
+          description: 'descripcion si la hay'
+        }));
+        return [...prevData, ...names];
       });
     }
     setIsLoading(false);

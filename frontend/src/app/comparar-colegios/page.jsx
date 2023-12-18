@@ -101,6 +101,7 @@ export default function page () {
 
         <div className="col-start-2">
           <Autocomplete
+            aria-label='Autocomplete'
             defaultItems={institutionNames}
             label=""
             placeholder="Elegí un colegio"
@@ -108,17 +109,22 @@ export default function page () {
             size="lg"
             onSelectionChange={handleSelection1Change}
           >
-            {(colegio) => (
-              <AutocompleteItem key={colegio.value}>
-                {colegio.label}
-              </AutocompleteItem>
-            )}
+            {(colegio) => {
+              console.log(colegio);
+              return (
+                <AutocompleteItem key={colegio.value}>
+                  {colegio.label}
+                </AutocompleteItem>
+
+              );
+            }}
           </Autocomplete>
           <CompareCardImages colegioId={selectColegio1} />
         </div>
         <CompareCardDetails colegioId={selectColegio1} position={'left'} />
         <div className="col-start-3 row-start-1">
           <Autocomplete
+            aria-label='Autocomplete'
             defaultItems={institutionNames}
             label=""
             placeholder="Elegí un colegio"
