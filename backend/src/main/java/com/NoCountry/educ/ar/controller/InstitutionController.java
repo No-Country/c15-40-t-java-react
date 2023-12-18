@@ -61,6 +61,11 @@ public class InstitutionController {
         return new ResponseEntity<List<Institution>>(institutions,HttpStatus.OK);
     }
 
+    @GetMapping("/citiesNames")
+    public ResponseEntity<List<String>> getNamesOfTheCitiesOfTheInstitutions() {
+        return new ResponseEntity<>(institutionService.getAllInstitutionCities(), HttpStatus.OK);
+    }
+
     @PutMapping("/{institutionId}")
     public ResponseEntity<Institution> updateInstitution(@PathVariable String institutionId, @RequestBody InstitutionRequestDTO institutionData) {
         return new ResponseEntity<>(institutionService.updateInstitution(institutionId, institutionData), HttpStatus.OK);

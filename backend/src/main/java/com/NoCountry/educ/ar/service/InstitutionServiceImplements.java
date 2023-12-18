@@ -1,8 +1,10 @@
 package com.NoCountry.educ.ar.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import com.NoCountry.educ.ar.dto.InstitutionRequestDTO;
@@ -23,6 +25,9 @@ public class InstitutionServiceImplements implements InstitutionService {
 
     @Autowired
     private ObjectsValidator<PreInscriptionRequestDTO> preInscriptionValidator;
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     @Override
     public Institution createInstitution(PreInscriptionRequestDTO institutionDTO) {
@@ -79,5 +84,19 @@ public class InstitutionServiceImplements implements InstitutionService {
     @Override
     public List<Institution> findByinstitutionName(String institutionName) {
         return institutionRepository.findByinstitutionName(institutionName);
+    }
+
+    @Override
+    public List<Institution> findInstitutionsByFields(List<String> city, String range, String[] religion) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findInstitutionsByFields'");
+    }
+
+    @Override
+    public List<String> getAllInstitutionCities() {
+        return getInstitutions()
+            .stream()
+            .map(Institution::getCity)
+            .collect(Collectors.toList());
     }
 }

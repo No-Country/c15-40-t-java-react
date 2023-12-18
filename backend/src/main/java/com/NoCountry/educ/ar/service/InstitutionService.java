@@ -21,4 +21,8 @@ public interface InstitutionService {
     public Institution updateInstitution(String institutionEmail, InstitutionRequestDTO institution);
 
     public List<Institution> findByinstitutionName(String institutionName);
+
+    public List<Institution> findInstitutionsByFields(List<String> city, String range, String[] religion);
+
+    public List<String> getAllInstitutionCities();
 }
