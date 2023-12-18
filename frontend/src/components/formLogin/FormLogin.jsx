@@ -18,7 +18,8 @@ const FormLogin = () => {
     onBlurInputPassword,
     onBlurInputEmail,
     errorMessageEmail,
-    errorMessagePassword
+    errorMessagePassword,
+    userError
   } = useFormLogin();
 
   return (
@@ -73,6 +74,7 @@ const FormLogin = () => {
           errorMessage={errorMessagePassword}
         />
       </div>
+      {userError && <div className="text-red-500 text-center p-2">{userError}</div>}
       <div className="m-auto flex justify-center">
         <button
           type="submit"
