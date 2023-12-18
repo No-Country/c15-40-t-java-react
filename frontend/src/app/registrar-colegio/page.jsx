@@ -42,9 +42,9 @@ const RegistrarColegio = () => {
     const response = await sendAllData(dataBack);
 
     if (response.status !== 201) {
-      console.log('Ups, problemas en el servidor!');
+      // console.log('Ups, problemas en el servidor!');
     } else {
-      console.log('Registro exitoso!', 'Gracias por elegirnos');
+      // console.log('Registro exitoso!', 'Gracias por elegirnos');
 
       sendEmail();
 
@@ -66,10 +66,10 @@ const RegistrarColegio = () => {
       )
       .then(
         (result) => {
-          console.log(result.text);
+          // console.log(result.text);
         },
         (error) => {
-          console.log(error.text);
+          // console.log(error.text);
         }
       );
   };

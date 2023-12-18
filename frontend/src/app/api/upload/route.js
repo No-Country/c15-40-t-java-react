@@ -32,7 +32,7 @@ export async function POST (request) {
       .end(buffer);
   });
 
-  console.log(response.secure_url);
+  // console.log(response.secure_url);
   return NextResponse.json({
     message: 'imagen subida',
     url: response.secure_url
