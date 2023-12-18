@@ -15,17 +15,17 @@ const SchoolPanel = () => {
   const router = useRouter();
 
   const onSubmit = async (data) => {
-    // console.log('datos cargados', data);
+    console.log('datos cargados', data);
     const cloudUrl = localStorage.getItem('cloudinaryUrl');
     const backendData = dataBackendFormat(data, cloudUrl);
-    // console.log(backendData);
+    console.log(backendData);
 
     const response = await sendAllData(backendData);
 
     if (response.status !== 201) {
-      // console.log('Ups, problemas en el servidor!');
+      console.log('Ups, problemas en el servidor!');
     } else {
-      // console.log('Datos de colegio cargados!');
+      console.log('Datos de colegio cargados!');
 
       setTimeout(() => {
         router.push('/');
@@ -43,7 +43,7 @@ const SchoolPanel = () => {
 
     });
     const dataApi = await response.json();
-    // console.log(dataApi.message);
+    console.log(dataApi.message);
     localStorage.setItem('cloudinaryUrl', dataApi.url);
   };
 

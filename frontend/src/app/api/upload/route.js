@@ -10,7 +10,7 @@ cloudinary.config({
 
 export async function POST (request) {
   const data = await request.formData();
-  // console.log(data.get('file'));
+  console.log(data.get('file'));
 
   const images = data.get('file');
 
@@ -32,7 +32,7 @@ export async function POST (request) {
       .end(buffer);
   });
 
-  // console.log(response.secure_url);
+  console.log(response.secure_url);
   return NextResponse.json({
     message: 'imagen subida',
     url: response.secure_url

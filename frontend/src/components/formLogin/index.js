@@ -9,7 +9,7 @@ export const useFormLogin = () => {
   const [errorMessagePassword, setErrorMessagePassword] = useState('');
   const router = useRouter();
   const { jwt, setJwt } = useContext(Context);
-  // console.log(jwt);
+  console.log(jwt);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -44,7 +44,7 @@ export const useFormLogin = () => {
         console.error('Error de red:', error);
       }
 
-      // console.log(userData);
+      console.log(userData);
       e.target.reset();
     }
   };
