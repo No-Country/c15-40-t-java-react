@@ -4,12 +4,12 @@ const useColegioInfo = (colegio) => {
   let talleresString = '';
   let religionesString = '';
   const institutionName = colegio.institutionName;
-  const address = colegio.address;
+  const address = colegio.address.length > 0 ? colegio.address : 'Sin información';
   const city = colegio.city;
   const bilingual = colegio.bilingual ? 'Si' : 'No';
   const canteen = colegio.canteen ? 'Si' : 'No';
   const schoolUniform = colegio.schoolUniform ? 'Si' : 'No';
-  const administration = colegio.administration;
+  const administration = colegio.administration.length > 0 ? colegio.administration : 'Sin información';
 
   colegio.educationLevels?.forEach((level, index) => {
     educationLevelsString += (index > 0 ? ' - ' : '') + level.level;

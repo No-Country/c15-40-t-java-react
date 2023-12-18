@@ -15,19 +15,21 @@ import {
 } from '@nextui-org/react';
 
 import useFetchData from '@/hooks/useFetchData';
+
 export default function page () {
-  const [selectColegio1, setSelectColegio1] = useState('6578cd35190c987e9ced6849');
-  const [selectColegio2, setSelectColegio2] = useState('6578cd8a190c987e9ced684f');
+  const [selectColegio1, setSelectColegio1] = useState('657b5c17a3896c532e843b9d');
+  const [selectColegio2, setSelectColegio2] = useState('657b5a5fa3896c532e843b9c');
   const { institutionNames } = useFetchData('https://educ-ar-lgxy.onrender.com/api/institutions');
 
   console.log(institutionNames);
 
   const handleSelection1Change = (id) => {
-    id === null ? setSelectColegio1('6578cd35190c987e9ced6849') : setSelectColegio1(id);
+    id === null ? setSelectColegio1('657b5c17a3896c532e843b9d') : setSelectColegio1((prev) => id);
+    console.log(selectColegio1);
   };
 
   const handleSelection2Change = (id) => {
-    id === null ? setSelectColegio2('6578cd8a190c987e9ced684f') : setSelectColegio2(id);
+    id === null ? setSelectColegio2('657b5a5fa3896c532e843b9c') : setSelectColegio2((prev) => id);
   };
 
   return (
@@ -91,7 +93,7 @@ export default function page () {
             </TableRow>
             <TableRow key={'row-Head-10'}>
               <TableCell className="flex justify-center ">
-                Tiene calefacción
+                Administración
               </TableCell>
             </TableRow>
           </TableBody>

@@ -1,7 +1,10 @@
+'use client';
 import { useState, useEffect } from 'react';
+import useColegioInfo from './useColegioInfo';
 
 const useFetchData = (url) => {
   const [data, setData] = useState(null);
+  const [colegioInfo, setColegioInfo] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [institutionNames, setInstitutionNames] = useState([]);
@@ -17,6 +20,7 @@ const useFetchData = (url) => {
         }
         const result = await response.json();
         setData(result);
+        setColegioInfo(useColegioInfo(result));
       } catch (error) {
         setError(error);
       } finally {
@@ -43,7 +47,7 @@ const useFetchData = (url) => {
     setIsLoading(false);
   }, [data]);
 
-  return { data, error, isLoading, institutionNames };
+  return { data, error, isLoading, institutionNames, colegioInfo };
 };
 
 export default useFetchData;

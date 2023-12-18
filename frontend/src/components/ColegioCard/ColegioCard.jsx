@@ -30,7 +30,7 @@ function ColegioCard ({ colegio }) {
           <Image
             alt="Card background"
             className="object-cover"
-            src={colegio.images === null ? dummyImage : colegio.images[0]}
+            src={colegio.images === null || colegio.images.length === 0 ? dummyImage : colegio.images[0]}
           />
         </div>
       </CardBody>
