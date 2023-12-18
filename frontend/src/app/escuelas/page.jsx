@@ -1,16 +1,30 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Input, RadioGroup, Radio, Divider, Slider, Select, SelectItem } from '@nextui-org/react';
 import { SearchIcon } from '@/components/Icons';
 import ColegioCard from '@/components/ColegioCard/ColegioCard';
-import { ciudades } from '../comparar-colegios/data';
-import useFetchData from './useFetchData';
+import { ciudades } from '@/app/comparar-colegios/data';
+import useFetchData from '@/hooks/useFetchData';
 
 function page () {
-  const { data, isLoading } = useFetchData('https://educ-ar-lgxy.onrender.com/api/institutions');
+  const [url, setUrl] = useState('https://educ-ar-lgxy.onrender.com/api/institutions');
+  const { data, isLoading } = useFetchData(url);
+  const [search, setSearch] = useState('');
 
-  console.log(data);
+  const handleSearchChange = (ev) => {
+    setSearch(ev.target.value);
+  };
+
+  // Efecto que me actualiza la url del fetch según el input del search
+  useEffect(() => {
+    if (search.length > 0) { // chequea si existe un string en search, sino vuelve a pedir el link de todos los colegios
+      setUrl(`https://educ-ar-lgxy.onrender.com/api/institutions${'/' + search}`);
+    } else {
+      setUrl('https://educ-ar-lgxy.onrender.com/api/institutions');
+    }
+  }, [search]);
+
   return (
     <div className="flex">
       <div className="h-screen p-5  w-[15%] flex flex-col gap-1">
@@ -66,6 +80,8 @@ function page () {
             variant={'bordered'}
             label="Buscar"
             startContent={<SearchIcon />}
+            value={search}
+            onChange={handleSearchChange}
           />
         </div>
         <div className='flex gap-3 flex-wrap'>

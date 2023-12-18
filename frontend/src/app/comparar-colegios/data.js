@@ -1,7 +1,7 @@
 export const colegios = [
   {
-    label: 'Colegio1',
-    value: 'Colegio1',
+    label: 'NOmbre del colegio',
+    value: '324asdfañsdjfñlkasm',
     description: 'Colegio1 es el mejor'
   },
   {

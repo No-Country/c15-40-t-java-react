@@ -1,44 +1,35 @@
-import { colegioDetail } from '@/app/comparar-colegios/data';
+'use client';
+
+import { useEffect, useState } from 'react';
+import useColegioInfo from '@/hooks/useColegioInfo';
 
 export function index (colegioId) {
-  function filterObjectById (array, id) {
-    return array.filter((objeto) => objeto.id === id)[0];
-  }
+  const [colegio, setColegio] = useState(null);
+  const [colegioInfo, setColegioInfo] = useState(null);
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const colegio = filterObjectById(colegioDetail, colegioId);
-  let educationLevelsString = '';
-  let talleresString = '';
-  let religionesString = '';
-  const institutionName = colegio.institutionName;
-  const address = colegio.address;
-  const city = colegio.city;
-  const bilingual = colegio.bilingual ? 'Si' : 'No';
-  const comedor = colegio.comedor ? 'Si' : 'No';
-  const uniforme = colegio.uniforme ? 'Si' : 'No';
-  const calefaccion = colegio.calefaccion ? 'Si' : 'No';
-
-  colegio.educationLevels.forEach((level, index) => {
-    educationLevelsString += (index > 0 ? ' - ' : '') + level.name;
-  });
-
-  colegio.talleres.forEach((taller, index) => {
-    talleresString += (index > 0 ? ' - ' : '') + taller;
-  });
-
-  colegio.religion.forEach((religion, index) => {
-    religionesString += (index > 0 ? ' - ' : '') + religion;
-  });
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(`https://educ-ar-lgxy.onrender.com/api/institutions/${colegioId}`);
+        if (!response.ok) {
+          throw new Error('Error en conexion al servidor');
+        }
+        const result = await response.json();
+        setColegio(result);
+        setColegioInfo(useColegioInfo(result));
+      } catch (error) {
+        setError(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, [colegioId]);
 
   return {
-    institutionName,
-    address,
-    city,
-    educationLevelsString,
-    talleresString,
-    bilingual,
-    comedor,
-    religionesString,
-    uniforme,
-    calefaccion
+    colegio, error, isLoading, colegioInfo
   };
 }

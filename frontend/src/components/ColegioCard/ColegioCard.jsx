@@ -12,7 +12,6 @@ function ColegioCard ({ colegio }) {
     router.push(`/escuelas/${colegio.id}`);
   };
 
-  console.log(colegio);
   return (
     <Card className="w-[300px]" isPressable onPress={hanldePress}
     >
