@@ -1,6 +1,7 @@
 package com.NoCountry.educ.ar.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,6 +54,17 @@ public class InstitutionController {
     public ResponseEntity<List<Institution>> getInstitutions() {
         List<Institution> institutions = institutionService.getInstitutions();
         return new ResponseEntity<>(institutions, HttpStatus.OK);
+    }
+
+    @GetMapping("/searchName/{nameInstitution}")
+    public ResponseEntity<List<Institution>> getInstitutionName(@PathVariable String nameInstitution ){
+        List<Institution> institutions = institutionService.findByinstitutionName(nameInstitution);
+        return new ResponseEntity<List<Institution>>(institutions,HttpStatus.OK);
+    }
+
+    @GetMapping("/citiesNames")
+    public ResponseEntity<Set<String>> getNamesOfTheCitiesOfTheInstitutions() {
+        return new ResponseEntity<>(institutionService.getAllInstitutionCities(), HttpStatus.OK);
     }
 
     @PutMapping("/{institutionId}")
