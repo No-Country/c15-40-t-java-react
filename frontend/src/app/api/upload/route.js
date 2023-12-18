@@ -10,7 +10,7 @@ cloudinary.config({
 
 export async function POST (request) {
   const data = await request.formData();
-  // console.log(data.get('file'));
+  console.log(data.get('file'));
 
   const images = data.get('file');
 
