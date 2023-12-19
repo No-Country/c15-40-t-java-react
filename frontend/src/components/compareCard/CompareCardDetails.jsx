@@ -16,13 +16,12 @@ function CompareCardDetails ({ colegioId, position }) {
   const bool = false;
 
   const [colegio, setColegio] = useState(null);
-  console.log(colegio);
+
   const [colegioInfo, setColegioInfo] = useState(null);
-  console.log(colegioInfo);
+
   const [error, setError] = useState(null);
-  console.log(error);
+
   const [isLoading, setIsLoading] = useState(false);
-  console.log(isLoading);
 
   useEffect(() => {
     const fetchData = async () => {

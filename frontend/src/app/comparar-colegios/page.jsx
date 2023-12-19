@@ -21,11 +21,8 @@ export default function page () {
   const [selectColegio2, setSelectColegio2] = useState('657b5a5fa3896c532e843b9c');
   const { institutionNames } = useFetchData('https://educ-ar-lgxy.onrender.com/api/institutions');
 
-  console.log(institutionNames);
-
   const handleSelection1Change = (id) => {
     id === null ? setSelectColegio1('657b5c17a3896c532e843b9d') : setSelectColegio1((prev) => id);
-    console.log(selectColegio1);
   };
 
   const handleSelection2Change = (id) => {
@@ -110,7 +107,6 @@ export default function page () {
             onSelectionChange={handleSelection1Change}
           >
             {(colegio) => {
-              console.log(colegio);
               return (
                 <AutocompleteItem key={colegio.value}>
                   {colegio.label}
