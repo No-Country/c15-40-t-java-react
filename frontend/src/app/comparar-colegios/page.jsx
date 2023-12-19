@@ -46,50 +46,50 @@ export default function page () {
           <TableBody>
             {/* Nombre */}
             <TableRow key={'row-Head-1'}>
-              <TableCell className="flex justify-center">
+              <TableCell className="flex justify-center min-h-[50px] items-center">
                 Nombre de Colegio
               </TableCell>
             </TableRow>
             {/* Address */}
             <TableRow key={'row-Head-2'}>
-              <TableCell className="flex justify-center">Dirección</TableCell>
+              <TableCell className="flex justify-center min-h-[50px] items-center">Dirección</TableCell>
             </TableRow>
             {/* Ciudad */}
             <TableRow key={'row-Head-3'}>
-              <TableCell className="flex justify-center ">Ciudad</TableCell>
+              <TableCell className="flex justify-center  min-h-[50px] items-center">Ciudad</TableCell>
             </TableRow>
             {/* Education Levels */}
             <TableRow key={'row-Head-4'}>
-              <TableCell className="flex justify-center ">
+              <TableCell className="flex justify-center min-h-[50px] items-center ">
                 Niveles educativos
               </TableCell>
             </TableRow>
             {/* Talleres */}
             <TableRow key={'row-Head-5'}>
-              <TableCell className="flex justify-center">
+              <TableCell className="flex justify-center min-h-[50px] items-center">
                 Tiene talleres
               </TableCell>
             </TableRow>
             <TableRow key={'row-Head-6'}>
-              <TableCell className="flex justify-center ">
+              <TableCell className="flex justify-center min-h-[50px] items-center ">
                 Es Bilingue
               </TableCell>
             </TableRow>
             <TableRow key={'row-Head-7'}>
-              <TableCell className="flex justify-center ">
+              <TableCell className="flex justify-center  min-h-[50px] items-center">
                 Tiene Comedor
               </TableCell>
             </TableRow>
             <TableRow key={'row-Head-8'}>
-              <TableCell className="flex justify-center flex-col items-center">
+              <TableCell className="flex justify-center flex-col items-center min-h-[50px]">
                 Religión
               </TableCell>
             </TableRow>
             <TableRow key={'row-Head-9'}>
-              <TableCell className="flex justify-center ">Uniforme</TableCell>
+              <TableCell className="flex justify-center min-h-[50px] items-center ">Uniforme</TableCell>
             </TableRow>
             <TableRow key={'row-Head-10'}>
-              <TableCell className="flex justify-center ">
+              <TableCell className="flex justify-center  min-h-[50px] items-center">
                 Administración
               </TableCell>
             </TableRow>

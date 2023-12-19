@@ -13,6 +13,7 @@ function page () {
   const { data, isLoading } = useFetchData(url);
   const [search, setSearch] = useState('');
   const { cityNames } = useCityNames();
+
   const [selectedFilters, setSelectedFilters] = useState({ religion: '', range: [5000, 500000], city: '' });
   const [selectedRange, setSelectedRange] = useState([5000, 500000]);
   const [filteredItems, setFilteredItems] = useState(data);
@@ -35,8 +36,8 @@ function page () {
   }, [data]);
 
   useEffect(() => {
-    const { religiones } = useFilterColegios(selectedFilters, data);
-    setFilteredItems(religiones);
+    const { filtrados } = useFilterColegios(selectedFilters, data);
+    setFilteredItems(filtrados);
   }, [selectedFilters]);
 
   // Efecto que me actualiza la url del fetch según el input del search
@@ -98,6 +99,8 @@ function page () {
           className="max-w-xs"
           items={cityNames}
           color='warning'
+          name='city'
+          onChange={handleFilterChange}
         >
           {(cuidad) => <SelectItem key={cuidad.value}>{cuidad.label}</SelectItem>}
         </Select>

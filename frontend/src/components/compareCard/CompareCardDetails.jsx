@@ -60,21 +60,21 @@ function CompareCardDetails ({ colegioId, position }) {
           <TableBody>
             {/* Nombre */}
             <TableRow key={`row-${position}-1`}>
-              <TableCell className="flex justify-center ">
+              <TableCell className="flex justify-center min-h-[50px] items-center ">
                 {colegioInfo?.institutionName}
               </TableCell>
             </TableRow>
             {/* Address */}
             <TableRow key={`row-${position}-2`}>
-              <TableCell className="flex justify-center ">{colegioInfo?.address}</TableCell>
+              <TableCell className="flex justify-center  min-h-[50px] items-center">{colegioInfo?.address}</TableCell>
             </TableRow>
             {/* Ciudad */}
             <TableRow key={`row-${position}-3`}>
-              <TableCell className="flex justify-center ">{colegioInfo?.city}</TableCell>
+              <TableCell className="flex justify-center  min-h-[50px] items-center">{colegioInfo?.city}</TableCell>
             </TableRow>
             {/* Education Levels */}
             <TableRow key={`row-${position}-4`}>
-              <TableCell className="flex justify-center ">
+              <TableCell className="flex justify-center min-h-[50px] items-center">
                 {colegioInfo?.educationLevelsString.length > 0
                   ? colegioInfo?.educationLevelsString
                   : 'No hay datos'}
@@ -82,32 +82,32 @@ function CompareCardDetails ({ colegioId, position }) {
             </TableRow>
             {/* Talleres */}
             <TableRow key={`row-${position}-5`}>
-              <TableCell className="flex justify-center ">
+              <TableCell className="flex justify-center min-h-[50px] items-center">
                 {colegioInfo?.talleresString.length > 0 ? colegioInfo?.talleresString : 'No tiene talleres'}
               </TableCell>
             </TableRow>
             <TableRow key={`row-${position}-6`}>
-              <TableCell className="flex justify-center ">
+              <TableCell className="flex justify-center min-h-[50px] items-center ">
                 <p>{colegioInfo?.bilingual}</p>
               </TableCell>
             </TableRow>
             <TableRow key={`row-${position}-7`}>
-              <TableCell className="flex justify-center ">
+              <TableCell className="flex justify-center min-h-[50px] items-center">
                 <p>{colegioInfo?.canteen}</p>
               </TableCell>
             </TableRow>
             <TableRow key={`row-${position}-8`}>
-              <TableCell className="flex justify-center flex-col items-center">
+              <TableCell className="flex justify-center flex-col items-center min-h-[50px] ">
                 {colegioInfo?.religionesString.length > 0 ? colegioInfo?.religionesString : 'Laico'}
               </TableCell>
             </TableRow>
             <TableRow key={`row-${position}-9`}>
-              <TableCell className="flex justify-center ">
+              <TableCell className="flex justify-center min-h-[50px] items-center ">
                 <p>{colegioInfo?.schoolUniform}</p>
               </TableCell>
             </TableRow>
             <TableRow key={`row-${position}-10`}>
-              <TableCell className="flex justify-center ">
+              <TableCell className="flex justify-center min-h-[50px] items-center">
                 <p>{colegioInfo?.administration}</p>
               </TableCell>
             </TableRow>
