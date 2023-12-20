@@ -1,6 +1,6 @@
 // SERVICIO GET
 // -----------------------------
-const URLGetData = 'https://educ-ar-lgxy.onrender.com/api/users/institution/frontend@gmail.com';
+const URLGetData = 'https://educ-ar-lgxy.onrender.com/api/users/institution/test_form2.2@gmail.com';
 
 export const getSchoolData = async () => {
   const institutionData = await fetch(URLGetData, {

@@ -1,7 +1,7 @@
-function generateSchedule () {
+function generateMorningSchedule () {
   const schedules = [];
 
-  for (let hour = 7; hour < 22; hour++) {
+  for (let hour = 7; hour < 13; hour++) {
     for (let minute = 0; minute < 60; minute += 15) {
       const formattedHour = hour.toString().padStart(2, '0');
       const formattedMinute = minute.toString().padStart(2, '0');
@@ -15,7 +15,26 @@ function generateSchedule () {
   return schedules;
 }
 
-export const generatedSchedules = generateSchedule();
+export const generatedMorningSchedules = generateMorningSchedule();
+
+function generateAfternoonSchedule () {
+  const schedules = [];
+
+  for (let hour = 12; hour < 18; hour++) {
+    for (let minute = 0; minute < 60; minute += 15) {
+      const formattedHour = hour.toString().padStart(2, '0');
+      const formattedMinute = minute.toString().padStart(2, '0');
+      const schedule = `${formattedHour}:${formattedMinute}`;
+      schedules.push(schedule);
+    }
+  }
+
+  schedules.unshift('No tiene');
+
+  return schedules;
+}
+
+export const generatedAfternoonSchedules = generateAfternoonSchedule();
 
 export const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 export const gestiones = ['Público', 'Privado', 'Mixto'];
@@ -31,7 +50,7 @@ export const dataBackendFormat = (data, imageData) => {
 
     institutionName: data.institutionName,
     address: data.address,
-    city: data.address,
+    city: data.city,
     phones: [
       data.phone
     ],

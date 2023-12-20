@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input, Select, SelectItem, Checkbox, CheckboxGroup } from '@nextui-org/react';
 import { Controller } from 'react-hook-form';
-import { months, generatedSchedules, orientations } from '@/app/panel-colegio/utils';
+import { months, generatedAfternoonSchedules, generatedMorningSchedules, orientations } from '@/app/panel-colegio/utils';
 
 const SchoolLevelForm = (props) => {
   const {
@@ -14,13 +14,24 @@ const SchoolLevelForm = (props) => {
     control,
     feeInputFrom,
     feeInputTo,
+    defaultFeeFrom,
+    defaultFeeTo,
     morningScheduleFrom,
     morningScheduleTo,
     afternoonScheduleFrom,
     afternoonScheduleTo,
     classInput,
     classSelect,
-    classCheckBox
+    classCheckBox,
+    inscriptionDate,
+    inscriptionDateDefault,
+    defaultMorningScheduleFrom, // desde aca
+    defaultMorningScheduleTo,
+    defaultAfternoonScheduleFrom,
+    defaultAfternoonScheduleTo,
+    defaultOrientations
+    // defaultLevelState
+
   } = props;
 
   return (
@@ -29,7 +40,6 @@ const SchoolLevelForm = (props) => {
       <Controller
         name={levelName}
         control={control}
-        defaultValue={''}
         render={({ field }) =>
           <Checkbox
             isSelected={isSelected}
@@ -50,30 +60,42 @@ const SchoolLevelForm = (props) => {
           <Input
             isRequired={isSelected}
             label="Desde"
+            defaultValue={defaultFeeFrom}
             classNames={classInput}
-            errorMessage={
-              errors.feeInputFrom && isSelected && errors.feeInputFrom.message
+            errorMessage={isSelected && errors.feeInputTo?.message
+
             }
             {...register(feeInputFrom, {
-              ...(isSelected && { required: 'Este campo es obligatorio' })
+
+              require: !!isSelected,
+              pattern: {
+                value: /^[0-9\s]+$/i,
+                message: 'Escriba solo números'
+              }
+
             })}
           />
           <Input
             isRequired={isSelected}
             label="Hasta"
+            defaultValue={defaultFeeTo} // debe ser dinamico
             classNames={classInput}
             errorMessage={
-              errors.feeInputTo && isSelected && errors.feeInputTo.message
+              isSelected && errors.feeInputTo?.message
             }
             {...register(feeInputTo, {
-              ...(isSelected && { required: 'Este campo es obligatorio' })
+              require: !!isSelected,
+              pattern: {
+                value: /^[0-9\s]+$/i,
+                message: 'Escriba solo números'
+              }
             })}
           />
         </div>
       </div>
 
       <Controller
-        name="inscriptionDate"
+        name={inscriptionDate}
         control={control}
         rules={{
           ...(isSelected && { required: 'Este campo es obligatorio' })
@@ -84,6 +106,7 @@ const SchoolLevelForm = (props) => {
             classNames={classSelect}
             className='mb-4'
             label="Fecha de inscripción"
+            defaultSelectedKeys= {[inscriptionDateDefault]} // dinamico
             placeholder="Selecciona una opción"
             value={field.value ?? false}
             onBlur={field.onBlur}
@@ -115,6 +138,7 @@ const SchoolLevelForm = (props) => {
               <Select
                 isRequired={isSelected}
                 classNames={classSelect}
+                defaultSelectedKeys={[defaultMorningScheduleFrom]} // dinamico
                 label="Desde"
                 placeholder="Selecciona una opción"
                 value={field.value ?? false}
@@ -123,7 +147,7 @@ const SchoolLevelForm = (props) => {
                 errorMessage={errors.morningScheduleFrom && isSelected && errors.morningScheduleFrom.message}
                 {...field}
               >
-                {generatedSchedules.map((schedule) => (
+                {generatedMorningSchedules.map((schedule) => (
                   <SelectItem key={schedule} value={schedule}>
                     {schedule}
                   </SelectItem>
@@ -143,13 +167,14 @@ const SchoolLevelForm = (props) => {
                 classNames={classSelect}
                 label="Hasta"
                 placeholder="Selecciona una opción"
+                defaultSelectedKeys={[defaultMorningScheduleTo]} // dinamico
                 value={field.value ?? false}
                 onBlur={field.onBlur}
                 // className="max-w-xs"
                 errorMessage={errors.morningScheduleTo && isSelected && errors.morningScheduleTo.message}
                 {...field}
               >
-                {generatedSchedules.map((schedule) => (
+                {generatedMorningSchedules.map((schedule) => (
                   <SelectItem key={schedule} value={schedule}>
                     {schedule}
                   </SelectItem>
@@ -177,13 +202,14 @@ const SchoolLevelForm = (props) => {
                 classNames={classSelect}
                 label="Desde"
                 placeholder="Selecciona una opción"
+                defaultSelectedKeys={[defaultAfternoonScheduleFrom]} // dinamico
                 value={field.value ?? false}
                 onBlur={field.onBlur}
                 // className="max-w-xs"
                 errorMessage={errors.afternoonScheduleFrom && isSelected && errors.afternoonScheduleFrom.message}
                 {...field}
               >
-                {generatedSchedules.map((schedule) => (
+                {generatedAfternoonSchedules.map((schedule) => (
                   <SelectItem key={schedule} value={schedule}>
                     {schedule}
                   </SelectItem>
@@ -203,13 +229,14 @@ const SchoolLevelForm = (props) => {
                 classNames={classSelect}
                 label="Hasta"
                 placeholder="Selecciona una opción"
+                defaultSelectedKeys={[defaultAfternoonScheduleTo]} // dinamico
                 value={field.value ?? false}
                 onBlur={field.onBlur}
                 // className="max-w-xs"
                 errorMessage={errors.afternoonScheduleTo && isSelected && errors.afternoonScheduleTo.message}
                 {...field}
               >
-                {generatedSchedules.map((schedule) => (
+                {generatedAfternoonSchedules.map((schedule) => (
                   <SelectItem key={schedule} value={schedule}>
                     {schedule}
                   </SelectItem>
@@ -224,7 +251,7 @@ const SchoolLevelForm = (props) => {
           <Controller
             name="highschoolOrientacions"
             control={control}
-            defaultValue={[]}
+            defaultValue={defaultOrientations}
             rules={{
               ...(isSelected ? { required: 'Este campo es obligatorio' } : {})
             }}
