@@ -96,7 +96,7 @@ export default function page () {
           </TableBody>
         </Table>
 
-        <div className="col-start-2">
+        <div className="col-start-2 ">
           <Autocomplete
             aria-label='Autocomplete'
             defaultItems={institutionNames}

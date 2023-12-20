@@ -6,7 +6,8 @@ import {
   TableColumn,
   TableBody,
   TableRow,
-  TableCell
+  TableCell,
+  CircularProgress
 } from '@nextui-org/react';
 // import { index } from '.';
 import useColegioInfo from '@/hooks/useColegioInfo';
@@ -44,9 +45,10 @@ function CompareCardDetails ({ colegioId, position }) {
   }, [colegioId]);
 
   return (
-    bool
-      ? <div>cargando...</div>
-      : <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 justify-center items-center">
+      {isLoading && <CircularProgress color="warning" aria-label="Cargando..." />}
+      {!isLoading &&
+
         <Table
           hideHeader
           removeWrapper
@@ -112,8 +114,8 @@ function CompareCardDetails ({ colegioId, position }) {
               </TableCell>
             </TableRow>
           </TableBody>
-        </Table>
-      </div>
+        </Table>}
+    </div>
   );
 }
 

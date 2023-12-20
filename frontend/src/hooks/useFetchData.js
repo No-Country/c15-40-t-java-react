@@ -25,6 +25,15 @@ const useFetchData = (url) => {
         const result = await response.json();
         setData(result);
         setColegioInfo(useColegioInfo(result));
+        /* setInstitutionNames((prevData) => {
+          // Concatenar los nuevos datos al estado existente
+          const names = result.map((item) => ({
+            label: item.institutionName,
+            value: item.id,
+            description: 'descripcion si la hay'
+          }));
+          return [...prevData, ...names];
+        }); */
       } catch (error) {
         setError(error);
       } finally {
