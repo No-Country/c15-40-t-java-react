@@ -9,3 +9,4 @@ export { default as PhoneIcon } from './PhoneIcon';
 export { default as SearchIcon } from './SearchIcon';
 export { default as WebIcon } from './WebIcon';
 export { default as SchoolIcon } from './SchoolIcon';
+export { default as GenreIcon } from './GenreIcon';

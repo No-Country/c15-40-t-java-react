@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Input, RadioGroup, Radio, Divider, Slider, Select, SelectItem } from '@nextui-org/react';
+import { Input, RadioGroup, Radio, Divider, /* Slider */ Select, SelectItem } from '@nextui-org/react';
 import { SearchIcon } from '@/components/Icons';
 import ColegioCard from '@/components/ColegioCard/ColegioCard';
 import useFetchData from '@/hooks/useFetchData';
@@ -14,8 +14,8 @@ function page () {
   const [search, setSearch] = useState('');
   const { cityNames } = useCityNames();
 
-  const [selectedFilters, setSelectedFilters] = useState({ religion: '', range: [5000, 500000], city: '' });
-  const [selectedRange, setSelectedRange] = useState([5000, 500000]);
+  const [selectedFilters, setSelectedFilters] = useState({ religion: '', city: '', genere: '', educationalApproach: '' });
+  // const [selectedRange, setSelectedRange] = useState([5000, 500000]);
   const [filteredItems, setFilteredItems] = useState(data);
 
   const handleSearchChange = (ev) => {
@@ -26,8 +26,8 @@ function page () {
     const { name, value } = event.target;
     setSelectedFilters({
       ...selectedFilters,
-      [name]: value,
-      range: selectedRange
+      [name]: value
+      // range: selectedRange
     });
   };
 
@@ -36,6 +36,7 @@ function page () {
   }, [data]);
 
   useEffect(() => {
+    console.log(selectedFilters);
     const { filtrados } = useFilterColegios(selectedFilters, data);
     setFilteredItems(filtrados);
   }, [selectedFilters]);
@@ -54,6 +55,20 @@ function page () {
       <div className="h-screen p-5  w-[15%] flex flex-col gap-1">
         <h2 className='text-xl font-bold'>Filtros</h2>
         <Divider className="my-1" orientation='horizontal' />
+
+        {/* Género */}
+        <RadioGroup
+          label="Género"
+          color="warning"
+          onChange={handleFilterChange}
+          name='genere'
+        >
+          <Radio value="FEMENINO" name='genere'>Femenino</Radio>
+          <Radio value="MASCULINO" name='genere'>Masculino</Radio>
+          <Radio value="MIXTO" name='genere'>Mixto</Radio>
+        </RadioGroup>
+        <Divider className="my-4" orientation='horizontal' />
+
         {/* Religión */}
         <RadioGroup
           label="Religión"
@@ -61,7 +76,6 @@ function page () {
           onChange={handleFilterChange}
           name='religion'
         >
-
           <Radio value="LAICO" name='religion'>Laico</Radio>
           <Radio value="CATOLICO" name='religion'>Católico</Radio>
           <Radio value="JUDIO" name='religion'>Judío</Radio>
@@ -70,8 +84,9 @@ function page () {
 
         </RadioGroup>
         <Divider className="my-4" orientation='horizontal' />
+
         {/* Rango de precio */}
-        <Slider
+        {/* <Slider
           label="Rango de precio "
           labelWrapper
           name='range'
@@ -90,7 +105,8 @@ function page () {
           }}
 
         />
-        <Divider className="my-4" orientation='horizontal' />
+        <Divider className="my-4" orientation='horizontal' /> */}
+
         {/* Ciudad */}
         <Select
           variant="underlined"
@@ -104,7 +120,19 @@ function page () {
         >
           {(cuidad) => <SelectItem key={cuidad.value}>{cuidad.label}</SelectItem>}
         </Select>
-
+        <Divider className="my-4" orientation='horizontal' />
+        {/* Tipo de educación */}
+        <RadioGroup
+          label="Tipo de Educación"
+          color="warning"
+          onChange={handleFilterChange}
+          name='educationalApproach'
+        >
+          <Radio value="TRADICIONAL" name='educationalApproach'>Tradicional</Radio>
+          <Radio value="MONTESORI" name='educationalApproach'>Montesori</Radio>
+          <Radio value="ESPECIAL" name='educationalApproach'>Especial</Radio>
+        </RadioGroup>
+        <Divider className="my-4" orientation='horizontal' />
       </div>
 
       <div className=" w-full">
@@ -118,7 +146,7 @@ function page () {
             onChange={handleSearchChange}
           />
         </div>
-        <div className='flex gap-3 flex-wrap'>
+        <div className='flex gap-5 flex-wrap'>
 
           { !isLoading
             ? filteredItems?.map((colegio) => (

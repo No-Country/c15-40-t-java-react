@@ -1,5 +1,4 @@
 const useFilterColegios = (filtros, data) => {
-  console.log(filtros, data);
   const filtrados = data?.filter(colegio => {
     const religionFilter =
       filtros.religion.length > 0 &&
@@ -13,7 +12,19 @@ const useFilterColegios = (filtros, data) => {
         ? colegio?.city.includes(filtros.city)
         : true;
 
-    return religionFilter && cityFilter;
+    const genereFilter =
+        filtros.genere.length > 0 &&
+        colegio.genere
+          ? colegio?.genere.includes(filtros.genere)
+          : true;
+
+    const educationalApproachFilter =
+          filtros.educationalApproach.length > 0 &&
+          colegio.educationalApproach
+            ? colegio?.educationalApproach.includes(filtros.educationalApproach)
+            : true;
+
+    return religionFilter && cityFilter && genereFilter && educationalApproachFilter;
   });
 
   return { filtrados };
