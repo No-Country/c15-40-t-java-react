@@ -1,4 +1,4 @@
-import { getSchoolData } from './service';
+/* import { getSchoolData } from './service';
 
 const getPreviousData = async () => {
   const previousData = await getSchoolData();
@@ -13,75 +13,102 @@ const getPreviousData = async () => {
 
 const prevData = await getPreviousData();
 
-console.log('vengo del GET: ', prevData);
+console.log('vengo del GET: ', prevData); */
 
 // FUNCION QUE RECORRA LOS LEVELS QUE TRAE EL GET, Y VER SI COINCIDE CON EL NIVEL BUSCADO
 // debo escribir el parametro en mayuscula
-const schoolLevel = (wantedLevel) => {
-  let presentLevel;
-  const levelsArray = prevData?.educationLevels;
+/* const schoolLevel = (wantedLevel) => {
+  const levelsArray = prevData?.educationLevels || [];
+  let presentLevel = false;
 
-  levelsArray.map((obj) => {
-    if (obj.level === wantedLevel) { presentLevel = true; }
-    return presentLevel;
+  levelsArray.forEach((obj) => {
+    if (obj.level === wantedLevel) {
+      presentLevel = true;
+    }
   });
-};
 
+  return presentLevel;
+};
+ */
 // falta el email
 // falta description??
 // imagenes cargadas previamente
 // GET DEL COLEGIO
 // ------------------------
-const kinderGardenObject = prevData?.educationLevels.find(item => item.level === 'INICIAL');
+/* const kinderGardenObject = prevData?.educationLevels.find(item => item.level === 'INICIAL');
 const primaryObject = prevData?.educationLevels.find(item => item.level === 'PRIMARIO');
-const highSchoolObject = prevData?.educationLevels.find(item => item.level === 'SECUNDARIO');
+const highSchoolObject = prevData?.educationLevels.find(item => item.level === 'SECUNDARIO'); */
 
-console.log('kinderobject: ', kinderGardenObject);
+/* console.log('kinderobject: ', kinderGardenObject); */
 
-export const defaultValues2 = {
-  institutionName: prevData?.institutionName ?? '',
-  address: prevData?.address ?? '',
-  city: prevData?.city ?? '',
-  phone: prevData?.phones[0] ?? '',
-  cue: prevData?.cue ?? '',
-  website: prevData?.web ?? '',
-  images: prevData?.images,
-  management: prevData?.administration,
-  religion: prevData?.religion,
-  gender: prevData?.genere,
-  educationalApproach: prevData?.educationalApproach,
-  isBilingual: prevData?.bilingual,
-  hasUniform: prevData?.schoolUniform,
-  hasDiningRoom: prevData?.canteen,
-  workshops: prevData?.educationalWorkshops,
+export const defaultValuesFunc = (prevData) => {
+  const kinderGardenObject = prevData?.educationLevels.find(item => item.level === 'INICIAL');
+  const primaryObject = prevData?.educationLevels.find(item => item.level === 'PRIMARIO');
+  const highSchoolObject = prevData?.educationLevels.find(item => item.level === 'SECUNDARIO');
 
-  feeGardenFrom: kinderGardenObject.fee?.min, // ACAAA
-  feeGardenTo: kinderGardenObject.fee?.max,
-  kindergarden: !!schoolLevel('INICIAL'),
-  kinderGardenInscriptionDate: kinderGardenObject.inscriptionMonth,
-  morningScheduleGardenFrom: kinderGardenObject.shifts[0].schedule.min,
-  morningScheduleGardenTo: kinderGardenObject.shifts[0].schedule.max,
-  afternoonScheduleGardenFrom: kinderGardenObject.shifts[1].schedule.min,
-  afternoonScheduleGardenTo: kinderGardenObject.shifts[1].schedule.max,
+  const schoolLevel = (wantedLevel) => {
+    const levelsArray = prevData?.educationLevels || [];
+    let presentLevel = false;
 
-  feePrimaryFrom: primaryObject.fee?.min,
-  feePrimaryTo: primaryObject.fee?.max,
-  primaryschool: !!schoolLevel('PRIMARIO'),
-  primaryInscriptionDate: primaryObject.inscriptionMonth,
-  morningSchedulePrimaryFrom: primaryObject.shifts[0].schedule.min,
-  morningSchedulePrimaryTo: primaryObject.shifts[0].schedule.max,
-  afternoonSchedulePrimaryFrom: primaryObject.shifts[1].schedule.min,
-  afternoonSchedulePrimaryTo: primaryObject.shifts[1].schedule.max,
+    levelsArray.forEach((obj) => {
+      if (obj.level === wantedLevel) {
+        presentLevel = true;
+      }
+    });
 
-  feeHighSchoolFrom: highSchoolObject.fee?.min,
-  feeHighSchoolTo: highSchoolObject.fee?.max,
-  highschool: !!schoolLevel('SECUNDARIO'),
-  highSchoolInscriptionDate: highSchoolObject.inscriptionMonth,
-  morningScheduleHighSchoolFrom: highSchoolObject.shifts[0].schedule.min,
-  morningScheduleHighSchoolTo: highSchoolObject.shifts[0].schedule.max,
-  afternoonScheduleHighSchoolFrom: highSchoolObject.shifts[1].schedule.min,
-  afternoonScheduleHighSchoolTo: highSchoolObject.shifts[1].schedule.max,
-  highschoolOrientacions: highSchoolObject.orientations
+    return presentLevel;
+  };
+
+  const defaultObject = {
+    institutionName: prevData?.institutionName || '',
+    address: prevData?.address || '',
+    city: prevData?.city ?? '',
+    phone: prevData?.phones[0] ?? '',
+    cue: prevData?.cue ?? '',
+    website: prevData?.web ?? '',
+    images: prevData?.images,
+    management: prevData?.administration,
+    religion: prevData?.religion,
+    gender: prevData?.genere,
+    educationalApproach: prevData?.educationalApproach,
+    isBilingual: prevData?.bilingual,
+    hasUniform: prevData?.schoolUniform,
+    hasDiningRoom: prevData?.canteen,
+    workshops: prevData?.educationalWorkshops,
+
+    feeGardenFrom: kinderGardenObject?.fee.min ?? undefined, // ACAAA
+    feeGardenTo: kinderGardenObject?.fee.max ?? undefined,
+    kindergarden: !!schoolLevel('INICIAL'),
+    kinderGardenInscriptionDate: kinderGardenObject?.inscriptionMonth,
+    morningScheduleGardenFrom: kinderGardenObject?.shifts[0].schedule.min,
+    morningScheduleGardenTo: kinderGardenObject?.shifts[0].schedule.max,
+    afternoonScheduleGardenFrom: kinderGardenObject?.shifts[1].schedule.min,
+    afternoonScheduleGardenTo: kinderGardenObject?.shifts[1].schedule.max,
+
+    feePrimaryFrom: primaryObject?.fee.min ?? undefined,
+    feePrimaryTo: primaryObject?.fee.max ?? undefined,
+    primaryschool: !!schoolLevel('PRIMARIO'),
+    primaryInscriptionDate: primaryObject?.inscriptionMonth,
+    morningSchedulePrimaryFrom: primaryObject?.shifts[0].schedule.min,
+    morningSchedulePrimaryTo: primaryObject?.shifts[0].schedule.max,
+    afternoonSchedulePrimaryFrom: primaryObject?.shifts[1].schedule.min,
+    afternoonSchedulePrimaryTo: primaryObject?.shifts[1].schedule.max,
+
+    feeHighSchoolFrom: highSchoolObject?.fee.min ?? undefined,
+    feeHighSchoolTo: highSchoolObject?.fee.max ?? undefined,
+    highschool: !!schoolLevel('SECUNDARIO'),
+    highSchoolInscriptionDate: highSchoolObject?.inscriptionMonth,
+    morningScheduleHighSchoolFrom: highSchoolObject?.shifts[0].schedule.min,
+    morningScheduleHighSchoolTo: highSchoolObject?.shifts[0].schedule.max,
+    afternoonScheduleHighSchoolFrom: highSchoolObject?.shifts[1].schedule.min,
+    afternoonScheduleHighSchoolTo: highSchoolObject?.shifts[1].schedule.max,
+    highschoolOrientacions: highSchoolObject?.orientations
+
+  };
+
+  console.log('objeto default: ', defaultObject);
+
+  return defaultObject;
 };
 
 /* export const defaultValues2 = {

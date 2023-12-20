@@ -8,23 +8,48 @@ import { confirmation, educationalApproachTypes, genders, gestiones, religions, 
 // import { sendAllData } from './service';
 // import { useRouter } from 'next/navigation';
 import { Context } from '@/app/ContextProvider';
-import { defaultValues2 } from './defaultValues';
+import { defaultValuesFunc } from './defaultValues.js';
+import { getSchoolData } from './service';
 
 const SchoolPanel = () => {
+  const [defaultValues2, setDefaultValues2] = React.useState({});
   const [isSelectedKinder, setIsSelectedKinder] = React.useState(defaultValues2.kindergarden);
   const [isSelectedPrimary, setIsSelectedPrimary] = React.useState(defaultValues2.primaryschool);
   const [isSelectedHighSchool, setIsSelectedHighSchool] = React.useState(defaultValues2.highschool);
   // const [defaultSelectedHighSchool, setDefaultSelectedHighSchool] = React.useState();
-  const imagesArray = defaultValues2.images;
+  const imagesArray = defaultValues2?.images;
 
   // const router = useRouter();
 
   // arreglar funcionalidad de jwt
   const { jwt, setJwt } = useContext(Context);
 
+  const getPreviousData = async () => {
+    const previousData = await getSchoolData();
+    if (previousData.status !== 200) {
+      console.log('Ups, problemas en el servidor!');
+    } else {
+      console.log('datos previos');
+      console.log(previousData.data);
+
+      return previousData.data;
+    }
+  };
+
+  const formatIn = async () => {
+    const prevDataObject = await getPreviousData();
+    console.log('datos listos del get: ', prevDataObject);
+    const convertObject = defaultValuesFunc(prevDataObject);
+    setDefaultValues2(convertObject);
+  };
+
+  console.log('default2: ', defaultValues2);
+  // pasarle la data a defaultValue
+  // luego ejecutarlo y guardar el objeto en una variable, la cual sera usada
+
   useEffect(() => {
     setJwt('algo');
-
+    formatIn();
     setTimeout(() => {
       reset({
 
@@ -64,8 +89,51 @@ const SchoolPanel = () => {
         isBilingual: defaultValues2.isBilingual
 
       });
-    }, 500);
+    });
   }, []);
+
+  useEffect(() => {
+    /* setTimeout(() => {
+      reset({
+
+        feeHighSchoolFrom: defaultValues2.feeHighSchoolFrom,
+        feeHighSchoolTo: defaultValues2.feeHighSchoolTo,
+        highSchoolInscriptionDate: defaultValues2.highSchoolInscriptionDate,
+        highschool: defaultValues2.highschool,
+        morningScheduleHighSchoolFrom: defaultValues2.morningScheduleHighSchoolFrom,
+        morningScheduleHighSchoolTo: defaultValues2.morningScheduleHighSchoolTo,
+        afternoonScheduleHighSchoolFrom: defaultValues2.afternoonScheduleHighSchoolFrom,
+        afternoonScheduleHighSchoolTo: defaultValues2.afternoonScheduleHighSchoolTo,
+
+        feeGardenFrom: defaultValues2.feeGardenFrom,
+        feeGardenTo: defaultValues2.feeGardenTo,
+        gardenInscriptionDate: defaultValues2.kinderGardenInscriptionDate,
+        kindergarden: defaultValues2.kindergarden,
+        morningScheduleGardenFrom: defaultValues2.morningScheduleGardenFrom,
+        morningScheduleGardenTo: defaultValues2.morningScheduleGardenTo,
+        afternoonScheduleGardenFrom: defaultValues2.afternoonScheduleGardenFrom,
+        afternoonScheduleGardenTo: defaultValues2.afternoonScheduleGardenTo,
+
+        feePrimaryFrom: defaultValues2.feePrimaryFrom,
+        feePrimaryTo: defaultValues2.feePrimaryTo,
+        primaryInscriptionDate: defaultValues2.primaryInscriptionDate,
+        primaryschool: defaultValues2.primaryschool,
+        morningSchedulePrimaryFrom: defaultValues2.morningSchedulePrimaryFrom,
+        morningSchedulePrimaryTo: defaultValues2.morningSchedulePrimaryTo,
+        afternoonSchedulePrimaryFrom: defaultValues2.afternoonSchedulePrimaryFrom,
+        afternoonSchedulePrimaryTo: defaultValues2.afternoonSchedulePrimaryTo,
+
+        management: defaultValues2.management,
+        religion: defaultValues2.religion,
+        gender: defaultValues2.gender,
+        educationalApproach: defaultValues2.educationalApproach,
+        hasDiningRoom: defaultValues2.hasDiningRoom,
+        hasUniform: defaultValues2.hasUniform,
+        isBilingual: defaultValues2.isBilingual
+
+      });
+    }, 2000); */
+  }, [defaultValues2]);
 
   const onSubmit = async (data) => {
     console.log('datos cargados', data);
@@ -265,7 +333,7 @@ const SchoolPanel = () => {
                   classNames={customInputStyle}
                   label="Tipo de gestión"
                   placeholder="Selecciona una opción"
-                  defaultSelectedKeys={['Público']}
+                  defaultSelectedKeys={[defaultValues2.management]} // dinamico
                   value={field.value ?? false}
                   onChange={field.onChange}
                   // className="max-w-xs"
@@ -308,7 +376,7 @@ const SchoolPanel = () => {
                   classNames={customInputStyle}
                   label="Religión"
                   placeholder="Selecciona una opción"
-                  defaultSelectedKeys={['LAICO']}
+                  defaultSelectedKeys={defaultValues2.religion} // dinamico
                   value={field.value ?? false}
                   onChange={field.onChange}
                   // className="max-w-xs"
@@ -522,7 +590,7 @@ const SchoolPanel = () => {
                 type="file"
                 multiple
                 {...register('images', {
-                  required: (imagesArray.length === 0),
+                  required: (imagesArray?.length === 0),
                   onChange: (e) => submitImagesCloudinary(e.target.files[0])
                 })}
 
