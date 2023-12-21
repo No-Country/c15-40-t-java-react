@@ -52,7 +52,8 @@ function page () {
 
   return (
     <div className="flex">
-      <div className="h-screen p-5  w-[15%] flex flex-col gap-1">
+      {/* Filtros */}
+      <div className="h-screen p-5  w-[15%] flex flex-col gap-1 ">
         <h2 className='text-xl font-bold'>Filtros</h2>
         <Divider className="my-1" orientation='horizontal' />
 
@@ -135,7 +136,7 @@ function page () {
         <Divider className="my-4" orientation='horizontal' />
       </div>
 
-      <div className=" w-full">
+      <div className=" w-full max-h-screen overflow-scroll">
         <div className="text-black p-5">
           <Input
             type="text"
