@@ -9,7 +9,7 @@ export const useFormLogin = () => {
   const [errorMessagePassword, setErrorMessagePassword] = useState('');
   const [userError, setUserError] = useState('');
   const router = useRouter();
-  const { jwt, setJwt } = useContext(Context);
+  const { jwt, setJwt, setEmailLogin } = useContext(Context);
   console.log(jwt);
 
   const handleFormSubmit = async (e) => {
@@ -36,7 +36,8 @@ export const useFormLogin = () => {
 
         if (response.status === 200) {
           const data = await response.json();
-          console.log(data);
+          setEmailLogin(userData.email);
+          console.log('CORREO LOGIN:', data.email);
           setJwt(data.jwt);
 
           router.push('/panel-colegio');
