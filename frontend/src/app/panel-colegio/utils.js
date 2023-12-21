@@ -66,21 +66,23 @@ export const dataBackendFormat = (data, imageData) => {
         shifts: [
           { type: 'MAÑANA', schedule: { min: data.morningScheduleGardenFrom, max: data.morningScheduleGardenTo } },
           { type: 'TARDE', schedule: { min: data.afternoonScheduleGardenFrom, max: data.afternoonScheduleGardenTo } }
-        ]
+        ],
+        orientations: []
       },
       {
         level: data.primaryschool && 'PRIMARIO',
         fee: { min: data.feePrimaryFrom, max: data.feePrimaryTo },
-        inscriptionDate: data.primaryInscriptionDate,
+        inscriptionMonth: data.primaryInscriptionDate,
         shifts: [
           { type: 'MAÑANA', schedule: { min: data.morningSchedulePrimaryFrom, max: data.morningSchedulePrimaryTo } },
           { type: 'TARDE', schedule: { min: data.afternoonSchedulePrimaryFrom, max: data.afternoonSchedulePrimaryTo } }
-        ]
+        ],
+        orientations: []
       },
       {
         level: data.highschool && 'SECUNDARIO',
         fee: { min: data.feeHighSchoolFrom, max: data.feeHighSchoolTo },
-        inscriptionDate: data.highSchoolInscriptionDate,
+        inscriptionMonth: data.highSchoolInscriptionDate,
         shifts: [
           { type: 'MAÑANA', schedule: { min: data.morningScheduleHighSchoolFrom, max: data.morningScheduleHighSchoolTo } },
           { type: 'TARDE', schedule: { min: data.afternoonScheduleHighSchoolFrom, max: data.afternoonScheduleHighSchoolTo } }
@@ -91,7 +93,7 @@ export const dataBackendFormat = (data, imageData) => {
     educationalWorkshops: data.workshops,
     bilingual: data.isBilingual === 'Si',
     canteen: data.hasDiningRoom === 'Si',
-    religion: [data.religion],
+    religion: data.religion,
     schoolUniform: data.hasUniform === 'Si',
     genere: data.gender,
     educationalApproach: data.educationalApproach,

@@ -4,12 +4,10 @@ import React, { useEffect, useContext } from 'react';
 import { Input, Button, Textarea, Select, SelectItem, Checkbox, CheckboxGroup, Image } from '@nextui-org/react';
 import { useForm, Controller } from 'react-hook-form';
 import SchoolLevelForm from '@/components/SchoolLevelForm/SchoolLevelForm';
-import { confirmation, educationalApproachTypes, genders, gestiones, religions, workshops /* dataBackendFormat */ } from './utils';
-// import { sendAllData } from './service';
+import { confirmation, educationalApproachTypes, genders, gestiones, religions, workshops, dataBackendFormat } from './utils';
+import { sendAllData, formatIn } from './service';
 import { useRouter } from 'next/navigation';
 import { Context } from '@/app/ContextProvider';
-// import { defaultValuesFunc } from './defaultValues.js';
-import { formatIn } from './service';
 
 const SchoolPanel = () => {
   const [defaultValues2, setDefaultValues2] = React.useState(null);
@@ -21,36 +19,11 @@ const SchoolPanel = () => {
 
   const router = useRouter();
 
-  // arreglar funcionalidad de jwt
-  const { jwt } = useContext(Context);
-  const URLGetData = 'https://educ-ar-lgxy.onrender.com/api/users/institution/castelfrancoOk@pepe.com';
-  // https://educ-ar-lgxy.onrender.com/api/users/institution/castelfrancoOk@pepe.com
-
-  /*   const getPreviousData = async () => {
-    const previousData = await getSchoolData();
-    if (previousData.status !== 200) {
-      console.log('Ups, problemas en el servidor!');
-    } else {
-      console.log('datos previos');
-      console.log(previousData.data);
-
-      return previousData.data;
-    }
-  };
-
-  const formatIn = async () => {
-    const prevDataObject = await getPreviousData();
-    console.log('datos listos del get: ', prevDataObject);
-    const convertObject = defaultValuesFunc(prevDataObject);
-    setDefaultValues2(convertObject);
-  }; */
-
-  // pasarle la data a defaultValue
-  // luego ejecutarlo y guardar el objeto en una variable, la cual sera usada
+  const { jwt, emailLogin } = useContext(Context);
+  const URLGetData = `https://educ-ar-lgxy.onrender.com/api/users/institution/${emailLogin}`;
+  const URLPutData = `https://educ-ar-lgxy.onrender.com/api/institutions/${emailLogin}`;
 
   useEffect(() => {
-    // setJwt('algo');
-
     const fetchData = async () => {
       try {
         const data = await formatIn(URLGetData);
@@ -118,13 +91,13 @@ const SchoolPanel = () => {
   const onSubmit = async (data) => {
     console.log('datos cargados', data);
     console.log(JSON.stringify(data));
-    /* const cloudUrl = localStorage.getItem('cloudinaryUrl');
+    const cloudUrl = localStorage.getItem('cloudinaryUrl');
     const backendData = dataBackendFormat(data, cloudUrl);
-    console.log(backendData);
+    console.log('backendData', JSON.stringify(backendData));
 
-    const response = await sendAllData(backendData);
+    const response = await sendAllData(backendData, URLPutData);
 
-    if (response.status !== 201) {
+    if (response.status !== 200) {
       console.log('Ups, problemas en el servidor!');
     } else {
       console.log('Datos de colegio cargados!');
@@ -132,7 +105,7 @@ const SchoolPanel = () => {
       setTimeout(() => {
         router.push('/');
       }, 1000);
-    } */
+    }
   };
 
   const submitImagesCloudinary = async (sendFile) => {

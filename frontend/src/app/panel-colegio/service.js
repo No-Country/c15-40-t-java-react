@@ -34,8 +34,8 @@ export const getSchoolData = async (URLGetData) => {
   return institutionData;
 };
 
-export const getPreviousData = async () => {
-  const previousData = await getSchoolData();
+export const getPreviousData = async (URLGetData) => {
+  const previousData = await getSchoolData(URLGetData);
   if (previousData.status !== 200) {
     console.log('Ups, problemas en el servidor!');
   } else {
@@ -56,11 +56,11 @@ export const formatIn = async (URLGetData) => {
 // SERVICIO POST
 // -----------------------------
 
-const URLPostData = 'https://educ-ar-lgxy.onrender.com/api/institutions';
+// const URLPostData = 'https://educ-ar-lgxy.onrender.com/api/institutions/${email}';
 
-export const sendAllData = async (dataB) => {
+export const sendAllData = async (dataB, URLPostData) => {
   const institutionData = await fetch(URLPostData, {
-    method: 'POST',
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
     },
