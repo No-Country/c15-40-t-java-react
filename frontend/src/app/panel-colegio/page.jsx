@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Input, Button, Textarea, Select, SelectItem, Checkbox, CheckboxGroup, Image } from '@nextui-org/react';
 import { useForm, Controller } from 'react-hook-form';
 import SchoolLevelForm from '@/components/SchoolLevelForm/SchoolLevelForm';
 import { confirmation, educationalApproachTypes, genders, gestiones, religions, workshops /* dataBackendFormat */ } from './utils';
 // import { sendAllData } from './service';
 import { useRouter } from 'next/navigation';
-import { Context } from '@/app/ContextProvider';
+// import { Context } from '@/app/ContextProvider';
 // import { defaultValuesFunc } from './defaultValues.js';
 import { formatIn } from './service';
 
@@ -254,6 +254,7 @@ const SchoolPanel = () => {
 
             <Input
               isRequired
+              isReadOnly
               label="Email de la institución"
               defaultValue={defaultValues2.email} // ver si lo tomo de aca o de context
               classNames={customInputStyle}

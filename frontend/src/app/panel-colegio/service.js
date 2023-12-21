@@ -1,7 +1,9 @@
 import { defaultValuesFunc } from './defaultValues.js';
+// const schoolEmail = ''; // debo traerlo de context
 // SERVICIO GET
 // -----------------------------
-const URLGetData = 'https://educ-ar-lgxy.onrender.com/api/users/institution/test_form2.2@gmail.com';
+const URLGetData = 'https://educ-ar-lgxy.onrender.com/api/users/institution/castelfrancoOk@pepe.com';
+// const URLGetDataMail = `https://educ-ar-lgxy.onrender.com/api/users/institution/${schoolEmail}`;
 
 export const getSchoolData = async () => {
   const institutionData = await fetch(URLGetData, {

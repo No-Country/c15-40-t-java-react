@@ -55,13 +55,14 @@ export const dataBackendFormat = (data, imageData) => {
       data.phone
     ],
     cue: data.cue,
+    description: data.description,
     web: data.website,
     administration: data.management,
     educationLevels: [
       {
         level: data.kindergarden && 'INICIAL',
         fee: { min: data.feeGardenFrom, max: data.feeGardenTo },
-        inscriptionMonth: data.inscriptionDate,
+        inscriptionMonth: data.kinderGardenInscriptionDate,
         shifts: [
           { type: 'MAÑANA', schedule: { min: data.morningScheduleGardenFrom, max: data.morningScheduleGardenTo } },
           { type: 'TARDE', schedule: { min: data.afternoonScheduleGardenFrom, max: data.afternoonScheduleGardenTo } }
@@ -70,7 +71,7 @@ export const dataBackendFormat = (data, imageData) => {
       {
         level: data.primaryschool && 'PRIMARIO',
         fee: { min: data.feePrimaryFrom, max: data.feePrimaryTo },
-        inscriptionDate: data.inscriptionDate,
+        inscriptionDate: data.primaryInscriptionDate,
         shifts: [
           { type: 'MAÑANA', schedule: { min: data.morningSchedulePrimaryFrom, max: data.morningSchedulePrimaryTo } },
           { type: 'TARDE', schedule: { min: data.afternoonSchedulePrimaryFrom, max: data.afternoonSchedulePrimaryTo } }
@@ -79,7 +80,7 @@ export const dataBackendFormat = (data, imageData) => {
       {
         level: data.highschool && 'SECUNDARIO',
         fee: { min: data.feeHighSchoolFrom, max: data.feeHighSchoolTo },
-        inscriptionDate: data.inscriptionDate,
+        inscriptionDate: data.highSchoolInscriptionDate,
         shifts: [
           { type: 'MAÑANA', schedule: { min: data.morningScheduleHighSchoolFrom, max: data.morningScheduleHighSchoolTo } },
           { type: 'TARDE', schedule: { min: data.afternoonScheduleHighSchoolFrom, max: data.afternoonScheduleHighSchoolTo } }
