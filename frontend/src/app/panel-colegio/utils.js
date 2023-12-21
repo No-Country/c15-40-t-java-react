@@ -1,7 +1,7 @@
-function generateSchedule () {
+function generateMorningSchedule () {
   const schedules = [];
 
-  for (let hour = 7; hour < 22; hour++) {
+  for (let hour = 7; hour < 13; hour++) {
     for (let minute = 0; minute < 60; minute += 15) {
       const formattedHour = hour.toString().padStart(2, '0');
       const formattedMinute = minute.toString().padStart(2, '0');
@@ -15,7 +15,26 @@ function generateSchedule () {
   return schedules;
 }
 
-export const generatedSchedules = generateSchedule();
+export const generatedMorningSchedules = generateMorningSchedule();
+
+function generateAfternoonSchedule () {
+  const schedules = [];
+
+  for (let hour = 12; hour < 18; hour++) {
+    for (let minute = 0; minute < 60; minute += 15) {
+      const formattedHour = hour.toString().padStart(2, '0');
+      const formattedMinute = minute.toString().padStart(2, '0');
+      const schedule = `${formattedHour}:${formattedMinute}`;
+      schedules.push(schedule);
+    }
+  }
+
+  schedules.unshift('No tiene');
+
+  return schedules;
+}
+
+export const generatedAfternoonSchedules = generateAfternoonSchedule();
 
 export const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 export const gestiones = ['Público', 'Privado', 'Mixto'];
@@ -31,36 +50,39 @@ export const dataBackendFormat = (data, imageData) => {
 
     institutionName: data.institutionName,
     address: data.address,
-    city: data.address,
+    city: data.city,
     phones: [
       data.phone
     ],
     cue: data.cue,
+    description: data.description,
     web: data.website,
     administration: data.management,
     educationLevels: [
       {
         level: data.kindergarden && 'INICIAL',
         fee: { min: data.feeGardenFrom, max: data.feeGardenTo },
-        inscriptionMonth: data.inscriptionDate,
+        inscriptionMonth: data.kinderGardenInscriptionDate,
         shifts: [
           { type: 'MAÑANA', schedule: { min: data.morningScheduleGardenFrom, max: data.morningScheduleGardenTo } },
           { type: 'TARDE', schedule: { min: data.afternoonScheduleGardenFrom, max: data.afternoonScheduleGardenTo } }
-        ]
+        ],
+        orientations: []
       },
       {
         level: data.primaryschool && 'PRIMARIO',
         fee: { min: data.feePrimaryFrom, max: data.feePrimaryTo },
-        inscriptionDate: data.inscriptionDate,
+        inscriptionMonth: data.primaryInscriptionDate,
         shifts: [
           { type: 'MAÑANA', schedule: { min: data.morningSchedulePrimaryFrom, max: data.morningSchedulePrimaryTo } },
           { type: 'TARDE', schedule: { min: data.afternoonSchedulePrimaryFrom, max: data.afternoonSchedulePrimaryTo } }
-        ]
+        ],
+        orientations: []
       },
       {
         level: data.highschool && 'SECUNDARIO',
         fee: { min: data.feeHighSchoolFrom, max: data.feeHighSchoolTo },
-        inscriptionDate: data.inscriptionDate,
+        inscriptionMonth: data.highSchoolInscriptionDate,
         shifts: [
           { type: 'MAÑANA', schedule: { min: data.morningScheduleHighSchoolFrom, max: data.morningScheduleHighSchoolTo } },
           { type: 'TARDE', schedule: { min: data.afternoonScheduleHighSchoolFrom, max: data.afternoonScheduleHighSchoolTo } }
@@ -71,7 +93,7 @@ export const dataBackendFormat = (data, imageData) => {
     educationalWorkshops: data.workshops,
     bilingual: data.isBilingual === 'Si',
     canteen: data.hasDiningRoom === 'Si',
-    religion: [data.religion],
+    religion: data.religion,
     schoolUniform: data.hasUniform === 'Si',
     genere: data.gender,
     educationalApproach: data.educationalApproach,
