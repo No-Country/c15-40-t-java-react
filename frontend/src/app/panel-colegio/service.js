@@ -1,11 +1,11 @@
 import { defaultValuesFunc } from './defaultValues.js';
+
 // const schoolEmail = ''; // debo traerlo de context
 // SERVICIO GET
 // -----------------------------
-const URLGetData = 'https://educ-ar-lgxy.onrender.com/api/users/institution/castelfrancoOk@pepe.com';
-// const URLGetDataMail = `https://educ-ar-lgxy.onrender.com/api/users/institution/${schoolEmail}`;
+// const URLGetData = 'https://educ-ar-lgxy.onrender.com/api/users/institution/castelfrancoOk@pepe.com';
 
-export const getSchoolData = async () => {
+export const getSchoolData = async (URLGetData) => {
   const institutionData = await fetch(URLGetData, {
     method: 'GET',
     headers: {
@@ -34,7 +34,7 @@ export const getSchoolData = async () => {
   return institutionData;
 };
 
-const getPreviousData = async () => {
+export const getPreviousData = async () => {
   const previousData = await getSchoolData();
   if (previousData.status !== 200) {
     console.log('Ups, problemas en el servidor!');
@@ -46,8 +46,8 @@ const getPreviousData = async () => {
   }
 };
 
-export const formatIn = async () => {
-  const prevDataObject = await getPreviousData();
+export const formatIn = async (URLGetData) => {
+  const prevDataObject = await getPreviousData(URLGetData);
   console.log('datos listos del get: ', prevDataObject);
   const convertObject = defaultValuesFunc(prevDataObject);
   return convertObject;

@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Input, Button, Textarea, Select, SelectItem, Checkbox, CheckboxGroup, Image } from '@nextui-org/react';
 import { useForm, Controller } from 'react-hook-form';
 import SchoolLevelForm from '@/components/SchoolLevelForm/SchoolLevelForm';
 import { confirmation, educationalApproachTypes, genders, gestiones, religions, workshops /* dataBackendFormat */ } from './utils';
 // import { sendAllData } from './service';
 import { useRouter } from 'next/navigation';
-// import { Context } from '@/app/ContextProvider';
+import { Context } from '@/app/ContextProvider';
 // import { defaultValuesFunc } from './defaultValues.js';
 import { formatIn } from './service';
 
@@ -22,8 +22,9 @@ const SchoolPanel = () => {
   const router = useRouter();
 
   // arreglar funcionalidad de jwt
-  // const { jwt, setJwt } = useContext(Context);
-  const jwt = 'algo';
+  const { jwt } = useContext(Context);
+  const URLGetData = 'https://educ-ar-lgxy.onrender.com/api/users/institution/castelfrancoOk@pepe.com';
+  // https://educ-ar-lgxy.onrender.com/api/users/institution/castelfrancoOk@pepe.com
 
   /*   const getPreviousData = async () => {
     const previousData = await getSchoolData();
@@ -52,7 +53,7 @@ const SchoolPanel = () => {
 
     const fetchData = async () => {
       try {
-        const data = await formatIn();
+        const data = await formatIn(URLGetData);
         setDefaultValues2(data);
         setIsSelectedKinder(data?.kindergarden);
         setIsSelectedPrimary(data?.primaryschool);
