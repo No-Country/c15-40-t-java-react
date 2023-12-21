@@ -1,3 +1,4 @@
+import { defaultValuesFunc } from './defaultValues.js';
 // SERVICIO GET
 // -----------------------------
 const URLGetData = 'https://educ-ar-lgxy.onrender.com/api/users/institution/test_form2.2@gmail.com';
@@ -29,6 +30,25 @@ export const getSchoolData = async () => {
     });
 
   return institutionData;
+};
+
+const getPreviousData = async () => {
+  const previousData = await getSchoolData();
+  if (previousData.status !== 200) {
+    console.log('Ups, problemas en el servidor!');
+  } else {
+    console.log('datos previos');
+    console.log(previousData.data);
+
+    return previousData.data;
+  }
+};
+
+export const formatIn = async () => {
+  const prevDataObject = await getPreviousData();
+  console.log('datos listos del get: ', prevDataObject);
+  const convertObject = defaultValuesFunc(prevDataObject);
+  return convertObject;
 };
 
 // SERVICIO POST

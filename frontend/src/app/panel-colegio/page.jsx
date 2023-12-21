@@ -6,25 +6,26 @@ import { useForm, Controller } from 'react-hook-form';
 import SchoolLevelForm from '@/components/SchoolLevelForm/SchoolLevelForm';
 import { confirmation, educationalApproachTypes, genders, gestiones, religions, workshops /* dataBackendFormat */ } from './utils';
 // import { sendAllData } from './service';
-// import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Context } from '@/app/ContextProvider';
-import { defaultValuesFunc } from './defaultValues.js';
-import { getSchoolData } from './service';
+// import { defaultValuesFunc } from './defaultValues.js';
+import { formatIn } from './service';
 
 const SchoolPanel = () => {
-  const [defaultValues2, setDefaultValues2] = React.useState({});
-  const [isSelectedKinder, setIsSelectedKinder] = React.useState(defaultValues2.kindergarden);
-  const [isSelectedPrimary, setIsSelectedPrimary] = React.useState(defaultValues2.primaryschool);
-  const [isSelectedHighSchool, setIsSelectedHighSchool] = React.useState(defaultValues2.highschool);
-  // const [defaultSelectedHighSchool, setDefaultSelectedHighSchool] = React.useState();
+  const [defaultValues2, setDefaultValues2] = React.useState(null);
+  const [isSelectedKinder, setIsSelectedKinder] = React.useState(defaultValues2?.kindergarden);
+  const [isSelectedPrimary, setIsSelectedPrimary] = React.useState(defaultValues2?.primaryschool);
+  const [isSelectedHighSchool, setIsSelectedHighSchool] = React.useState(defaultValues2?.highschool);
+
   const imagesArray = defaultValues2?.images;
 
-  // const router = useRouter();
+  const router = useRouter();
 
   // arreglar funcionalidad de jwt
-  const { jwt, setJwt } = useContext(Context);
+  // const { jwt, setJwt } = useContext(Context);
+  const jwt = 'algo';
 
-  const getPreviousData = async () => {
+  /*   const getPreviousData = async () => {
     const previousData = await getSchoolData();
     if (previousData.status !== 200) {
       console.log('Ups, problemas en el servidor!');
@@ -41,98 +42,76 @@ const SchoolPanel = () => {
     console.log('datos listos del get: ', prevDataObject);
     const convertObject = defaultValuesFunc(prevDataObject);
     setDefaultValues2(convertObject);
-  };
+  }; */
 
-  console.log('default2: ', defaultValues2);
   // pasarle la data a defaultValue
   // luego ejecutarlo y guardar el objeto en una variable, la cual sera usada
 
   useEffect(() => {
-    setJwt('algo');
-    formatIn();
-    setTimeout(() => {
-      reset({
+    // setJwt('algo');
 
-        feeHighSchoolFrom: defaultValues2.feeHighSchoolFrom,
-        feeHighSchoolTo: defaultValues2.feeHighSchoolTo,
-        highSchoolInscriptionDate: defaultValues2.highSchoolInscriptionDate,
-        highschool: defaultValues2.highschool,
-        morningScheduleHighSchoolFrom: defaultValues2.morningScheduleHighSchoolFrom,
-        morningScheduleHighSchoolTo: defaultValues2.morningScheduleHighSchoolTo,
-        afternoonScheduleHighSchoolFrom: defaultValues2.afternoonScheduleHighSchoolFrom,
-        afternoonScheduleHighSchoolTo: defaultValues2.afternoonScheduleHighSchoolTo,
+    const fetchData = async () => {
+      try {
+        const data = await formatIn();
+        setDefaultValues2(data);
+        setIsSelectedKinder(data?.kindergarden);
+        setIsSelectedPrimary(data?.primaryschool);
+        setIsSelectedHighSchool(data?.highschool);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
 
-        feeGardenFrom: defaultValues2.feeGardenFrom,
-        feeGardenTo: defaultValues2.feeGardenTo,
-        gardenInscriptionDate: defaultValues2.kinderGardenInscriptionDate,
-        kindergarden: defaultValues2.kindergarden,
-        morningScheduleGardenFrom: defaultValues2.morningScheduleGardenFrom,
-        morningScheduleGardenTo: defaultValues2.morningScheduleGardenTo,
-        afternoonScheduleGardenFrom: defaultValues2.afternoonScheduleGardenFrom,
-        afternoonScheduleGardenTo: defaultValues2.afternoonScheduleGardenTo,
-
-        feePrimaryFrom: defaultValues2.feePrimaryFrom,
-        feePrimaryTo: defaultValues2.feePrimaryTo,
-        primaryInscriptionDate: defaultValues2.primaryInscriptionDate,
-        primaryschool: defaultValues2.primaryschool,
-        morningSchedulePrimaryFrom: defaultValues2.morningSchedulePrimaryFrom,
-        morningSchedulePrimaryTo: defaultValues2.morningSchedulePrimaryTo,
-        afternoonSchedulePrimaryFrom: defaultValues2.afternoonSchedulePrimaryFrom,
-        afternoonSchedulePrimaryTo: defaultValues2.afternoonSchedulePrimaryTo,
-
-        management: defaultValues2.management,
-        religion: defaultValues2.religion,
-        gender: defaultValues2.gender,
-        educationalApproach: defaultValues2.educationalApproach,
-        hasDiningRoom: defaultValues2.hasDiningRoom,
-        hasUniform: defaultValues2.hasUniform,
-        isBilingual: defaultValues2.isBilingual
-
-      });
-    });
+    fetchData();
   }, []);
 
   useEffect(() => {
-    /* setTimeout(() => {
-      reset({
+    if (!jwt) {
+      router.push('/');
+    }
+  }, [jwt, router]);
 
-        feeHighSchoolFrom: defaultValues2.feeHighSchoolFrom,
-        feeHighSchoolTo: defaultValues2.feeHighSchoolTo,
-        highSchoolInscriptionDate: defaultValues2.highSchoolInscriptionDate,
-        highschool: defaultValues2.highschool,
-        morningScheduleHighSchoolFrom: defaultValues2.morningScheduleHighSchoolFrom,
-        morningScheduleHighSchoolTo: defaultValues2.morningScheduleHighSchoolTo,
-        afternoonScheduleHighSchoolFrom: defaultValues2.afternoonScheduleHighSchoolFrom,
-        afternoonScheduleHighSchoolTo: defaultValues2.afternoonScheduleHighSchoolTo,
+  console.log('default2: ', defaultValues2);
 
-        feeGardenFrom: defaultValues2.feeGardenFrom,
-        feeGardenTo: defaultValues2.feeGardenTo,
-        gardenInscriptionDate: defaultValues2.kinderGardenInscriptionDate,
-        kindergarden: defaultValues2.kindergarden,
-        morningScheduleGardenFrom: defaultValues2.morningScheduleGardenFrom,
-        morningScheduleGardenTo: defaultValues2.morningScheduleGardenTo,
-        afternoonScheduleGardenFrom: defaultValues2.afternoonScheduleGardenFrom,
-        afternoonScheduleGardenTo: defaultValues2.afternoonScheduleGardenTo,
+  useEffect(() => {
+    reset({
 
-        feePrimaryFrom: defaultValues2.feePrimaryFrom,
-        feePrimaryTo: defaultValues2.feePrimaryTo,
-        primaryInscriptionDate: defaultValues2.primaryInscriptionDate,
-        primaryschool: defaultValues2.primaryschool,
-        morningSchedulePrimaryFrom: defaultValues2.morningSchedulePrimaryFrom,
-        morningSchedulePrimaryTo: defaultValues2.morningSchedulePrimaryTo,
-        afternoonSchedulePrimaryFrom: defaultValues2.afternoonSchedulePrimaryFrom,
-        afternoonSchedulePrimaryTo: defaultValues2.afternoonSchedulePrimaryTo,
+      feeHighSchoolFrom: defaultValues2?.feeHighSchoolFrom,
+      feeHighSchoolTo: defaultValues2?.feeHighSchoolTo,
+      highSchoolInscriptionDate: defaultValues2?.highSchoolInscriptionDate,
+      highschool: defaultValues2?.highschool,
+      morningScheduleHighSchoolFrom: defaultValues2?.morningScheduleHighSchoolFrom,
+      morningScheduleHighSchoolTo: defaultValues2?.morningScheduleHighSchoolTo,
+      afternoonScheduleHighSchoolFrom: defaultValues2?.afternoonScheduleHighSchoolFrom,
+      afternoonScheduleHighSchoolTo: defaultValues2?.afternoonScheduleHighSchoolTo,
 
-        management: defaultValues2.management,
-        religion: defaultValues2.religion,
-        gender: defaultValues2.gender,
-        educationalApproach: defaultValues2.educationalApproach,
-        hasDiningRoom: defaultValues2.hasDiningRoom,
-        hasUniform: defaultValues2.hasUniform,
-        isBilingual: defaultValues2.isBilingual
+      feeGardenFrom: defaultValues2?.feeGardenFrom,
+      feeGardenTo: defaultValues2?.feeGardenTo,
+      gardenInscriptionDate: defaultValues2?.kinderGardenInscriptionDate,
+      kindergarden: defaultValues2?.kindergarden,
+      morningScheduleGardenFrom: defaultValues2?.morningScheduleGardenFrom,
+      morningScheduleGardenTo: defaultValues2?.morningScheduleGardenTo,
+      afternoonScheduleGardenFrom: defaultValues2?.afternoonScheduleGardenFrom,
+      afternoonScheduleGardenTo: defaultValues2?.afternoonScheduleGardenTo,
 
-      });
-    }, 2000); */
+      feePrimaryFrom: defaultValues2?.feePrimaryFrom,
+      feePrimaryTo: defaultValues2?.feePrimaryTo,
+      primaryInscriptionDate: defaultValues2?.primaryInscriptionDate,
+      primaryschool: defaultValues2?.primaryschool,
+      morningSchedulePrimaryFrom: defaultValues2?.morningSchedulePrimaryFrom,
+      morningSchedulePrimaryTo: defaultValues2?.morningSchedulePrimaryTo,
+      afternoonSchedulePrimaryFrom: defaultValues2?.afternoonSchedulePrimaryFrom,
+      afternoonSchedulePrimaryTo: defaultValues2?.afternoonSchedulePrimaryTo,
+
+      management: defaultValues2?.management,
+      religion: defaultValues2?.religion,
+      gender: defaultValues2?.gender,
+      educationalApproach: defaultValues2?.educationalApproach,
+      hasDiningRoom: defaultValues2?.hasDiningRoom,
+      hasUniform: defaultValues2?.hasUniform,
+      isBilingual: defaultValues2?.isBilingual
+
+    });
   }, [defaultValues2]);
 
   const onSubmit = async (data) => {
@@ -188,7 +167,7 @@ const SchoolPanel = () => {
 
   return (
 
-    jwt
+    (defaultValues2 && jwt)
       ? (
 
         <section className='max-w-7xl mx-auto'>
@@ -737,7 +716,7 @@ const SchoolPanel = () => {
 
       )
       : (
-        <p>Algo hay</p>
+        <p className='text-center font-bold'>Cargando Panel...</p>
         // router.push('/')
       )
 
