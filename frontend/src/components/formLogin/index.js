@@ -34,6 +34,7 @@ export const useFormLogin = () => {
 
         if (response.status === 200) {
           const data = await response.json();
+          console.log(data);
           setJwt(data.jwt);
 
           router.push('/panel-colegio');

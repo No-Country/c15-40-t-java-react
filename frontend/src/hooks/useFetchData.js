@@ -42,8 +42,8 @@ const useFetchData = (url) => {
       setInstitutionNames((prevData) => {
         // Concatenar los nuevos datos al estado existente
         const names = Object.keys(data).map((key) => ({
-          label: data[key].institutionName,
-          value: data[key].id,
+          label: data[key]?.institutionName,
+          value: data[key]?.id,
           description: 'descripcion si la hay'
         }));
         return [...prevData, ...names];
