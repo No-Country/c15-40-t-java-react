@@ -3,6 +3,7 @@
 import React from 'react';
 import { Card, CardHeader, CardBody, CardFooter, Image } from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
+import { LocationIcon, SchoolIcon, GenreIcon } from '../Icons';
 
 function ColegioCard ({ colegio }) {
   const dummyImage = 'https://dummyimage.com/vga';
@@ -13,7 +14,7 @@ function ColegioCard ({ colegio }) {
   };
 
   return (
-    <Card className="w-[300px]" isPressable onPress={hanldePress}
+    <Card className="w-[450px] hover:scale-[102%]" isPressable onPress={hanldePress}
     >
       <CardHeader className='flex gap-3'>
         <Image
@@ -26,7 +27,7 @@ function ColegioCard ({ colegio }) {
         <p className=' font-bold text-xl '>{colegio.institutionName}</p>
       </CardHeader>
       <CardBody >
-        <div className='w-full h-[200px] overflow-hidden'>
+        <div className='w-full h-[250px] overflow-hidden'>
           <Image
             alt="Card background"
             className="object-cover"
@@ -34,8 +35,27 @@ function ColegioCard ({ colegio }) {
           />
         </div>
       </CardBody>
-      <CardFooter>
-        {colegio.city}
+      <CardFooter className='flex gap-3 flex-col w-full items-start'>
+        <div className='flex gap-3'>
+          <LocationIcon className="w-6 fill-warning" />
+          <p>{colegio.city}</p>
+        </div>
+        <div className='flex gap-3'>
+          <h3 className='text-md font-bold'>Religión:</h3>
+          <p>{colegio.religion ? colegio.religion : 'Sin datos'}</p>
+        </div>
+        <div className='flex gap-3'>
+          <SchoolIcon className="h-6"/>
+          {colegio.educationLevels?.length === 0 || !colegio.educationLevels
+            ? <p className=' text-gray-500'>Sin datos</p>
+            : colegio.educationLevels?.map((item, index) => (
+              <p key={index + colegio.institutionName}>{item.level}</p>
+            ))}
+        </div>
+        <div className='flex gap-3'>
+          <GenreIcon className="h-6 text-warning"/>
+          {colegio.genere}
+        </div>
       </CardFooter>
     </Card>);
 }

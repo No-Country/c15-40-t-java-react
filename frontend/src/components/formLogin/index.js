@@ -7,12 +7,14 @@ export const useFormLogin = () => {
   const [password, setPassword] = useState('');
   const [errorMessageEmail, setErrorMessageEmail] = useState('');
   const [errorMessagePassword, setErrorMessagePassword] = useState('');
+  const [userError, setUserError] = useState('');
   const router = useRouter();
   const { jwt, setJwt } = useContext(Context);
   console.log(jwt);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    setUserError('');
 
     if (user !== '' && password !== '') {
       const formData = new FormData(e.target);
@@ -39,7 +41,7 @@ export const useFormLogin = () => {
 
           router.push('/panel-colegio');
         } else {
-          console.error('Error en la solicitud al backend');
+          setUserError('Usuario Incorrecto');
         }
       } catch (error) {
         console.error('Error de red:', error);
@@ -86,6 +88,7 @@ export const useFormLogin = () => {
     onBlurInputPassword,
     onBlurInputEmail,
     errorMessageEmail,
-    errorMessagePassword
+    errorMessagePassword,
+    userError
   };
 };
