@@ -72,10 +72,7 @@ export default function page () {
                   </ModalBody>
                   <ModalFooter>
                     <Button color="danger" variant="light" onPress={onClose}>
-                      Close
-                    </Button>
-                    <Button color="primary" onPress={onClose}>
-                      Action
+                      Cerrar
                     </Button>
                   </ModalFooter>
                 </>
@@ -115,13 +112,12 @@ export default function page () {
           );
 
           if (!response.ok) {
-            // throw new Error('Error al eliminar la escuela');
-            console.log(response);
+            throw new Error('Error al eliminar la escuela');
           }
 
           onOpenChange();
         } catch (error) {
-          // console.error('Error al eliminar la escuela:', error);
+          console.error('Error al eliminar la escuela:', error);
         }
       };
 
@@ -187,7 +183,8 @@ export default function page () {
 
   const filteredSchools = data
     ? data.filter((school) => {
-      const nameQuery = school.institutionName?.toLowerCase()
+      const nameQuery = school.institutionName
+        ?.toLowerCase()
         .includes(searchTerm.toLowerCase());
       const statusQuery =
           filterStatus === 'todos' ? true : school.status === filterStatus;

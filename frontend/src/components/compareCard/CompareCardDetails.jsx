@@ -14,13 +14,12 @@ import useColegioInfo from '@/hooks/useColegioInfo';
 // import useFetchData from '@/hooks/useFetchData';
 
 function CompareCardDetails ({ colegioId, position }) {
-  const bool = false;
-
   const [colegio, setColegio] = useState(null);
+  console.log(colegio);
 
   const [colegioInfo, setColegioInfo] = useState(null);
 
-  const [error, setError] = useState(null);
+  const [Error, setError] = useState(null);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -37,6 +36,7 @@ function CompareCardDetails ({ colegioId, position }) {
         setColegioInfo(useColegioInfo(result));
       } catch (error) {
         setError(error);
+        console.log(Error);
       } finally {
         setIsLoading(false);
       }
