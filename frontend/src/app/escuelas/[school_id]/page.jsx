@@ -1,8 +1,8 @@
 'use client';
 
 import {
+  CityIcon,
   ClockIcon,
-  EmailIcon,
   LocationIcon,
   PhoneIcon,
   WebIcon
@@ -34,9 +34,9 @@ const Londrina_Solid_Font_Black = Londrina_Solid({
 export default function Page (props) {
   const router = useRouter();
   const school_id = props.params.school_id;
-  const urlGetSchools = `https://educ-ar-lgxy.onrender.com/api/institutions/${school_id}`;
+  const urlGetSchool = `https://educ-ar-lgxy.onrender.com/api/institutions/${school_id}`;
 
-  const { data, error } = useFetchData(urlGetSchools);
+  const { data, error } = useFetchData(urlGetSchool);
 
   if (error === 'No se encontraron datos') {
     router.push('/404');
@@ -76,16 +76,14 @@ export default function Page (props) {
         </header>
         <div className="w-full flex items-center gap-10 flex-wrap my-6">
           {city && (
-            <>
-              <div className="flex items-center gap-4">
-                <LocationIcon className="w-6 fill-warning" />
-                <p className="capitalize">{city}</p>
-              </div>
-            </>
+            <div className="flex items-center gap-4">
+              <CityIcon className="w-6 fill-warning" />
+              <p className="capitalize">{city}</p>
+            </div>
           )}
           {address && (
             <div className="flex items-center gap-4">
-              <EmailIcon className="w-6 fill-warning" />
+              <LocationIcon className="w-6 fill-warning" />
               <LinkUI
                 color="foreground"
                 underline="always"

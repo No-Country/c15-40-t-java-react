@@ -28,7 +28,7 @@ import {
 
 import React, { useState } from 'react';
 
-import { schools } from './data';
+import useFetchData from '@/hooks/useFetchData';
 
 const statusColorMap = {
   activo: 'success',
@@ -37,11 +37,16 @@ const statusColorMap = {
 };
 
 export default function page () {
-  const ActionsCell = ({ school }) => {
-    const { name, email } = school;
+  const urlGetSchools = 'https://educ-ar-lgxy.onrender.com/api/institutions';
+
+  const { data } = useFetchData(urlGetSchools);
+
+  const ActionsCell = (school) => {
+    const { institutionName, address } = school.school;
 
     const DetailsAction = () => {
       const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
       return (
         <>
           <Tooltip content="Detalles">
@@ -60,17 +65,14 @@ export default function page () {
               {(onClose) => (
                 <>
                   <ModalHeader className="flex flex-col gap-1">
-                    {name}
+                    {institutionName}
                   </ModalHeader>
                   <ModalBody>
-                    <h2>Correo electrónico: {email}</h2>
+                    <h2>Correo electrónico: {address}</h2>
                   </ModalBody>
                   <ModalFooter>
                     <Button color="danger" variant="light" onPress={onClose}>
-                      Close
-                    </Button>
-                    <Button color="primary" onPress={onClose}>
-                      Action
+                      Cerrar
                     </Button>
                   </ModalFooter>
                 </>
@@ -93,6 +95,31 @@ export default function page () {
 
     const DeleteAction = () => {
       const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+      const handleDelete = async () => {
+        try {
+          const response = await fetch(
+            `https://educ-ar-lgxy.onrender.com/api/institutions/${school.school.id}`,
+            {
+              method: 'DELETE',
+              headers: {
+                'Content-Type': 'application/json',
+                Bearer:
+                  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU5JU1RSQVRPUiIsInBlcm1pc3Npb25zIjpbeyJhdXRob3JpdHkiOiJTQVZFX09ORV9JTlNUSVRVVElPTiJ9LHsiYXV0aG9yaXR5IjoiUkVBRF9BTExfSU5TVElUVVRJT05TIn0seyJhdXRob3JpdHkiOiJST0xFX0FETUlOSVNUUkFUT1IifV0sIm5hbWUiOiJ0ZXN0MzNAZ21haWwuY29tIiwic3ViIjoidGVzdDMzQGdtYWlsLmNvbSIsImlhdCI6MTcwMjk0NjE2OCwiZXhwIjoxNzAyOTUzMzY4fQ.edgjQ5pJ24MeaWrQBhw1caycclYIZSJrwTUQv6ISJbc',
+                cors: 'no-cors'
+              }
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error('Error al eliminar la escuela');
+          }
+
+          onOpenChange();
+        } catch (error) {
+          console.error('Error al eliminar la escuela:', error);
+        }
+      };
 
       return (
         <>
@@ -117,7 +144,7 @@ export default function page () {
                   <ModalBody>
                     <p>
                       ¿Está seguro de eliminar la escuela{' '}
-                      <strong>{name}</strong>?
+                      <strong>{institutionName}</strong>?
                     </p>
                   </ModalBody>
                   <ModalFooter>
@@ -126,7 +153,10 @@ export default function page () {
                     </Button>
                     <Button
                       color="danger"
-                      onPress={onClose}
+                      onPress={() => {
+                        onClose();
+                        handleDelete();
+                      }}
                       className="text-white">
                       Eliminar
                     </Button>
@@ -151,10 +181,10 @@ export default function page () {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('todos');
 
-  const filteredSchools = schools
-    ? schools.filter((school) => {
-      const nameQuery = school.name
-        .toLowerCase()
+  const filteredSchools = data
+    ? data.filter((school) => {
+      const nameQuery = school.institutionName
+        ?.toLowerCase()
         .includes(searchTerm.toLowerCase());
       const statusQuery =
           filterStatus === 'todos' ? true : school.status === filterStatus;
@@ -257,8 +287,8 @@ export default function page () {
                     avatarProps={{
                       style: { display: 'none' }
                     }}
-                    description={school.email}
-                    name={school.name}
+                    description={school.address}
+                    name={school.institutionName}
                   />
                 </TableCell>
                 <TableCell>

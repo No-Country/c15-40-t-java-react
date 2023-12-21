@@ -1,3 +1,4 @@
+export { default as CityIcon } from './CityIcon';
 export { default as ClockIcon } from './ClockIcon';
 export { default as DeleteIcon } from './DeleteIcon';
 export { default as EditIcon } from './EditIcon';
@@ -8,3 +9,5 @@ export { default as LocationIcon } from './LocationIcon';
 export { default as PhoneIcon } from './PhoneIcon';
 export { default as SearchIcon } from './SearchIcon';
 export { default as WebIcon } from './WebIcon';
+export { default as SchoolIcon } from './SchoolIcon';
+export { default as GenreIcon } from './GenreIcon';
