@@ -1,5 +1,5 @@
 import { Button, Image } from '@nextui-org/react';
-
+import Link from 'next/link';
 import { Londrina_Solid } from 'next/font/google';
 
 const Londrina_SolidFontBlack = Londrina_Solid({
@@ -18,7 +18,7 @@ export default function Home () {
           <p className='mt-4 text-balance'>Busca el colegio que mejor se <strong className='text-purple-500'>adapte</strong> a tus necesidades.</p>
           <p className='text-balance'>Aquí encontrarás toda la información que necesitas para <span className='font-bold text-orange-500'>tomar tu decisión.!</span></p>
 
-          <Button className='mt-4 text-white' color='warning' variant='shadow'>
+          <Button as={Link} href='/escuelas' className='mt-4 text-white' color='warning' variant='shadow'>
             Inicia tu búsqueda
           </Button>
         </header>
