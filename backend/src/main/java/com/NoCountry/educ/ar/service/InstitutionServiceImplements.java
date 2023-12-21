@@ -62,6 +62,7 @@ public class InstitutionServiceImplements implements InstitutionService {
         institutionToUpdate.setAddress(institution.address());
         institutionToUpdate.setCity(institution.city());
         institutionToUpdate.setPhones(institution.phones());
+        institutionToUpdate.setDescription(institution.description());
         institutionToUpdate.setWeb(institution.web());
         institutionToUpdate.setAdministration(institution.administration());
         institutionToUpdate.setEducationLevels(institution.educationLevels());
@@ -88,5 +89,12 @@ public class InstitutionServiceImplements implements InstitutionService {
             .stream()
             .map(Institution::getCity)
             .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Institution updateActivated(String institutionEmail, InstitutionRequestDTO institution) {
+        Institution institutionToUpdate = userService.getInstitutionByEmail(institutionEmail);
+        institutionToUpdate.setActivated(institution.activated());
+        return institutionRepository.save(institutionToUpdate);
     }
 }

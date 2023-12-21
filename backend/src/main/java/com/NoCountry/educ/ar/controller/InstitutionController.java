@@ -67,8 +67,13 @@ public class InstitutionController {
         return new ResponseEntity<>(institutionService.getAllInstitutionCities(), HttpStatus.OK);
     }
 
-    @PutMapping("/{institutionId}")
-    public ResponseEntity<Institution> updateInstitution(@PathVariable String institutionId, @RequestBody InstitutionRequestDTO institutionData) {
-        return new ResponseEntity<>(institutionService.updateInstitution(institutionId, institutionData), HttpStatus.OK);
+    @PutMapping("/{institutionEmail}")
+    public ResponseEntity<Institution> updateInstitution(@PathVariable String institutionEmail, @RequestBody InstitutionRequestDTO institutionData) {
+        return new ResponseEntity<>(institutionService.updateInstitution(institutionEmail, institutionData), HttpStatus.OK);
+    }
+
+    @PutMapping("/activated/{institutionEmail}")
+    public ResponseEntity<Institution> updateActi(@PathVariable String institutionEmail, @RequestBody InstitutionRequestDTO institutionData) {
+        return new ResponseEntity<>(institutionService.updateActivated(institutionEmail, institutionData), HttpStatus.OK);
     }
 }

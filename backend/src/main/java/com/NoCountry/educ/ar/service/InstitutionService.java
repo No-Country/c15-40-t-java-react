@@ -24,4 +24,6 @@ public interface InstitutionService {
     public List<Institution> findByinstitutionName(String institutionName);
 
     public Set<String> getAllInstitutionCities();
+
+    public Institution updateActivated(String institutionEmail, InstitutionRequestDTO institution);  
 }
