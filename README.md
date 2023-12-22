@@ -1,10 +1,14 @@
 # Bienvenidos a Educar
 
+[![Deploy on Vercel](https://img.shields.io/badge/educ_ar-fff?style=for-the-badge&logo=vercel&logoColor=white&labelColor=000)](https://educ-ar-frontend.vercel.app/)
+
 - Somos Educar, tu plataforma confiable para explorar y descubrir los mejores colegios en Córdoba Capital. Nos dedicamos a facilitar el proceso de elección educativa para familias comprometidas con el futuro de sus hijos.
 
 - En un mundo lleno de opciones educativas, entendemos la importancia de tomar decisiones informadas. Nuestra aplicación está diseñada con el propósito de ofrecer una amplia gama de recursos y detalles acerca de los colegios locales, proporcionando a las familias acceso a información precisa y actualizada.
 
-<iframe style="width: 100%;" width="560" height="315" src="https://www.youtube.com/embed/cLOkevrkYuc?si=L5jvOAgmNftDIkOl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<video controls>
+<source src="https://www.youtube.com/watch?v=cLOkevrkYuc">
+</video>
 
 <details name="info" style="background: #f97316; padding: 8px; color: black; border-radius: 8px; margin-bottom: 0.75rem;">
   <summary><h2 style="display: inline; color:white;">¿Qué nos hace especiales?</h5></summary>
@@ -49,20 +53,16 @@
 ### Frontend
 
 [![Nextjs](https://img.shields.io/badge/nextjs-000?style=for-the-badge&logo=next.js&logoColor=black&labelColor=fff)](https://nextui.org/)
-
 [![React](https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white&labelColor=101010)](https://react.dev/)
-
 [![NextUI](https://img.shields.io/badge/nextui-fff?style=for-the-badge&logo=next.js&logoColor=white&labelColor=000)](https://nextui.org/)
-
 [![Tailwindcss](https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white&labelColor=000)](https://tailwindcss.com/)
-
 [![Vercel](https://img.shields.io/badge/vercel-fff?style=for-the-badge&logo=vercel&logoColor=white&labelColor=000)](https://vercel.com/)
 
 ### Backend
 
 [![MongoDB](https://img.shields.io/badge/mongodb-47A248?style=for-the-badge&logo=mongodb&logoColor=white&labelColor=000)](https://www.mongodb.com/)
-
 [![Java](https://img.shields.io/badge/java-F80000?style=for-the-badge&logo=oracle&logoColor=white&labelColor=000)](https://www.java.com)
 
+### QA
 
-
+[![Jira](https://img.shields.io/badge/jira-0052CC?style=for-the-badge&logo=jira&logoColor=white&labelColor=000)](https://www.atlassian.com/es/software/jira)
