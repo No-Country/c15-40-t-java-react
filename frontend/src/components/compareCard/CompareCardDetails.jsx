@@ -14,8 +14,8 @@ import useColegioInfo from '@/hooks/useColegioInfo';
 // import useFetchData from '@/hooks/useFetchData';
 
 function CompareCardDetails ({ colegioId, position }) {
-  const [colegio, setColegio] = useState(null);
-  console.log(colegio);
+  // const [colegio, setColegio] = useState(null);
+  // console.log(colegio);
 
   const [colegioInfo, setColegioInfo] = useState(null);
 
@@ -32,7 +32,7 @@ function CompareCardDetails ({ colegioId, position }) {
           throw new Error('Error en conexion al servidor');
         }
         const result = await response.json();
-        setColegio(result);
+        // setColegio(result);
         setColegioInfo(useColegioInfo(result));
       } catch (error) {
         setError(error);
@@ -100,7 +100,7 @@ function CompareCardDetails ({ colegioId, position }) {
             </TableRow>
             <TableRow key={`row-${position}-8`}>
               <TableCell className="flex justify-center flex-col items-center min-h-[50px] ">
-                {colegioInfo?.religionesString.length > 0 ? colegioInfo?.religionesString : 'Laico'}
+                {colegioInfo?.religion}
               </TableCell>
             </TableRow>
             <TableRow key={`row-${position}-9`}>

@@ -36,7 +36,7 @@ function page () {
   }, [data]);
 
   useEffect(() => {
-    console.log(selectedFilters);
+    // console.log(selectedFilters);
     const { filtrados } = useFilterColegios(selectedFilters, data);
     setFilteredItems(filtrados);
   }, [selectedFilters]);
@@ -150,8 +150,12 @@ function page () {
         <div className='flex gap-5 flex-wrap'>
 
           { !isLoading
-            ? filteredItems?.map((colegio) => (
-              <ColegioCard key={colegio.id} colegio={colegio}/>))
+            ? filteredItems?.map((colegio) => (<ColegioCard key={colegio.id} colegio={colegio}/>)/* {
+              const { activated } = colegio;
+              return (activated && <ColegioCard key={colegio.id} colegio={colegio}/>);
+            } */
+
+            )
             : 'Cargando...'
           }
 

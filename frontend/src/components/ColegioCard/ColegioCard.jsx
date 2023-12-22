@@ -3,7 +3,7 @@
 import React from 'react';
 import { Card, CardHeader, CardBody, CardFooter, Image } from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
-import { LocationIcon, SchoolIcon, GenreIcon } from '../Icons';
+import { LocationIcon, GenreIcon } from '../Icons';
 
 function ColegioCard ({ colegio }) {
   const dummyImage = 'https://dummyimage.com/vga';
@@ -44,14 +44,14 @@ function ColegioCard ({ colegio }) {
           <h3 className='text-md font-bold'>Religión:</h3>
           <p>{colegio.religion ? colegio.religion : 'Sin datos'}</p>
         </div>
-        <div className='flex gap-3'>
+        {/* <div className='flex gap-3'>
           <SchoolIcon className="h-6"/>
           {colegio.educationLevels?.length === 0 || !colegio.educationLevels
             ? <p className=' text-gray-500'>Sin datos</p>
             : colegio.educationLevels?.map((item, index) => (
-              <p key={index + colegio.institutionName}>{item.level}</p>
+              <p key={index + colegio.institutionName}>{item.level || ''}</p>
             ))}
-        </div>
+        </div> */}
         <div className='flex gap-3'>
           <GenreIcon className="h-6 text-warning"/>
           {colegio.genere}
