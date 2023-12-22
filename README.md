@@ -6,9 +6,7 @@
 
 - En un mundo lleno de opciones educativas, entendemos la importancia de tomar decisiones informadas. Nuestra aplicación está diseñada con el propósito de ofrecer una amplia gama de recursos y detalles acerca de los colegios locales, proporcionando a las familias acceso a información precisa y actualizada.
 
-<video controls>
-<source src="https://www.youtube.com/watch?v=cLOkevrkYuc">
-</video>
+<video controls style="width: 100%" src="video-promocional.mp4"></video>
 
 <details name="info" style="background: #f97316; padding: 8px; color: black; border-radius: 8px; margin-bottom: 0.75rem;">
   <summary><h2 style="display: inline; color:white;">¿Qué nos hace especiales?</h5></summary>
