@@ -1,5 +1,4 @@
 const useColegioInfo = (colegio) => {
-  console.log(colegio);
   let educationLevelsString = '';
   let talleresString = '';
 

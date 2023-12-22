@@ -14,8 +14,8 @@ import useColegioInfo from '@/hooks/useColegioInfo';
 // import useFetchData from '@/hooks/useFetchData';
 
 function CompareCardDetails ({ colegioId, position }) {
-  const [colegio, setColegio] = useState(null);
-  console.log(colegio);
+  // const [colegio, setColegio] = useState(null);
+  // console.log(colegio);
 
   const [colegioInfo, setColegioInfo] = useState(null);
 
@@ -32,7 +32,7 @@ function CompareCardDetails ({ colegioId, position }) {
           throw new Error('Error en conexion al servidor');
         }
         const result = await response.json();
-        setColegio(result);
+        // setColegio(result);
         setColegioInfo(useColegioInfo(result));
       } catch (error) {
         setError(error);
@@ -44,7 +44,6 @@ function CompareCardDetails ({ colegioId, position }) {
     fetchData();
   }, [colegioId]);
 
-  console.log(colegioInfo);
   return (
     <div className="flex flex-col gap-5 justify-center items-center">
       {isLoading && <CircularProgress color="warning" aria-label="Cargando..." />}

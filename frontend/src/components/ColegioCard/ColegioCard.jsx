@@ -3,7 +3,7 @@
 import React from 'react';
 import { Card, CardHeader, CardBody, CardFooter, Image } from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
-import { LocationIcon, SchoolIcon, GenreIcon } from '../Icons';
+import { LocationIcon, GenreIcon } from '../Icons';
 
 function ColegioCard ({ colegio }) {
   const dummyImage = 'https://dummyimage.com/vga';
@@ -13,7 +13,6 @@ function ColegioCard ({ colegio }) {
     router.push(`/escuelas/${colegio.id}`);
   };
 
-  console.log(colegio);
   return (
     <Card className="w-[450px] hover:scale-[102%]" isPressable onPress={hanldePress}
     >

@@ -36,7 +36,7 @@ function page () {
   }, [data]);
 
   useEffect(() => {
-    console.log(selectedFilters);
+    // console.log(selectedFilters);
     const { filtrados } = useFilterColegios(selectedFilters, data);
     setFilteredItems(filtrados);
   }, [selectedFilters]);
