@@ -9,8 +9,8 @@ export const useFormLogin = () => {
   const [errorMessagePassword, setErrorMessagePassword] = useState('');
   const [userError, setUserError] = useState('');
   const router = useRouter();
-  const { jwt, setJwt, setEmailLogin } = useContext(Context);
-  console.log(jwt);
+  const { setJwt, setEmailLogin } = useContext(Context);
+  // console.log(jwt);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -37,7 +37,7 @@ export const useFormLogin = () => {
         if (response.status === 200) {
           const data = await response.json();
           setEmailLogin(userData.email);
-          console.log('CORREO LOGIN:', data.email);
+          // console.log('CORREO LOGIN:', data.email);
           setJwt(data.jwt);
 
           router.push('/panel-colegio');
@@ -48,7 +48,7 @@ export const useFormLogin = () => {
         console.error('Error de red:', error);
       }
 
-      console.log(userData);
+      // console.log(userData);
       e.target.reset();
     }
   };
