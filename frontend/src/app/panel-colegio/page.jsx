@@ -20,6 +20,7 @@ const SchoolPanel = () => {
   const router = useRouter();
 
   const { jwt, emailLogin } = useContext(Context);
+
   const URLGetData = `https://educ-ar-lgxy.onrender.com/api/users/institution/${emailLogin}`;
   const URLPutData = `https://educ-ar-lgxy.onrender.com/api/institutions/${emailLogin}`;
 

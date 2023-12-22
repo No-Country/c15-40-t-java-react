@@ -39,6 +39,7 @@ export const useFormLogin = () => {
           setEmailLogin(userData.email);
           // console.log('CORREO LOGIN:', data.email);
           setJwt(data.jwt);
+          localStorage.setItem('userEmail', userData.email);
 
           router.push('/panel-colegio');
         } else {
