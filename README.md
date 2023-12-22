@@ -6,7 +6,7 @@
 
 - En un mundo lleno de opciones educativas, entendemos la importancia de tomar decisiones informadas. Nuestra aplicación está diseñada con el propósito de ofrecer una amplia gama de recursos y detalles acerca de los colegios locales, proporcionando a las familias acceso a información precisa y actualizada.
 
-<video controls style="width: 100%" src="video-promocional.mp4"></video>
+https://github.com/No-Country/c15-40-t-java-react/assets/104035823/d4e8d896-199f-425b-9a31-e2e43b33cc81
 
 <details name="info" style="background: #f97316; padding: 8px; color: black; border-radius: 8px; margin-bottom: 0.75rem;">
   <summary><h2 style="display: inline; color:white;">¿Qué nos hace especiales?</h5></summary>
@@ -27,23 +27,27 @@
 
 ### Frontend
 
-<a style="font-weight: bold; display: flex; align-items: center; gap: 0.5rem; padding:0.75rem; border-radius: 0.75rem; width: max-content; border: 4px solid #f97316; color: #f97316;" href="https://github.com/diegopaff"><img style="width: 2rem; border-radius: 0.5rem;" src="https://avatars.githubusercontent.com/u/110573986?v=4" />Diego Curutchet</a>
-
-<a style="font-weight: bold; display: flex; align-items: center; gap: 0.5rem; padding:0.75rem; border-radius: 0.75rem; width: max-content; border: 4px solid #f97316; color: #f97316;" href="https://github.com/sandra0411"><img style="width: 2rem; border-radius: 0.5rem;" src="https://avatars.githubusercontent.com/u/77741065?v=4" />Sandra Divan</a>
-
-<a style="font-weight: bold; display: flex; align-items: center; gap: 0.5rem; padding:0.75rem; border-radius: 0.75rem; width: max-content; border: 4px solid #f97316; color: #f97316;" href="https://github.com/thefabi8a"><img style="width: 2rem; border-radius: 0.5rem;" src="https://avatars.githubusercontent.com/u/104035823?v=4" />Fabian Ochoa</a>
-
-<a style="font-weight: bold; display: flex; align-items: center; gap: 0.5rem; padding:0.75rem; border-radius: 0.75rem; width: max-content; border: 4px solid #f97316; color: #f97316;" href="https://github.com/CristianMozetich"><img style="width: 2rem; border-radius: 0.5rem;" src="https://avatars.githubusercontent.com/u/117293281?v=4" />Cristian Mozetich</a>
+| Nombre               | GitHub                                      |
+|----------------------|---------------------------------------------|
+| Diego Curutchet      | [![Diego Curutchet](https://avatars.githubusercontent.com/u/110573986?v=4&s=200)](https://github.com/diegopaff) |
+| Sandra Divan         | [![Sandra Divan](https://avatars.githubusercontent.com/u/77741065?v=4&s=200)](https://github.com/sandra0411) |
+| Fabian Ochoa         | [![Fabian Ochoa](https://avatars.githubusercontent.com/u/104035823?v=4&s=200)](https://github.com/thefabi8a) |
+| Cristian Mozetich    | [![Cristian Mozetich](https://avatars.githubusercontent.com/u/117293281?v=4&s=200)](https://github.com/CristianMozetich) |
 
 ### Backend
 
-<a style="font-weight: bold; display: flex; align-items: center; gap: 0.5rem; padding:0.75rem; border-radius: 0.75rem; width: max-content; border: 4px solid #f97316; color: #f97316;" href="https://github.com/nico-ortiz"><img style="width: 2rem; border-radius: 0.5rem;" src="https://avatars.githubusercontent.com/u/68659234?v=4" />Nico Ortiz</a>
-
-<a style="font-weight: bold; display: flex; align-items: center; gap: 0.5rem; padding:0.75rem; border-radius: 0.75rem; width: max-content; border: 4px solid #f97316; color: #f97316;" href="https://github.com/RafaelTalavera"><img style="width: 2rem; border-radius: 0.5rem;" src="https://avatars.githubusercontent.com/u/125708112?v=4" />Rafael Talavera</a>
+| Nombre           | GitHub                                      |
+|------------------|---------------------------------------------|
+| Nico Ortiz       | [![Nico Ortiz](https://avatars.githubusercontent.com/u/68659234?v=4&s=200)](https://github.com/nico-ortiz) |
+| Rafael Talavera  | [![Rafael Talavera](https://avatars.githubusercontent.com/u/125708112?v=4&s=200)](https://github.com/RafaelTalavera) |
 
 ### QA
 
-<a style="font-weight: bold; display: flex; align-items: center; gap: 0.5rem; padding:0.75rem; border-radius: 0.75rem; width: max-content; border: 4px solid #f97316; color: #f97316;" href="https://www.linkedin.com/in/ximena-gil-rueda-84428053/"><img style="width: 2rem; border-radius: 0.5rem;" src="https://media.licdn.com/dms/image/D4D03AQEfhF6DWfl96g/profile-displayphoto-shrink_200_200/0/1679270861753?e=1708560000&v=beta&t=TFQjHdt94atDHDlVY67uNhZ7Bc__prA_PN5LmjN7viM" />Zayra Gil</a>
+| Nombre               | LinkedIn                                                               |
+|----------------------|------------------------------------------------------------------------|
+| Zayra Gil            | [![Zayra Gil](https://media.licdn.com/dms/image/D4D03AQEfhF6DWfl96g/profile-displayphoto-shrink_200_200/0/1679270861753?e=1708560000&v=beta&t=TFQjHdt94atDHDlVY67uNhZ7Bc__prA_PN5LmjN7viM)](https://www.linkedin.com/in/ximena-gil-rueda-84428053/) |
+
+
 
 
 ## Tecnologías
