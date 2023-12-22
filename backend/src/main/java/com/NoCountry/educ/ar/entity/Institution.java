@@ -34,6 +34,8 @@ public class Institution {
     @Indexed(name = "institution_cue_index", unique = true)
     private String cue;
 
+    private String description;
+
     private String web;
 
     private String administration;
@@ -57,6 +59,8 @@ public class Institution {
     private List<String> images;
 
     private String logo;
+
+    private boolean activated;
 
     public Institution(PreInscriptionRequestDTO preInscriptionRequest) {
         this.institutionName = preInscriptionRequest.institutionName();

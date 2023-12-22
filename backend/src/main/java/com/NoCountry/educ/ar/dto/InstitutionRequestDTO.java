@@ -14,6 +14,7 @@ public record InstitutionRequestDTO(
     List<String> phones,
     String cue,
     String web,
+    String description,
     String administration,
     List<EducationLevel> educationLevels,
     List<String> educationalWorkshops,
@@ -24,7 +25,8 @@ public record InstitutionRequestDTO(
     Genere genere,
     Approach educationalApproach,
     List<String> images,
-    String logo
+    String logo,
+    boolean activated
 ) {
     
 }

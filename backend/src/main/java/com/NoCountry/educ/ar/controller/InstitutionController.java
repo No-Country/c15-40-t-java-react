@@ -1,6 +1,7 @@
 package com.NoCountry.educ.ar.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,8 +56,24 @@ public class InstitutionController {
         return new ResponseEntity<>(institutions, HttpStatus.OK);
     }
 
-    @PutMapping("/{institutionId}")
-    public ResponseEntity<Institution> updateInstitution(@PathVariable String institutionId, @RequestBody InstitutionRequestDTO institutionData) {
-        return new ResponseEntity<>(institutionService.updateInstitution(institutionId, institutionData), HttpStatus.OK);
+    @GetMapping("/searchName/{nameInstitution}")
+    public ResponseEntity<List<Institution>> getInstitutionName(@PathVariable String nameInstitution ){
+        List<Institution> institutions = institutionService.findByinstitutionName(nameInstitution);
+        return new ResponseEntity<List<Institution>>(institutions,HttpStatus.OK);
+    }
+
+    @GetMapping("/citiesNames")
+    public ResponseEntity<Set<String>> getNamesOfTheCitiesOfTheInstitutions() {
+        return new ResponseEntity<>(institutionService.getAllInstitutionCities(), HttpStatus.OK);
+    }
+
+    @PutMapping("/{institutionEmail}")
+    public ResponseEntity<Institution> updateInstitution(@PathVariable String institutionEmail, @RequestBody InstitutionRequestDTO institutionData) {
+        return new ResponseEntity<>(institutionService.updateInstitution(institutionEmail, institutionData), HttpStatus.OK);
+    }
+
+    @PutMapping("/activated/{institutionEmail}")
+    public ResponseEntity<Institution> updateActi(@PathVariable String institutionEmail, @RequestBody InstitutionRequestDTO institutionData) {
+        return new ResponseEntity<>(institutionService.updateActivated(institutionEmail, institutionData), HttpStatus.OK);
     }
 }

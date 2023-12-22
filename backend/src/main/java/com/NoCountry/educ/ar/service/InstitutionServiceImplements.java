@@ -1,6 +1,8 @@
 package com.NoCountry.educ.ar.service;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,8 +51,7 @@ public class InstitutionServiceImplements implements InstitutionService {
 
     @Override
     public Institution getInstitutionByCUE(String cue) {
-        return institutionRepository.getPreInscriptionByCue(cue)
-            .orElseThrow(() -> new IdNotFoundException("Institucion con CUE = " + cue + " no encontrada"));
+        return institutionRepository.getPreInscriptionByCue(cue).orElse(null);
     }
 
     @Override
@@ -61,6 +62,7 @@ public class InstitutionServiceImplements implements InstitutionService {
         institutionToUpdate.setAddress(institution.address());
         institutionToUpdate.setCity(institution.city());
         institutionToUpdate.setPhones(institution.phones());
+        institutionToUpdate.setDescription(institution.description());
         institutionToUpdate.setWeb(institution.web());
         institutionToUpdate.setAdministration(institution.administration());
         institutionToUpdate.setEducationLevels(institution.educationLevels());
@@ -74,5 +76,25 @@ public class InstitutionServiceImplements implements InstitutionService {
         institutionToUpdate.setImages(institution.images());
         institutionToUpdate.setLogo(institution.logo());
         return createInstitutionWithAllFields(institutionToUpdate);
+    }
+
+    @Override
+    public List<Institution> findByinstitutionName(String institutionName) {
+        return institutionRepository.findByinstitutionName(institutionName);
+    }
+
+    @Override
+    public Set<String> getAllInstitutionCities() {
+        return getInstitutions()
+            .stream()
+            .map(Institution::getCity)
+            .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Institution updateActivated(String institutionEmail, InstitutionRequestDTO institution) {
+        Institution institutionToUpdate = userService.getInstitutionByEmail(institutionEmail);
+        institutionToUpdate.setActivated(institution.activated());
+        return institutionRepository.save(institutionToUpdate);
     }
 }

@@ -1,6 +1,7 @@
 package com.NoCountry.educ.ar.service;
 
 import java.util.List;
+import java.util.Set;
 
 import com.NoCountry.educ.ar.dto.InstitutionRequestDTO;
 import com.NoCountry.educ.ar.dto.PreInscriptionRequestDTO;
@@ -19,4 +20,10 @@ public interface InstitutionService {
     public List<Institution> getInstitutions();
 
     public Institution updateInstitution(String institutionEmail, InstitutionRequestDTO institution);
+
+    public List<Institution> findByinstitutionName(String institutionName);
+
+    public Set<String> getAllInstitutionCities();
+
+    public Institution updateActivated(String institutionEmail, InstitutionRequestDTO institution);  
 }
