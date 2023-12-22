@@ -60,7 +60,7 @@ const SchoolLevelForm = (props) => {
           <Input
             isRequired={isSelected}
             label="Desde"
-            defaultValue={defaultFeeFrom}
+            defaultValue={defaultFeeFrom} // ver
             classNames={classInput}
             errorMessage={isSelected && errors.feeInputTo?.message
 

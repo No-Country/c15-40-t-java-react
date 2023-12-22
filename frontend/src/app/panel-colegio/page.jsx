@@ -45,7 +45,7 @@ const SchoolPanel = () => {
     }
   }, [jwt, router]);
 
-  console.log('default2: ', defaultValues2);
+  // console.log('default2: ', defaultValues2);
 
   useEffect(() => {
     reset({
@@ -330,7 +330,7 @@ const SchoolPanel = () => {
                   classNames={customInputStyle}
                   label="Religión"
                   placeholder="Selecciona una opción"
-                  defaultSelectedKeys={defaultValues2.religion} // dinamico
+                  defaultSelectedKeys={[defaultValues2.religion]} // dinamico
                   value={field.value ?? false}
                   onChange={field.onChange}
                   // className="max-w-xs"

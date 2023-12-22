@@ -39,8 +39,8 @@ export const getPreviousData = async (URLGetData) => {
   if (previousData.status !== 200) {
     console.log('Ups, problemas en el servidor!');
   } else {
-    console.log('datos previos');
-    console.log(previousData.data);
+    // console.log('datos previos');
+    // console.log(previousData.data);
 
     return previousData.data;
   }
@@ -48,7 +48,7 @@ export const getPreviousData = async (URLGetData) => {
 
 export const formatIn = async (URLGetData) => {
   const prevDataObject = await getPreviousData(URLGetData);
-  console.log('datos listos del get: ', prevDataObject);
+  // console.log('datos listos del get: ', prevDataObject);
   const convertObject = defaultValuesFunc(prevDataObject);
   return convertObject;
 };

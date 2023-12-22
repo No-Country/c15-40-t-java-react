@@ -5,7 +5,7 @@ export const Context = createContext();
 const ContextProvider = ({ children }) => {
   const [jwt, setJwt] = useState('');
   const [emailLogin, setEmailLogin] = useState('');
-  console.log(emailLogin);
+  // console.log(emailLogin);
 
   return (
     <Context.Provider value={{ jwt, setJwt, emailLogin, setEmailLogin }}>
