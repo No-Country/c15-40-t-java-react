@@ -166,7 +166,7 @@ export default function Page (props) {
                       {religion.length > 1 ? 'Religiones: ' : 'Religión: '}
                     </h3>
                     <div className="inline-flex gap-2">
-                      {religion.map((religion) => {
+                      {/* religion.map((religion) => {
                         return (
                           <Chip
                             key={religion}
@@ -176,7 +176,8 @@ export default function Page (props) {
                             <p className="inline">{religion}</p>
                           </Chip>
                         );
-                      })}
+                      }) */}
+                      {religion}
                     </div>
                   </>
                 )}

@@ -13,6 +13,7 @@ function ColegioCard ({ colegio }) {
     router.push(`/escuelas/${colegio.id}`);
   };
 
+  console.log(colegio);
   return (
     <Card className="w-[450px] hover:scale-[102%]" isPressable onPress={hanldePress}
     >
@@ -44,14 +45,14 @@ function ColegioCard ({ colegio }) {
           <h3 className='text-md font-bold'>Religión:</h3>
           <p>{colegio.religion ? colegio.religion : 'Sin datos'}</p>
         </div>
-        <div className='flex gap-3'>
+        {/* <div className='flex gap-3'>
           <SchoolIcon className="h-6"/>
           {colegio.educationLevels?.length === 0 || !colegio.educationLevels
             ? <p className=' text-gray-500'>Sin datos</p>
             : colegio.educationLevels?.map((item, index) => (
-              <p key={index + colegio.institutionName}>{item.level}</p>
+              <p key={index + colegio.institutionName}>{item.level || ''}</p>
             ))}
-        </div>
+        </div> */}
         <div className='flex gap-3'>
           <GenreIcon className="h-6 text-warning"/>
           {colegio.genere}

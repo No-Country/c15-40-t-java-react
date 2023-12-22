@@ -44,6 +44,7 @@ function CompareCardDetails ({ colegioId, position }) {
     fetchData();
   }, [colegioId]);
 
+  console.log(colegioInfo);
   return (
     <div className="flex flex-col gap-5 justify-center items-center">
       {isLoading && <CircularProgress color="warning" aria-label="Cargando..." />}
@@ -100,7 +101,7 @@ function CompareCardDetails ({ colegioId, position }) {
             </TableRow>
             <TableRow key={`row-${position}-8`}>
               <TableCell className="flex justify-center flex-col items-center min-h-[50px] ">
-                {colegioInfo?.religionesString.length > 0 ? colegioInfo?.religionesString : 'Laico'}
+                {colegioInfo?.religion}
               </TableCell>
             </TableRow>
             <TableRow key={`row-${position}-9`}>
