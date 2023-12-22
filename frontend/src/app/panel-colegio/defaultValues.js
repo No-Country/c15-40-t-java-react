@@ -1,50 +1,12 @@
-/* import { getSchoolData } from './service';
-
-const getPreviousData = async () => {
-  const previousData = await getSchoolData();
-  if (previousData.status !== 200) {
-    console.log('Ups, problemas en el servidor!');
-  } else {
-    console.log('datos previos');
-
-    return previousData.data;
-  }
-};
-
-const prevData = await getPreviousData();
-
-console.log('vengo del GET: ', prevData); */
-
-// FUNCION QUE RECORRA LOS LEVELS QUE TRAE EL GET, Y VER SI COINCIDE CON EL NIVEL BUSCADO
-// debo escribir el parametro en mayuscula
-/* const schoolLevel = (wantedLevel) => {
-  const levelsArray = prevData?.educationLevels || [];
-  let presentLevel = false;
-
-  levelsArray.forEach((obj) => {
-    if (obj.level === wantedLevel) {
-      presentLevel = true;
-    }
-  });
-
-  return presentLevel;
-};
- */
-// falta el email
-// falta description??
-// imagenes cargadas previamente
-// GET DEL COLEGIO
-// ------------------------
-/* const kinderGardenObject = prevData?.educationLevels.find(item => item.level === 'INICIAL');
-const primaryObject = prevData?.educationLevels.find(item => item.level === 'PRIMARIO');
-const highSchoolObject = prevData?.educationLevels.find(item => item.level === 'SECUNDARIO'); */
-
 /* console.log('kinderobject: ', kinderGardenObject); */
 
 export const defaultValuesFunc = (prevData) => {
   const kinderGardenObject = prevData?.educationLevels?.find(item => item.level === 'INICIAL');
   const primaryObject = prevData?.educationLevels?.find(item => item.level === 'PRIMARIO');
   const highSchoolObject = prevData?.educationLevels?.find(item => item.level === 'SECUNDARIO');
+
+  const email = localStorage.getItem('userEmail');
+  console.log('email del usuario default', email);
 
   const schoolLevel = (wantedLevel) => {
     const levelsArray = prevData?.educationLevels || [];
@@ -62,7 +24,7 @@ export const defaultValuesFunc = (prevData) => {
   const defaultObject = {
     institutionName: prevData?.institutionName || '',
     description: prevData?.description || '',
-    email: 'maildePrueba@pepe.com',
+    email: email ?? '',
     address: prevData?.address || '',
     city: prevData?.city ?? '',
     phone: prevData?.phones[0] ?? '',
