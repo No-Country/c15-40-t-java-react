@@ -20,7 +20,7 @@ public record InstitutionRequestDTO(
     List<String> educationalWorkshops,
     boolean bilingual,
     boolean canteen,
-    Religion religion,
+    List<Religion> religion,
     boolean schoolUniform,
     Genere genere,
     Approach educationalApproach,

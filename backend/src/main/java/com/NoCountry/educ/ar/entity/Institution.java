@@ -48,7 +48,7 @@ public class Institution {
 
     private boolean canteen;
 
-    private Religion religion;
+    private List<Religion> religion;
 
     private boolean schoolUniform;
 
