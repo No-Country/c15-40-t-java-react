@@ -51,9 +51,9 @@ function page () {
   }, [search]);
 
   return (
-    <div className="flex">
+    <div className="flex flex-col md:flex-row ">
       {/* Filtros */}
-      <div className="h-screen p-5  w-[15%] flex flex-col gap-1 ">
+      <div className=" p-5 gap-1 w-full flex flex-row flex-wrap md:flex-col md:w-[15%] md:h-screen">
         <h2 className='text-xl font-bold'>Filtros</h2>
         <Divider className="my-1" orientation='horizontal' />
 
@@ -135,7 +135,7 @@ function page () {
         </RadioGroup>
         <Divider className="my-4" orientation='horizontal' />
       </div>
-
+      {/* Contenido */}
       <div className=" w-full max-h-screen overflow-scroll">
         <div className="text-black p-5">
           <Input
@@ -147,7 +147,7 @@ function page () {
             onChange={handleSearchChange}
           />
         </div>
-        <div className='flex gap-5 flex-wrap'>
+        <div className='flex gap-5 flex-wrap justify-around'>
 
           { !isLoading
             ? filteredItems?.map((colegio) => (<ColegioCard key={colegio.id} colegio={colegio}/>)/* {
